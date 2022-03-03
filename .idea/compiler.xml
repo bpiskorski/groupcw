@@ -9,8 +9,5 @@
         <module name="semCoursework" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="semCoursework" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
