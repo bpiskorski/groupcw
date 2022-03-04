@@ -32,9 +32,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="18b950c6-d9eb-459d-9cc4-6cdb2bf77dea" object-ref="consoles/dockerlocal" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="18b950c6-d9eb-459d-9cc4-6cdb2bf77dea" />
