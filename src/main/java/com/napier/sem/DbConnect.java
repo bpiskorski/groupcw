@@ -8,20 +8,15 @@ public class DbConnect {
     static final String DB_URL = "jdbc:mysql://db:3306/world?useSSL=false";
     static final String USER = "root";
     static final String PASS = "example";
-    public void connect(){
 
+    public DbConnect() {
+    }
+
+    public void connect(){
+        Connection con = null;
 
         System.out.println("Connecting to a selected database...");
-        // Open a connection
-        /*try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);) {
-            System.out.println("Connected database successfully...");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        }*/
-       /* Enumeration<Driver> drivers = DriverManager.getDrivers();
-        while (drivers.hasMoreElements()) {
-            Driver d = drivers.nextElement();*/
+
         try
         {
             // Load Database driver
@@ -34,7 +29,7 @@ public class DbConnect {
 
 
         // Connection to the database
-        Connection con = null;
+
         int retries = 100;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
@@ -43,6 +38,7 @@ public class DbConnect {
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection(DB_URL,USER,PASS);
+
                 System.out.println("Successfully connected");
                 // Wait a bit
                 Thread.sleep(10000);
