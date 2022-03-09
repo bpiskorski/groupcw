@@ -13,12 +13,7 @@ services:
     build: db/.
     #command: --authentication_policy
     restart: unless-stopped
-    container_name: db
-    image: mysql:latest
-    ports:
-      - "3306"
-    environment:
-        MYSQL_ROOT_PASSWORD: password
-        MYSQL_DATABASE: world
-        MYSQL_USER: mysql
-        MYSQL_PASSWORD: pass
+
+
+
+
