@@ -11,4 +11,7 @@ COPY world_db/*.sql /tmp/
 COPY world_db/world.sql /docker-entrypoint-initdb.d
 
 # Set the root password
+#ENV MYSQL_DATABASE: world
 ENV MYSQL_ROOT_PASSWORD root
+ENV MYSQL_PASSWORD: pass
+

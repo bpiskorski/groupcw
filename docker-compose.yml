@@ -4,9 +4,21 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
+    container_name: app
+
 
   # db is is db folder
+
   db:
     build: db/.
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    #command: --authentication_policy
+    restart: unless-stopped
+    container_name: db
+    image: mysql:latest
+    ports:
+      - "3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_DATABASE: world
+        MYSQL_USER: mysql
+        MYSQL_PASSWORD: pass
