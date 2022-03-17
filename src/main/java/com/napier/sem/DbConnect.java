@@ -33,7 +33,7 @@ public class DbConnect {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                //Thread.sleep(30000);
+                Thread.sleep(30000);
 
                 // Connect to database
                 conn = DriverManager.getConnection(DB_URL,USER,PASS);
