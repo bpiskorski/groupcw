@@ -6,6 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ServiceLoader;
 
+
+/**
+ *  Connection to MySQL database
+ */
 public class DbConnect {
     static final String DB_URL = "jdbc:mysql://db:3306/world";
     static final String USER = "root";
