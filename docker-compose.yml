@@ -10,10 +10,10 @@ services:
   # db is is db folder
 
   db:
-    build: db/.
-    #command: --authentication_policy
-    restart: unless-stopped
-
-
-
-
+    build: world/.
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+    # This tells docker to forward requests from our local machine on port 33060 to port 3306 inside the docker container.
+    # We can now connect locally without having to do so from another docker container.
+          - "33060:3306"
