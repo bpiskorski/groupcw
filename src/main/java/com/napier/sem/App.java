@@ -21,7 +21,7 @@ public class App {
         App a = new App();
 
         // Connect to database
-        a.connect("db:3306", 0);
+        a.connect("db:3306", 3000);
 
         a.countryrep();// 1) Provide all countries in a world from largest population to smallest.
                        //"select * from world.country order by Population desc;";
