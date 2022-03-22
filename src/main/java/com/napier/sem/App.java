@@ -18,6 +18,7 @@ public class App{
         // Extract city information
         ArrayList<Results> results = GetAllCities(con1);
         PrintCityResults(results);
+        System.out.println("Number of results: " + results.size());
 
     }
 
@@ -55,7 +56,7 @@ public class App{
             Statement stmt = con.getCons().createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.ID , city.Name, city.Population FROM city ORDER BY city.Population DESC";
+                    "SELECT city.ID , city.Name, city.Population FROM city INNER JOIN country ON city.ID = country.Capital ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -87,10 +88,10 @@ public class App{
             Statement stmt = con.getCons().createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.ID , city.Name, city.Population FROM city RIGHT JOIN country ON (city.ID = country.capital) ORDER BY city.Population DESC";
+                    "SELECT country.Capital FROM country ORDER BY country.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<Results> ress = new ArrayList<Results>();
             while (rset.next())
             {
@@ -100,7 +101,6 @@ public class App{
                 res.population = rset.getInt("city.Population");
                 ress.add(res);
             }
-            System.out.println("Number of results: " + ress.size());
             return ress;
         }
         catch (Exception e)
