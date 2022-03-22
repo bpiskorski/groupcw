@@ -17,5 +17,6 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn package
-      - name: Run Docker compose
-        run: docker-compose up --abort-on-container-exit
+      - name: Run docker compose
+        run: docker-compose up --abort-on-container-exit    # it tells Docker to stop all services once one container
+         # has finished. This will gracefully exit the MySQL container when the main application exits in GitHub Actions.
