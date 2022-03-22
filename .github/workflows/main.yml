@@ -19,3 +19,5 @@ jobs:
         run: mvn package
       - name: Run Docker compose
         run: docker-compose up --abort-on-conntainer-exit
+        - name: view logs
+        run: docker logs semcontainer
