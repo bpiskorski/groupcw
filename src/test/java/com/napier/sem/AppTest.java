@@ -15,4 +15,8 @@ public class AppTest {
     static void init() {
         app = new App();
     }
+
+// @Test
+    // void CitiesTestNull() {app.printCities(null);}
+
 }

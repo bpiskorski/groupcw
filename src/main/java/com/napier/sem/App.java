@@ -1,7 +1,9 @@
 package com.napier.sem;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
@@ -10,6 +12,8 @@ public class App {
 
         // Connect to database
         a.connect();
+
+        a.citiesReport();
         // Disconnect from database
         a.disconnect();
     }
@@ -63,6 +67,39 @@ public class App {
             }
         }
     }
+
+    public void citiesReport() {
+        StringBuilder sb = new StringBuilder();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String sql = "select * from city order by Population desc;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(sql);
+            // Return new employee if valid.
+            // Check one is returned
+            while (rset.next()) {
+                String name = rset.getString("name");
+                String countryCode = rset.getString("countryCode");
+                String district = rset.getString("district");
+                Integer population = rset.getInt("population");
+                City city = new City(name, countryCode, district, population);
+                sb.append(city.toString() + "\r\n");
+            }
+            new File("./tmp/").mkdir();
+            System.out.println("sb" + sb);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./tmp/report1.txt")));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get employee details");
+            return;
+        }
+    }
+
+
 }
 
 
