@@ -14,12 +14,47 @@ public class App{
         System.out.println("Hello World! City Reports Feature!");
         DbConnect con1 = new DbConnect();
         con1.connect();
-        System.out.println("Calling GetAllCities (By Population)...");
+        /* // Get all capital cities
+        System.out.println("Calling GetCapitalCities (Ordered By Population)...");
         // Extract city information
-        ArrayList<Results> results = GetAllCities(con1);
+        ArrayList<Results> results = GetCapitalCities(con1);
+        PrintCityResults(results);
+        System.out.println("Number of results: " + results.size());*/
+
+        /* // Get capital cities by continent
+        System.out.println("Calling GetContinentCities (Ordered By population)...");
+        // Extract city information
+        ArrayList<Results> results = GetContinentCities(con1, "Europe");
+        PrintCityResults(results);
+        System.out.println("Number of results: " + results.size());*/
+
+        /* // Get capital cities by region
+        System.out.println("Calling GetRegionCities (Ordered By population)...");
+        // Extract city information
+        ArrayList<Results> results = GetRegionCities(con1, "Northern Europe");
+        PrintCityResults(results);
+        System.out.println("Number of results: " + results.size());*/
+
+        /* // Get n capital cities in the world
+        System.out.println("Calling Get_N_CapitalCities (Ordered By population)...");
+        // Extract city information
+        ArrayList<Results> results = Get_N_CapitalCities(con1, 5);
+        PrintCityResults(results);
+        System.out.println("Number of results: " + results.size());*/
+
+        /*// Get n capital cities by continent
+        System.out.println("Calling Get_N_ContinentCities (Ordered By population)...");
+        // Extract city information
+        ArrayList<Results> results = Get_N_ContinentCities(con1, "Europe", 5);
+        PrintCityResults(results);
+        System.out.println("Number of results: " + results.size());*/
+
+        // Get n capital cities by region
+        System.out.println("Calling Get_N_RegionCities (Ordered By population)...");
+        // Extract city information
+        ArrayList<Results> results = Get_N_RegionCities(con1, "Southern Europe", 5);
         PrintCityResults(results);
         System.out.println("Number of results: " + results.size());
-
     }
 
     /*GET LIST OF TABLES (NOT FUNCTIONAL)*/
@@ -47,16 +82,16 @@ public class App{
         }
     }
 
-    // Get list of cities by population
-    public static ArrayList<Results> GetAllCities(DbConnect con){
-        System.out.println("Getting cities...");
+    // Get list of all capital cities by population
+    public static ArrayList<Results> GetCapitalCities(DbConnect con){
+        System.out.println("Getting cities (All)...");
         try
         {
             // Create an SQL statement
             Statement stmt = con.getCons().createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.ID , city.Name, city.Population FROM city INNER JOIN country ON city.ID = country.Capital ORDER BY city.Population DESC";
+                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
@@ -67,6 +102,8 @@ public class App{
                 res.id = rset.getInt("city.ID");
                 res.cityName = rset.getString("city.Name");
                 res.population = rset.getInt("city.Population");
+                res.countryCode = rset.getString("city.CountryCode");
+                res.district = rset.getString("city.District");
                 ress.add(res);
             }
             return ress;
@@ -79,16 +116,16 @@ public class App{
         }
     }
 
-    // Get list of cities by continent
+    // Get list of capital cities by continent
     public static ArrayList<Results> GetContinentCities(DbConnect con, String continent){
-        System.out.println("Getting cities...");
+        System.out.println("Getting cities (Continent)...");
         try
         {
             // Create an SQL statement
             Statement stmt = con.getCons().createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Capital FROM country ORDER BY country.Population DESC";
+                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital WHERE country.Continent LIKE '" + continent + "' ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract city information
@@ -99,6 +136,144 @@ public class App{
                 res.id = rset.getInt("city.ID");
                 res.cityName = rset.getString("city.Name");
                 res.population = rset.getInt("city.Population");
+                res.countryCode = rset.getString("city.CountryCode");
+                res.district = rset.getString("city.District");
+                ress.add(res);
+            }
+            return ress;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    // Get list of capital cities by region
+    public static ArrayList<Results> GetRegionCities(DbConnect con, String region){
+        System.out.println("Getting cities (Region)...");
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.getCons().createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital WHERE country.Region LIKE '" + region + "' ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Results> ress = new ArrayList<Results>();
+            while (rset.next())
+            {
+                Results res = new Results();
+                res.id = rset.getInt("city.ID");
+                res.cityName = rset.getString("city.Name");
+                res.population = rset.getInt("city.Population");
+                res.countryCode = rset.getString("city.CountryCode");
+                res.district = rset.getString("city.District");
+                ress.add(res);
+            }
+            return ress;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    // Get list of N capital cities in the world
+    public static ArrayList<Results> Get_N_CapitalCities(DbConnect con, int n){
+        System.out.println("Getting " + n + " cities (All)...");
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.getCons().createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital ORDER BY city.Population DESC LIMIT " + n;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Results> ress = new ArrayList<Results>();
+            while (rset.next())
+            {
+                Results res = new Results();
+                res.id = rset.getInt("city.ID");
+                res.cityName = rset.getString("city.Name");
+                res.population = rset.getInt("city.Population");
+                res.countryCode = rset.getString("city.CountryCode");
+                res.district = rset.getString("city.District");
+                ress.add(res);
+            }
+            return ress;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    // Get list of N capital cities by continent
+    public static ArrayList<Results> Get_N_ContinentCities(DbConnect con, String continent, int n){
+        System.out.println("Getting " + n + " cities (Continent)...");
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.getCons().createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital WHERE country.Continent LIKE '" + continent + "' ORDER BY city.Population DESC LIMIT " + n;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Results> ress = new ArrayList<Results>();
+            while (rset.next())
+            {
+                Results res = new Results();
+                res.id = rset.getInt("city.ID");
+                res.cityName = rset.getString("city.Name");
+                res.population = rset.getInt("city.Population");
+                res.countryCode = rset.getString("city.CountryCode");
+                res.district = rset.getString("city.District");
+                ress.add(res);
+            }
+            return ress;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    // Get list of N capital cities by continent
+    public static ArrayList<Results> Get_N_RegionCities(DbConnect con, String region, int n){
+        System.out.println("Getting " + n + " cities (Region)...");
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.getCons().createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital WHERE country.Region LIKE '" + region + "' ORDER BY city.Population DESC LIMIT " + n;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<Results> ress = new ArrayList<Results>();
+            while (rset.next())
+            {
+                Results res = new Results();
+                res.id = rset.getInt("city.ID");
+                res.cityName = rset.getString("city.Name");
+                res.population = rset.getInt("city.Population");
+                res.countryCode = rset.getString("city.CountryCode");
+                res.district = rset.getString("city.District");
                 ress.add(res);
             }
             return ress;
@@ -126,7 +301,7 @@ public class App{
             if (results == null)
                 continue;
             String emp_string =
-                    String.format("%-10s %-40s %-10s %-8s %-8s",
+                    String.format("%-10s %-40s %-15s %-18s %-15s",
                             res.id, res.cityName, res.population, res.countryCode, res.district);
             System.out.println(emp_string);
         }
