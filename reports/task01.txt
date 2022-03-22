@@ -1,0 +1,239 @@
+Country{code='CHN', name='China', continent='Asia', region='Eastern Asia', population=1277558000, capital=1891}
+Country{code='IND', name='India', continent='Asia', region='Southern and Central Asia', population=1013662000, capital=1109}
+Country{code='USA', name='United States', continent='North America', region='North America', population=278357000, capital=3813}
+Country{code='IDN', name='Indonesia', continent='Asia', region='Southeast Asia', population=212107000, capital=939}
+Country{code='BRA', name='Brazil', continent='South America', region='South America', population=170115000, capital=211}
+Country{code='PAK', name='Pakistan', continent='Asia', region='Southern and Central Asia', population=156483000, capital=2831}
+Country{code='RUS', name='Russian Federation', continent='Europe', region='Eastern Europe', population=146934000, capital=3580}
+Country{code='BGD', name='Bangladesh', continent='Asia', region='Southern and Central Asia', population=129155000, capital=150}
+Country{code='JPN', name='Japan', continent='Asia', region='Eastern Asia', population=126714000, capital=1532}
+Country{code='NGA', name='Nigeria', continent='Africa', region='Western Africa', population=111506000, capital=2754}
+Country{code='MEX', name='Mexico', continent='North America', region='Central America', population=98881000, capital=2515}
+Country{code='DEU', name='Germany', continent='Europe', region='Western Europe', population=82164700, capital=3068}
+Country{code='VNM', name='Vietnam', continent='Asia', region='Southeast Asia', population=79832000, capital=3770}
+Country{code='PHL', name='Philippines', continent='Asia', region='Southeast Asia', population=75967000, capital=766}
+Country{code='EGY', name='Egypt', continent='Africa', region='Northern Africa', population=68470000, capital=608}
+Country{code='IRN', name='Iran', continent='Asia', region='Southern and Central Asia', population=67702000, capital=1380}
+Country{code='TUR', name='Turkey', continent='Asia', region='Middle East', population=66591000, capital=3358}
+Country{code='ETH', name='Ethiopia', continent='Africa', region='Eastern Africa', population=62565000, capital=756}
+Country{code='THA', name='Thailand', continent='Asia', region='Southeast Asia', population=61399000, capital=3320}
+Country{code='GBR', name='United Kingdom', continent='Europe', region='British Islands', population=59623400, capital=456}
+Country{code='FRA', name='France', continent='Europe', region='Western Europe', population=59225700, capital=2974}
+Country{code='ITA', name='Italy', continent='Europe', region='Southern Europe', population=57680000, capital=1464}
+Country{code='COD', name='Congo, The Democratic Republic of the', continent='Africa', region='Central Africa', population=51654000, capital=2298}
+Country{code='UKR', name='Ukraine', continent='Europe', region='Eastern Europe', population=50456000, capital=3426}
+Country{code='KOR', name='South Korea', continent='Asia', region='Eastern Asia', population=46844000, capital=2331}
+Country{code='MMR', name='Myanmar', continent='Asia', region='Southeast Asia', population=45611000, capital=2710}
+Country{code='COL', name='Colombia', continent='South America', region='South America', population=42321000, capital=2257}
+Country{code='ZAF', name='South Africa', continent='Africa', region='Southern Africa', population=40377000, capital=716}
+Country{code='ESP', name='Spain', continent='Europe', region='Southern Europe', population=39441700, capital=653}
+Country{code='POL', name='Poland', continent='Europe', region='Eastern Europe', population=38653600, capital=2928}
+Country{code='ARG', name='Argentina', continent='South America', region='South America', population=37032000, capital=69}
+Country{code='TZA', name='Tanzania', continent='Africa', region='Eastern Africa', population=33517000, capital=3306}
+Country{code='DZA', name='Algeria', continent='Africa', region='Northern Africa', population=31471000, capital=35}
+Country{code='CAN', name='Canada', continent='North America', region='North America', population=31147000, capital=1822}
+Country{code='KEN', name='Kenya', continent='Africa', region='Eastern Africa', population=30080000, capital=1881}
+Country{code='SDN', name='Sudan', continent='Africa', region='Northern Africa', population=29490000, capital=3225}
+Country{code='MAR', name='Morocco', continent='Africa', region='Northern Africa', population=28351000, capital=2486}
+Country{code='PER', name='Peru', continent='South America', region='South America', population=25662000, capital=2890}
+Country{code='UZB', name='Uzbekistan', continent='Asia', region='Southern and Central Asia', population=24318000, capital=3503}
+Country{code='VEN', name='Venezuela', continent='South America', region='South America', population=24170000, capital=3539}
+Country{code='PRK', name='North Korea', continent='Asia', region='Eastern Asia', population=24039000, capital=2318}
+Country{code='NPL', name='Nepal', continent='Asia', region='Southern and Central Asia', population=23930000, capital=2729}
+Country{code='IRQ', name='Iraq', continent='Asia', region='Middle East', population=23115000, capital=1365}
+Country{code='AFG', name='Afghanistan', continent='Asia', region='Southern and Central Asia', population=22720000, capital=1}
+Country{code='ROM', name='Romania', continent='Europe', region='Eastern Europe', population=22455500, capital=3018}
+Country{code='TWN', name='Taiwan', continent='Asia', region='Eastern Asia', population=22256000, capital=3263}
+Country{code='MYS', name='Malaysia', continent='Asia', region='Southeast Asia', population=22244000, capital=2464}
+Country{code='UGA', name='Uganda', continent='Africa', region='Eastern Africa', population=21778000, capital=3425}
+Country{code='SAU', name='Saudi Arabia', continent='Asia', region='Middle East', population=21607000, capital=3173}
+Country{code='GHA', name='Ghana', continent='Africa', region='Western Africa', population=20212000, capital=910}
+Country{code='MOZ', name='Mozambique', continent='Africa', region='Eastern Africa', population=19680000, capital=2698}
+Country{code='AUS', name='Australia', continent='Oceania', region='Australia and New Zealand', population=18886000, capital=135}
+Country{code='LKA', name='Sri Lanka', continent='Asia', region='Southern and Central Asia', population=18827000, capital=3217}
+Country{code='YEM', name='Yemen', continent='Asia', region='Middle East', population=18112000, capital=1780}
+Country{code='KAZ', name='Kazakstan', continent='Asia', region='Southern and Central Asia', population=16223000, capital=1864}
+Country{code='SYR', name='Syria', continent='Asia', region='Middle East', population=16125000, capital=3250}
+Country{code='MDG', name='Madagascar', continent='Africa', region='Eastern Africa', population=15942000, capital=2455}
+Country{code='NLD', name='Netherlands', continent='Europe', region='Western Europe', population=15864000, capital=5}
+Country{code='CHL', name='Chile', continent='South America', region='South America', population=15211000, capital=554}
+Country{code='CMR', name='Cameroon', continent='Africa', region='Central Africa', population=15085000, capital=1804}
+Country{code='CIV', name='Côte d’Ivoire', continent='Africa', region='Western Africa', population=14786000, capital=2814}
+Country{code='AGO', name='Angola', continent='Africa', region='Central Africa', population=12878000, capital=56}
+Country{code='ECU', name='Ecuador', continent='South America', region='South America', population=12646000, capital=594}
+Country{code='BFA', name='Burkina Faso', continent='Africa', region='Western Africa', population=11937000, capital=549}
+Country{code='ZWE', name='Zimbabwe', continent='Africa', region='Eastern Africa', population=11669000, capital=4068}
+Country{code='GTM', name='Guatemala', continent='North America', region='Central America', population=11385000, capital=922}
+Country{code='MLI', name='Mali', continent='Africa', region='Western Africa', population=11234000, capital=2482}
+Country{code='CUB', name='Cuba', continent='North America', region='Caribbean', population=11201000, capital=2413}
+Country{code='KHM', name='Cambodia', continent='Asia', region='Southeast Asia', population=11168000, capital=1800}
+Country{code='MWI', name='Malawi', continent='Africa', region='Eastern Africa', population=10925000, capital=2462}
+Country{code='NER', name='Niger', continent='Africa', region='Western Africa', population=10730000, capital=2738}
+Country{code='YUG', name='Yugoslavia', continent='Europe', region='Southern Europe', population=10640000, capital=1792}
+Country{code='GRC', name='Greece', continent='Europe', region='Southern Europe', population=10545700, capital=2401}
+Country{code='CZE', name='Czech Republic', continent='Europe', region='Eastern Europe', population=10278100, capital=3339}
+Country{code='BEL', name='Belgium', continent='Europe', region='Western Europe', population=10239000, capital=179}
+Country{code='BLR', name='Belarus', continent='Europe', region='Eastern Europe', population=10236000, capital=3520}
+Country{code='SOM', name='Somalia', continent='Africa', region='Eastern Africa', population=10097000, capital=3214}
+Country{code='HUN', name='Hungary', continent='Europe', region='Eastern Europe', population=10043200, capital=3483}
+Country{code='PRT', name='Portugal', continent='Europe', region='Southern Europe', population=9997600, capital=2914}
+Country{code='TUN', name='Tunisia', continent='Africa', region='Northern Africa', population=9586000, capital=3349}
+Country{code='SEN', name='Senegal', continent='Africa', region='Western Africa', population=9481000, capital=3198}
+Country{code='ZMB', name='Zambia', continent='Africa', region='Eastern Africa', population=9169000, capital=3162}
+Country{code='SWE', name='Sweden', continent='Europe', region='Nordic Countries', population=8861400, capital=3048}
+Country{code='DOM', name='Dominican Republic', continent='North America', region='Caribbean', population=8495000, capital=587}
+Country{code='BOL', name='Bolivia', continent='South America', region='South America', population=8329000, capital=194}
+Country{code='HTI', name='Haiti', continent='North America', region='Caribbean', population=8222000, capital=929}
+Country{code='BGR', name='Bulgaria', continent='Europe', region='Eastern Europe', population=8190900, capital=539}
+Country{code='AUT', name='Austria', continent='Europe', region='Western Europe', population=8091800, capital=1523}
+Country{code='AZE', name='Azerbaijan', continent='Asia', region='Middle East', population=7734000, capital=144}
+Country{code='RWA', name='Rwanda', continent='Africa', region='Eastern Africa', population=7733000, capital=3047}
+Country{code='TCD', name='Chad', continent='Africa', region='Central Africa', population=7651000, capital=3337}
+Country{code='GIN', name='Guinea', continent='Africa', region='Western Africa', population=7430000, capital=926}
+Country{code='CHE', name='Switzerland', continent='Europe', region='Western Europe', population=7160400, capital=3248}
+Country{code='HKG', name='Hong Kong', continent='Asia', region='Eastern Asia', population=6782000, capital=937}
+Country{code='BDI', name='Burundi', continent='Africa', region='Eastern Africa', population=6695000, capital=552}
+Country{code='HND', name='Honduras', continent='North America', region='Central America', population=6485000, capital=933}
+Country{code='SLV', name='El Salvador', continent='North America', region='Central America', population=6276000, capital=645}
+Country{code='ISR', name='Israel', continent='Asia', region='Middle East', population=6217000, capital=1450}
+Country{code='TJK', name='Tajikistan', continent='Asia', region='Southern and Central Asia', population=6188000, capital=3261}
+Country{code='BEN', name='Benin', continent='Africa', region='Western Africa', population=6097000, capital=187}
+Country{code='LBY', name='Libyan Arab Jamahiriya', continent='Africa', region='Northern Africa', population=5605000, capital=2441}
+Country{code='PRY', name='Paraguay', continent='South America', region='South America', population=5496000, capital=2885}
+Country{code='LAO', name='Laos', continent='Asia', region='Southeast Asia', population=5433000, capital=2432}
+Country{code='SVK', name='Slovakia', continent='Europe', region='Eastern Europe', population=5398700, capital=3209}
+Country{code='DNK', name='Denmark', continent='Europe', region='Nordic Countries', population=5330000, capital=3315}
+Country{code='FIN', name='Finland', continent='Europe', region='Nordic Countries', population=5171300, capital=3236}
+Country{code='JOR', name='Jordan', continent='Asia', region='Middle East', population=5083000, capital=1786}
+Country{code='NIC', name='Nicaragua', continent='North America', region='Central America', population=5074000, capital=2734}
+Country{code='GEO', name='Georgia', continent='Asia', region='Middle East', population=4968000, capital=905}
+Country{code='SLE', name='Sierra Leone', continent='Africa', region='Western Africa', population=4854000, capital=3207}
+Country{code='PNG', name='Papua New Guinea', continent='Oceania', region='Melanesia', population=4807000, capital=2884}
+Country{code='KGZ', name='Kyrgyzstan', continent='Asia', region='Southern and Central Asia', population=4699000, capital=2253}
+Country{code='TGO', name='Togo', continent='Africa', region='Western Africa', population=4629000, capital=3332}
+Country{code='NOR', name='Norway', continent='Europe', region='Nordic Countries', population=4478500, capital=2807}
+Country{code='HRV', name='Croatia', continent='Europe', region='Southern Europe', population=4473000, capital=2409}
+Country{code='TKM', name='Turkmenistan', continent='Asia', region='Southern and Central Asia', population=4459000, capital=3419}
+Country{code='MDA', name='Moldova', continent='Europe', region='Eastern Europe', population=4380000, capital=2690}
+Country{code='CRI', name='Costa Rica', continent='North America', region='Central America', population=4023000, capital=584}
+Country{code='BIH', name='Bosnia and Herzegovina', continent='Europe', region='Southern Europe', population=3972000, capital=201}
+Country{code='PRI', name='Puerto Rico', continent='North America', region='Caribbean', population=3869000, capital=2919}
+Country{code='NZL', name='New Zealand', continent='Oceania', region='Australia and New Zealand', population=3862000, capital=3499}
+Country{code='ERI', name='Eritrea', continent='Africa', region='Eastern Africa', population=3850000, capital=652}
+Country{code='IRL', name='Ireland', continent='Europe', region='British Islands', population=3775100, capital=1447}
+Country{code='LTU', name='Lithuania', continent='Europe', region='Baltic Countries', population=3698500, capital=2447}
+Country{code='CAF', name='Central African Republic', continent='Africa', region='Central Africa', population=3615000, capital=1889}
+Country{code='SGP', name='Singapore', continent='Asia', region='Southeast Asia', population=3567000, capital=3208}
+Country{code='ARM', name='Armenia', continent='Asia', region='Middle East', population=3520000, capital=126}
+Country{code='ALB', name='Albania', continent='Europe', region='Southern Europe', population=3401200, capital=34}
+Country{code='URY', name='Uruguay', continent='South America', region='South America', population=3337000, capital=3492}
+Country{code='LBN', name='Lebanon', continent='Asia', region='Middle East', population=3282000, capital=2438}
+Country{code='LBR', name='Liberia', continent='Africa', region='Western Africa', population=3154000, capital=2440}
+Country{code='PSE', name='Palestine', continent='Asia', region='Middle East', population=3101000, capital=4074}
+Country{code='COG', name='Congo', continent='Africa', region='Central Africa', population=2943000, capital=2296}
+Country{code='PAN', name='Panama', continent='North America', region='Central America', population=2856000, capital=2882}
+Country{code='MRT', name='Mauritania', continent='Africa', region='Western Africa', population=2670000, capital=2509}
+Country{code='MNG', name='Mongolia', continent='Asia', region='Eastern Asia', population=2662000, capital=2696}
+Country{code='JAM', name='Jamaica', continent='North America', region='Caribbean', population=2583000, capital=1530}
+Country{code='OMN', name='Oman', continent='Asia', region='Middle East', population=2542000, capital=2821}
+Country{code='ARE', name='United Arab Emirates', continent='Asia', region='Middle East', population=2441000, capital=65}
+Country{code='LVA', name='Latvia', continent='Europe', region='Baltic Countries', population=2424200, capital=2434}
+Country{code='LSO', name='Lesotho', continent='Africa', region='Southern Africa', population=2153000, capital=2437}
+Country{code='BTN', name='Bhutan', continent='Asia', region='Southern and Central Asia', population=2124000, capital=192}
+Country{code='MKD', name='Macedonia', continent='Europe', region='Southern Europe', population=2024000, capital=2460}
+Country{code='SVN', name='Slovenia', continent='Europe', region='Southern Europe', population=1987800, capital=3212}
+Country{code='KWT', name='Kuwait', continent='Asia', region='Middle East', population=1972000, capital=2429}
+Country{code='NAM', name='Namibia', continent='Africa', region='Southern Africa', population=1726000, capital=2726}
+Country{code='BWA', name='Botswana', continent='Africa', region='Southern Africa', population=1622000, capital=204}
+Country{code='EST', name='Estonia', continent='Europe', region='Baltic Countries', population=1439200, capital=3791}
+Country{code='GMB', name='Gambia', continent='Africa', region='Western Africa', population=1305000, capital=904}
+Country{code='TTO', name='Trinidad and Tobago', continent='North America', region='Caribbean', population=1295000, capital=3336}
+Country{code='GAB', name='Gabon', continent='Africa', region='Central Africa', population=1226000, capital=902}
+Country{code='GNB', name='Guinea-Bissau', continent='Africa', region='Western Africa', population=1213000, capital=927}
+Country{code='MUS', name='Mauritius', continent='Africa', region='Eastern Africa', population=1158000, capital=2511}
+Country{code='SWZ', name='Swaziland', continent='Africa', region='Southern Africa', population=1008000, capital=3244}
+Country{code='TMP', name='East Timor', continent='Asia', region='Southeast Asia', population=885000, capital=1522}
+Country{code='GUY', name='Guyana', continent='South America', region='South America', population=861000, capital=928}
+Country{code='FJI', name='Fiji Islands', continent='Oceania', region='Melanesia', population=817000, capital=764}
+Country{code='CYP', name='Cyprus', continent='Asia', region='Middle East', population=754700, capital=2430}
+Country{code='REU', name='Réunion', continent='Africa', region='Eastern Africa', population=699000, capital=3017}
+Country{code='DJI', name='Djibouti', continent='Africa', region='Eastern Africa', population=638000, capital=585}
+Country{code='BHR', name='Bahrain', continent='Asia', region='Middle East', population=617000, capital=149}
+Country{code='QAT', name='Qatar', continent='Asia', region='Middle East', population=599000, capital=2973}
+Country{code='COM', name='Comoros', continent='Africa', region='Eastern Africa', population=578000, capital=2295}
+Country{code='MAC', name='Macao', continent='Asia', region='Eastern Asia', population=473000, capital=2454}
+Country{code='GLP', name='Guadeloupe', continent='North America', region='Caribbean', population=456000, capital=919}
+Country{code='GNQ', name='Equatorial Guinea', continent='Africa', region='Central Africa', population=453000, capital=2972}
+Country{code='SLB', name='Solomon Islands', continent='Oceania', region='Melanesia', population=444000, capital=3161}
+Country{code='LUX', name='Luxembourg', continent='Europe', region='Western Europe', population=435700, capital=2452}
+Country{code='CPV', name='Cape Verde', continent='Africa', region='Western Africa', population=428000, capital=1859}
+Country{code='SUR', name='Suriname', continent='South America', region='South America', population=417000, capital=3243}
+Country{code='MTQ', name='Martinique', continent='North America', region='Caribbean', population=395000, capital=2508}
+Country{code='MLT', name='Malta', continent='Europe', region='Southern Europe', population=380200, capital=2484}
+Country{code='BRN', name='Brunei', continent='Asia', region='Southeast Asia', population=328000, capital=538}
+Country{code='BHS', name='Bahamas', continent='North America', region='Caribbean', population=307000, capital=148}
+Country{code='ESH', name='Western Sahara', continent='Africa', region='Northern Africa', population=293000, capital=2453}
+Country{code='MDV', name='Maldives', continent='Asia', region='Southern and Central Asia', population=286000, capital=2463}
+Country{code='ISL', name='Iceland', continent='Europe', region='Nordic Countries', population=279000, capital=1449}
+Country{code='BRB', name='Barbados', continent='North America', region='Caribbean', population=270000, capital=174}
+Country{code='BLZ', name='Belize', continent='North America', region='Central America', population=241000, capital=185}
+Country{code='PYF', name='French Polynesia', continent='Oceania', region='Polynesia', population=235000, capital=3016}
+Country{code='ANT', name='Netherlands Antilles', continent='North America', region='Caribbean', population=217000, capital=33}
+Country{code='NCL', name='New Caledonia', continent='Oceania', region='Melanesia', population=214000, capital=3493}
+Country{code='VUT', name='Vanuatu', continent='Oceania', region='Melanesia', population=190000, capital=3537}
+Country{code='GUF', name='French Guiana', continent='South America', region='South America', population=181000, capital=3014}
+Country{code='WSM', name='Samoa', continent='Oceania', region='Polynesia', population=180000, capital=3169}
+Country{code='GUM', name='Guam', continent='Oceania', region='Micronesia', population=168000, capital=921}
+Country{code='LCA', name='Saint Lucia', continent='North America', region='Caribbean', population=154000, capital=3065}
+Country{code='MYT', name='Mayotte', continent='Africa', region='Eastern Africa', population=149000, capital=2514}
+Country{code='STP', name='Sao Tome and Principe', continent='Africa', region='Central Africa', population=147000, capital=3172}
+Country{code='FSM', name='Micronesia, Federated States of', continent='Oceania', region='Micronesia', population=119000, capital=2689}
+Country{code='VCT', name='Saint Vincent and the Grenadines', continent='North America', region='Caribbean', population=114000, capital=3066}
+Country{code='ABW', name='Aruba', continent='North America', region='Caribbean', population=103000, capital=129}
+Country{code='TON', name='Tonga', continent='Oceania', region='Polynesia', population=99000, capital=3334}
+Country{code='GRD', name='Grenada', continent='North America', region='Caribbean', population=94000, capital=916}
+Country{code='VIR', name='Virgin Islands, U.S.', continent='North America', region='Caribbean', population=93000, capital=4067}
+Country{code='KIR', name='Kiribati', continent='Oceania', region='Micronesia', population=83000, capital=2256}
+Country{code='AND', name='Andorra', continent='Europe', region='Southern Europe', population=78000, capital=55}
+Country{code='MNP', name='Northern Mariana Islands', continent='Oceania', region='Micronesia', population=78000, capital=2913}
+Country{code='SYC', name='Seychelles', continent='Africa', region='Eastern Africa', population=77000, capital=3206}
+Country{code='DMA', name='Dominica', continent='North America', region='Caribbean', population=71000, capital=586}
+Country{code='ASM', name='American Samoa', continent='Oceania', region='Polynesia', population=68000, capital=54}
+Country{code='ATG', name='Antigua and Barbuda', continent='North America', region='Caribbean', population=68000, capital=63}
+Country{code='BMU', name='Bermuda', continent='North America', region='North America', population=65000, capital=191}
+Country{code='MHL', name='Marshall Islands', continent='Oceania', region='Micronesia', population=64000, capital=2507}
+Country{code='GRL', name='Greenland', continent='North America', region='North America', population=56000, capital=917}
+Country{code='FRO', name='Faroe Islands', continent='Europe', region='Nordic Countries', population=43000, capital=901}
+Country{code='CYM', name='Cayman Islands', continent='North America', region='Caribbean', population=38000, capital=553}
+Country{code='KNA', name='Saint Kitts and Nevis', continent='North America', region='Caribbean', population=38000, capital=3064}
+Country{code='MCO', name='Monaco', continent='Europe', region='Western Europe', population=34000, capital=2695}
+Country{code='LIE', name='Liechtenstein', continent='Europe', region='Western Europe', population=32300, capital=2446}
+Country{code='SMR', name='San Marino', continent='Europe', region='Southern Europe', population=27000, capital=3171}
+Country{code='GIB', name='Gibraltar', continent='Europe', region='Southern Europe', population=25000, capital=915}
+Country{code='VGB', name='Virgin Islands, British', continent='North America', region='Caribbean', population=21000, capital=537}
+Country{code='COK', name='Cook Islands', continent='Oceania', region='Polynesia', population=20000, capital=583}
+Country{code='PLW', name='Palau', continent='Oceania', region='Micronesia', population=19000, capital=2881}
+Country{code='TCA', name='Turks and Caicos Islands', continent='North America', region='Caribbean', population=17000, capital=3423}
+Country{code='WLF', name='Wallis and Futuna', continent='Oceania', region='Polynesia', population=15000, capital=3536}
+Country{code='NRU', name='Nauru', continent='Oceania', region='Micronesia', population=12000, capital=2728}
+Country{code='TUV', name='Tuvalu', continent='Oceania', region='Polynesia', population=12000, capital=3424}
+Country{code='MSR', name='Montserrat', continent='North America', region='Caribbean', population=11000, capital=2697}
+Country{code='AIA', name='Anguilla', continent='North America', region='Caribbean', population=8000, capital=62}
+Country{code='SPM', name='Saint Pierre and Miquelon', continent='North America', region='North America', population=7000, capital=3067}
+Country{code='SHN', name='Saint Helena', continent='Africa', region='Western Africa', population=6000, capital=3063}
+Country{code='SJM', name='Svalbard and Jan Mayen', continent='Europe', region='Nordic Countries', population=3200, capital=938}
+Country{code='CXR', name='Christmas Island', continent='Oceania', region='Australia and New Zealand', population=2500, capital=1791}
+Country{code='FLK', name='Falkland Islands', continent='South America', region='South America', population=2000, capital=763}
+Country{code='NFK', name='Norfolk Island', continent='Oceania', region='Australia and New Zealand', population=2000, capital=2806}
+Country{code='NIU', name='Niue', continent='Oceania', region='Polynesia', population=2000, capital=2805}
+Country{code='TKL', name='Tokelau', continent='Oceania', region='Polynesia', population=2000, capital=3333}
+Country{code='VAT', name='Holy See (Vatican City State)', continent='Europe', region='Southern Europe', population=1000, capital=3538}
+Country{code='CCK', name='Cocos (Keeling) Islands', continent='Oceania', region='Australia and New Zealand', population=600, capital=2317}
+Country{code='PCN', name='Pitcairn', continent='Oceania', region='Polynesia', population=50, capital=2912}
+Country{code='ATA', name='Antarctica', continent='Antarctica', region='Antarctica', population=0, capital=0}
+Country{code='ATF', name='French Southern territories', continent='Antarctica', region='Antarctica', population=0, capital=0}
+Country{code='BVT', name='Bouvet Island', continent='Antarctica', region='Antarctica', population=0, capital=0}
+Country{code='HMD', name='Heard Island and McDonald Islands', continent='Antarctica', region='Antarctica', population=0, capital=0}
+Country{code='IOT', name='British Indian Ocean Territory', continent='Africa', region='Eastern Africa', population=0, capital=0}
+Country{code='SGS', name='South Georgia and the South Sandwich Islands', continent='Antarctica', region='Antarctica', population=0, capital=0}
+Country{code='UMI', name='United States Minor Outlying Islands', continent='Oceania', region='Micronesia/Caribbean', population=0, capital=0}
