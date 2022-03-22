@@ -9,7 +9,7 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.Statement;
 
-public class App {
+public class CountryApp {
 
     /**
      * Connection to MySQL database.
@@ -18,7 +18,7 @@ public class App {
 
     public static void main(String[] args) {
         // Create new Application
-        App a = new App();
+        CountryApp a = new CountryApp();
 
         // Connect to database
         a.connect("db:3306", 3000);
@@ -42,7 +42,7 @@ public class App {
 
     /**
      * Connect to the MySQL database.
-     * @param conString Use db:3306 for docker and localhost:33060 for local or Integration Tests
+     * @param conString db:3306 for docker and localhost:33060 for local or Integration Tests
      * @param i
      */
     public void connect(String conString, int delay) {
@@ -94,7 +94,7 @@ public class App {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String sql ="select * from world.country Where Continent ='Europe' order by Population desc;";
+            String sql ="select * from world.country order by Population desc limit 3;";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(sql);
             // Return  if valid.
@@ -108,8 +108,9 @@ public class App {
                 Integer capital = rset.getInt("capital");
                 Country country = new Country(code, name, continent, region, population, capital);
                 sb.append(country.toString() + "\r\n");
+                System.out.println(country.toString());
             } new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/task03.txt")));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/task06.txt")));
             writer.write(sb.toString());
             writer.close();
             System.out.println("Report created look in a reports folder!");
