@@ -9,7 +9,7 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.Statement;
 
-public class CountryApp {
+public class App {
 
     /**
      * Connection to MySQL database.
@@ -18,7 +18,7 @@ public class CountryApp {
 
     public static void main(String[] args) {
         // Create new Application
-        CountryApp a = new CountryApp();
+        App a = new App();
 
         // Connect to database
         a.connect("db:3306", 3000);

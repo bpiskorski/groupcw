@@ -4,14 +4,14 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class CountryAppTest
+public class AppTest
 {
-    static CountryApp app;
+    static App app;
 
     @BeforeAll
     static void init()
     {
-        app = new CountryApp();
+        app = new App();
         app.connect("localhost:33060", 0);
     }
 
@@ -20,6 +20,8 @@ public class CountryAppTest
     {
         app.countryrep();
     }
+
+
 
     @AfterAll
     static void close(){
