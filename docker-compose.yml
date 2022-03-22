@@ -11,8 +11,10 @@ services:
 
   db:
     build: db/.
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     #command: --authentication_policy
-    restart: unless-stopped
+    #restart: unless-stopped
 
 
 
