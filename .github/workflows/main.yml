@@ -18,4 +18,4 @@ jobs:
       - name: Build with Maven
         run: mvn package
       - name: Run Docker compose
-        run: docker-compose up --abort-on-conntainer-exit
+        run: docker-compose up --abort-on-container-exit
