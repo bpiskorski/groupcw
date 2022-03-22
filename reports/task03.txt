@@ -1,0 +1,46 @@
+Country{code='RUS', name='Russian Federation', continent='Europe', region='Eastern Europe', population=146934000, capital=3580}
+Country{code='DEU', name='Germany', continent='Europe', region='Western Europe', population=82164700, capital=3068}
+Country{code='GBR', name='United Kingdom', continent='Europe', region='British Islands', population=59623400, capital=456}
+Country{code='FRA', name='France', continent='Europe', region='Western Europe', population=59225700, capital=2974}
+Country{code='ITA', name='Italy', continent='Europe', region='Southern Europe', population=57680000, capital=1464}
+Country{code='UKR', name='Ukraine', continent='Europe', region='Eastern Europe', population=50456000, capital=3426}
+Country{code='ESP', name='Spain', continent='Europe', region='Southern Europe', population=39441700, capital=653}
+Country{code='POL', name='Poland', continent='Europe', region='Eastern Europe', population=38653600, capital=2928}
+Country{code='ROM', name='Romania', continent='Europe', region='Eastern Europe', population=22455500, capital=3018}
+Country{code='NLD', name='Netherlands', continent='Europe', region='Western Europe', population=15864000, capital=5}
+Country{code='YUG', name='Yugoslavia', continent='Europe', region='Southern Europe', population=10640000, capital=1792}
+Country{code='GRC', name='Greece', continent='Europe', region='Southern Europe', population=10545700, capital=2401}
+Country{code='CZE', name='Czech Republic', continent='Europe', region='Eastern Europe', population=10278100, capital=3339}
+Country{code='BEL', name='Belgium', continent='Europe', region='Western Europe', population=10239000, capital=179}
+Country{code='BLR', name='Belarus', continent='Europe', region='Eastern Europe', population=10236000, capital=3520}
+Country{code='HUN', name='Hungary', continent='Europe', region='Eastern Europe', population=10043200, capital=3483}
+Country{code='PRT', name='Portugal', continent='Europe', region='Southern Europe', population=9997600, capital=2914}
+Country{code='SWE', name='Sweden', continent='Europe', region='Nordic Countries', population=8861400, capital=3048}
+Country{code='BGR', name='Bulgaria', continent='Europe', region='Eastern Europe', population=8190900, capital=539}
+Country{code='AUT', name='Austria', continent='Europe', region='Western Europe', population=8091800, capital=1523}
+Country{code='CHE', name='Switzerland', continent='Europe', region='Western Europe', population=7160400, capital=3248}
+Country{code='SVK', name='Slovakia', continent='Europe', region='Eastern Europe', population=5398700, capital=3209}
+Country{code='DNK', name='Denmark', continent='Europe', region='Nordic Countries', population=5330000, capital=3315}
+Country{code='FIN', name='Finland', continent='Europe', region='Nordic Countries', population=5171300, capital=3236}
+Country{code='NOR', name='Norway', continent='Europe', region='Nordic Countries', population=4478500, capital=2807}
+Country{code='HRV', name='Croatia', continent='Europe', region='Southern Europe', population=4473000, capital=2409}
+Country{code='MDA', name='Moldova', continent='Europe', region='Eastern Europe', population=4380000, capital=2690}
+Country{code='BIH', name='Bosnia and Herzegovina', continent='Europe', region='Southern Europe', population=3972000, capital=201}
+Country{code='IRL', name='Ireland', continent='Europe', region='British Islands', population=3775100, capital=1447}
+Country{code='LTU', name='Lithuania', continent='Europe', region='Baltic Countries', population=3698500, capital=2447}
+Country{code='ALB', name='Albania', continent='Europe', region='Southern Europe', population=3401200, capital=34}
+Country{code='LVA', name='Latvia', continent='Europe', region='Baltic Countries', population=2424200, capital=2434}
+Country{code='MKD', name='Macedonia', continent='Europe', region='Southern Europe', population=2024000, capital=2460}
+Country{code='SVN', name='Slovenia', continent='Europe', region='Southern Europe', population=1987800, capital=3212}
+Country{code='EST', name='Estonia', continent='Europe', region='Baltic Countries', population=1439200, capital=3791}
+Country{code='LUX', name='Luxembourg', continent='Europe', region='Western Europe', population=435700, capital=2452}
+Country{code='MLT', name='Malta', continent='Europe', region='Southern Europe', population=380200, capital=2484}
+Country{code='ISL', name='Iceland', continent='Europe', region='Nordic Countries', population=279000, capital=1449}
+Country{code='AND', name='Andorra', continent='Europe', region='Southern Europe', population=78000, capital=55}
+Country{code='FRO', name='Faroe Islands', continent='Europe', region='Nordic Countries', population=43000, capital=901}
+Country{code='MCO', name='Monaco', continent='Europe', region='Western Europe', population=34000, capital=2695}
+Country{code='LIE', name='Liechtenstein', continent='Europe', region='Western Europe', population=32300, capital=2446}
+Country{code='SMR', name='San Marino', continent='Europe', region='Southern Europe', population=27000, capital=3171}
+Country{code='GIB', name='Gibraltar', continent='Europe', region='Southern Europe', population=25000, capital=915}
+Country{code='SJM', name='Svalbard and Jan Mayen', continent='Europe', region='Nordic Countries', population=3200, capital=938}
+Country{code='VAT', name='Holy See (Vatican City State)', continent='Europe', region='Southern Europe', population=1000, capital=3538}
