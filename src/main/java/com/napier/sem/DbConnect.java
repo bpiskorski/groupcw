@@ -14,18 +14,18 @@ public class DbConnect {
     static final String DB_URL = "jdbc:mysql://db:3306/world";
     static final String USER = "root";
     static final String PASS = "root";
+    private Connection conn = null;
 
-    public DbConnect() {
+    public Connection getCons(){
+        return conn;
     }
 
     public void connect(){
-        Connection conn = null;
 
         System.out.println("Connecting to a selected database...");
 
         // Connection to the database
         try {
-            //Thread.sleep(30000);
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
             System.out.println("Could not load SQL driver");
