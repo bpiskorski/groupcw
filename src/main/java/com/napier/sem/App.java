@@ -25,8 +25,10 @@ public class App {
         ArrayList<LanguageData> chinese = new ArrayList<>();
         ArrayList<Country> countries = new ArrayList<>();
         int chineseSpeakers=0;
+
         chinese = first.chinese();
         countries = first.countriesData();
+
         for (LanguageData ld: chinese
              ) {
             System.out.println(ld.toString());
@@ -35,7 +37,7 @@ public class App {
             for (Country c: countries
                  ) {if(c.getCode().equals(x)){
                      int pop = c.getPopulation();
-                System.out.println(c.getPopulation());
+                //System.out.println(c.getPopulation());
                      int res = (int) (pop*i);
                 chineseSpeakers += res;
             }
