@@ -24,17 +24,17 @@ public class App {
         a.connect("db:3306", 3000);
 
         a.countryrep();// 1) Provide all countries in a world from largest population to smallest.
-                       //"select * from world.country order by Population desc;";
-                       // 2) Provide countries in a region from largest population to smallest
-                       //"select * from world.country Where Region = 'Eastern Asia' order by Population desc;";
-                       // 3) Provide counties from largest population to smallest in a continent
-                       //"select * from world.country Where Continent = 'Eastern Asia' order by Population desc;";
-                       // 4) The top N populated countries in a region where N is provided by the user.
-                       //"select * from world.country where Region ='Eastern Asia' order by Population desc limit 3;";
-                       // 5)The top N populated countries in a continent where N is provided by the user.
-                       //"select  * from world.country where Continent ='Asia' order by Population desc limit 3;";
-                       // 6)The top N populated countries in the world where N is provided by the user.
-                       //"select * from world.country order by Population desc limit 3;";
+        //"select * from world.country order by Population desc;";
+        // 2) Provide countries in a region from largest population to smallest
+        //"select * from world.country Where Region = 'Eastern Asia' order by Population desc;";
+        // 3) Provide counties from largest population to smallest in a continent
+        //"select * from world.country Where Continent = 'Eastern Asia' order by Population desc;";
+        // 4) The top N populated countries in a region where N is provided by the user.
+        //"select * from world.country where Region ='Eastern Asia' order by Population desc limit 3;";
+        // 5)The top N populated countries in a continent where N is provided by the user.
+        //"select  * from world.country where Continent ='Asia' order by Population desc limit 3;";
+        // 6)The top N populated countries in the world where N is provided by the user.
+        //"select * from world.country order by Population desc limit 3;";
 
         // Disconnect from database
         a.disconnect();
