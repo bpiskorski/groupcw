@@ -4,7 +4,6 @@ services:
   # Application Dockerfile is in same folder which is .
   app:
     build: .
-    container_name: app
 
 
   # db is is db folder
