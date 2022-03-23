@@ -1,47 +1,24 @@
 package com.napier.sem;
 
-<<<<<<< HEAD
+import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-public class AppTest
-{
-    static App app;
-
-    @BeforeAll
-    static void init()
-    {
-        app = new App();
-        app.connect("localhost:33060", 0);
-    }
-
-    @Test
-    void countryrep()
-    {
-        app.countryrep();
-    }
-
-
-
-    @AfterAll
-    static void close(){
-        app.disconnect();
-=======
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class AppTest {
     static App app;
 
-    @BeforeAll      // creating an instance of App to work with
+    @BeforeAll
     static void init() {
-        app = new App();
+        app = new App(); // creating an instance of App to work with
+        app.connect("localhost:33060", 0);
+    }
+
+    @Test
+    void countryrep() {
+        app.countryrep("select * from world.country order by Population desc limit 3;");
     }
 
     @Test
@@ -78,6 +55,10 @@ public class AppTest {
     void N_RegionCities() // Get N capital cities in defined region
     {
         app.Get_N_RegionCities("Southern Europe", 5);
->>>>>>> feature/capital_cities
+    }
+
+    @AfterAll
+    static void close() {
+        app.disconnect();
     }
 }
