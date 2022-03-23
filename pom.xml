@@ -19,10 +19,10 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.18</version>
         </dependency>
-<<<<<<< HEAD
-=======
+<<<<<<<<< Temporary merge branch 1
 
->>>>>>> origin/develop
+=========
+>>>>>>>>> Temporary merge branch 2
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -57,10 +57,10 @@
                     </execution>
                 </executions>
             </plugin>
-<<<<<<< HEAD
-=======
+<<<<<<<<< Temporary merge branch 1
 
->>>>>>> origin/develop
+=========
+>>>>>>>>> Temporary merge branch 2
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -78,10 +78,10 @@
                     </dependency>
                 </dependencies>
             </plugin>
-<<<<<<< HEAD
-=======
+<<<<<<<<< Temporary merge branch 1
 
->>>>>>> origin/develop
+=========
+>>>>>>>>> Temporary merge branch 2
         </plugins>
     </build>
 </project>
