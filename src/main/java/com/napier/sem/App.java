@@ -180,9 +180,6 @@ public class App {
         }
     }
 
-
-}
-
     public void countryrep(String input) {
         System.out.println("Creating the country report...");
         StringBuilder sb  = new StringBuilder();
