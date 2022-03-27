@@ -244,17 +244,8 @@ public class App {
                             " ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            while (rset.next()) {
-                Results res = new Results();
-//                res.id = rset.getInt("city.ID");
-                res.cityName = rset.getString("city.Name");
-                res.population = rset.getInt("city.Population");
-                res.countryCode = rset.getString("city.CountryCode");
-                res.district = rset.getString("city.District");
-                ress.add(res);
-            }
+            // Extract information
+            ArrayList<Results> ress = GetCityList(rset);
             if (ress != null) {
                 PrintCityResults(ress);
                 System.out.println("Number of results: " + ress.size());
@@ -266,6 +257,25 @@ public class App {
             System.out.println("Failed to get city details");
             return null;
         }
+    }
+
+    /**
+     *  Get ArrayList of city names, population, country code and location district
+     * @param resultSet from world db SQL query
+     * @return ArrayList<Results> cityLists
+     * @throws SQLException
+     */
+    public ArrayList<Results> GetCityList(ResultSet resultSet) throws SQLException {
+        ArrayList<Results> cityList = new ArrayList<Results>();
+        while (resultSet.next()) {
+            Results result = new Results();
+            result.cityName = resultSet.getString("city.Name");
+            result.population = resultSet.getInt("city.Population");
+            result.countryCode = resultSet.getString("city.CountryCode");
+            result.district = resultSet.getString("city.District");
+            cityList.add(result);
+        }
+        return cityList;
     }
 
     // Get list of capital cities by continent
