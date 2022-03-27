@@ -68,4 +68,9 @@ public class AppTest {
         app.GetAllCities();
     }
 
+    @Test
+    void GetCitiesFromContinent() {
+        app.GetCitiesFromContinent();
+    }
+
 }
