@@ -192,23 +192,45 @@ public class App {
 
 
 
-    // Capital and city reports
-    // Get list of all capital cities by population
-    public ArrayList<Results> GetCapitalCities() {
-        System.out.println("Getting cities (All)...");
+    // City reports
+
+    /**
+     *  All the cities in the world organised by largest population to smallest.
+     */
+    String allCities = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
+            " FROM city" +
+            " ORDER BY city.Population DESC";
+
+
+
+    /**
+     *  All the cities in the world organised by largest population to smallest.
+     * @return
+     */
+    public ArrayList<Results> GetAllCities() {
+        System.out.println("Cities in the world");
+        return GetCities(allCities);
+    }
+
+    /**
+     *  Return and print list of cities from a query in world db
+     * @param query
+     * @return ArrayList<Results>
+     */
+    public ArrayList<Results> GetCities(String query) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect =
-                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital ORDER BY city.Population DESC";
+            String strSelect = query;
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
             ArrayList<Results> ress = new ArrayList<Results>();
             while (rset.next()) {
                 Results res = new Results();
-                res.id = rset.getInt("city.ID");
+//                res.id = rset.getInt("city.ID");
                 res.cityName = rset.getString("city.Name");
                 res.population = rset.getInt("city.Population");
                 res.countryCode = rset.getString("city.CountryCode");
@@ -228,27 +250,28 @@ public class App {
         }
     }
 
-    /**
-     *  All the cities in the world organised by largest population to smallest.
-     * @return  ArrayList<Results>
-     */
-    public ArrayList<Results> GetAllCities() {
-        System.out.println("Cities in the world");
+
+
+
+
+
+    // Capital reports
+    // Get list of all capital cities by population
+    public ArrayList<Results> GetCapitalCities() {
+        System.out.println("Getting cities (All)...");
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
-                            " FROM city" +
-                            " ORDER BY city.Population DESC";
+                    "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
             ArrayList<Results> ress = new ArrayList<Results>();
             while (rset.next()) {
                 Results res = new Results();
-//                res.id = rset.getInt("city.ID");
+                res.id = rset.getInt("city.ID");
                 res.cityName = rset.getString("city.Name");
                 res.population = rset.getInt("city.Population");
                 res.countryCode = rset.getString("city.CountryCode");
