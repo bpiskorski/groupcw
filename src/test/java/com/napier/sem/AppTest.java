@@ -62,7 +62,13 @@ public class AppTest {
         app.disconnect();
     }
 
-// @Test
-    // void CitiesTestNull() {app.printCities(null);}
+
+
+    // Cities tests
+    @Test
+    void GetAllCities()
+    {
+        app.GetAllCities();
+    }
 
 }
