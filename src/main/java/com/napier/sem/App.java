@@ -201,14 +201,6 @@ public class App {
             " FROM city" +
             " ORDER BY city.Population DESC";
 
-    /**
- *  All the cities in a continent organised by largest population to smallest.
- */
-    String continentForCities = "Europe";
-    String citiesFromContinent = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
-            "    FROM city" +
-            "    INNER JOIN country ON city.CountryCode = country.Code " +
-            "    WHERE country.Continent LIKE '" + continentForCities + "' ORDER BY city.Population DESC";
 
 
     /**
@@ -224,7 +216,16 @@ public class App {
      * All the cities in a continent organised by largest population to smallest.
      * @return
      */
-    public ArrayList<Results> GetCitiesFromContinent() {
+    public ArrayList<Results> getCitiesFromContinent(String continentForCities) {
+        /**
+         *  All the cities in a continent organised by largest population to smallest.
+         */
+         //= "Europe";
+        String citiesFromContinent = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
+                "    FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "    WHERE country.Continent LIKE '" + continentForCities + "' ORDER BY city.Population DESC";
+
         System.out.println("Cities in " + continentForCities);
         return GetCities(citiesFromContinent);
     }

@@ -70,7 +70,7 @@ public class AppTest {
 
     @Test
     void GetCitiesFromContinent() {
-        app.GetCitiesFromContinent();
+        app.getCitiesFromContinent("Europe");
     }
 
 }
