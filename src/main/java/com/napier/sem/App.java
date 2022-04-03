@@ -201,11 +201,9 @@ public class App {
             " FROM city" +
             " ORDER BY city.Population DESC";
 
-
-
     /**
-     *  All the cities in the world organised by largest population to smallest.
-     * @return
+     *  All the cities in the world organised by largest population to smallest from query string allCities
+     * @return getCities(allCities)
      */
     public ArrayList<Results> getAllCities() {
         System.out.println("Cities in the world");
@@ -229,9 +227,11 @@ public class App {
     }
 
     /**
-     *  Return and print list of cities from a query in world db
+     *  Return and print list of cities from a query in world db.
+     *  It calls getCityList(rset) formating query results
      * @param query
-     * @return ArrayList<Results>
+     * @return ArrayList<Results> of cities data or null
+     * @throws Exception Failed to get city details"
      */
     public ArrayList<Results> getCities(String query) {
         try {
@@ -243,16 +243,7 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract employee information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            while (rset.next()) {
-                Results res = new Results();
-//                res.id = rset.getInt("city.ID");
-                res.cityName = rset.getString("city.Name");
-                res.population = rset.getInt("city.Population");
-                res.countryCode = rset.getString("city.CountryCode");
-                res.district = rset.getString("city.District");
-                ress.add(res);
-            }
+            ArrayList<Results> ress = getCityList(rset);
             if (ress != null) {
                 PrintCityResults(ress);
                 System.out.println("Number of results: " + ress.size());
@@ -266,7 +257,24 @@ public class App {
         }
     }
 
-
+    /**
+     *  Get ArrayList of city names, population, country code and location district
+     * @param resultSet from World DB SQL query
+     * @return ArrayList<Results> cityLists
+     * @throws SQLException
+     */
+    public ArrayList<Results> getCityList(ResultSet resultSet) throws SQLException {
+        ArrayList<Results> cityList = new ArrayList<Results>();
+        while (resultSet.next()) {
+            Results result = new Results();
+            result.cityName = resultSet.getString("city.Name");
+            result.population = resultSet.getInt("city.Population");
+            result.countryCode = resultSet.getString("city.CountryCode");
+            result.district = resultSet.getString("city.District");
+            cityList.add(result);
+        }
+        return cityList;
+    }
 
 
 

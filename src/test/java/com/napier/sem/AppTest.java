@@ -63,13 +63,13 @@ public class AppTest {
 
     // Cities tests
     @Test
-    void GetAllCities()
+    void getAllCities()
     {
         app.getAllCities();
     }
 
     @Test
-    void GetCitiesFromContinent() {
+    void getCitiesFromContinent() {
         app.getCitiesFromContinent("Europe");
     }
 
