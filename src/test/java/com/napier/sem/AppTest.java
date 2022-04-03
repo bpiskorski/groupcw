@@ -65,7 +65,7 @@ public class AppTest {
     @Test
     void GetAllCities()
     {
-        app.GetAllCities();
+        app.getAllCities();
     }
 
     @Test

@@ -207,27 +207,25 @@ public class App {
      *  All the cities in the world organised by largest population to smallest.
      * @return
      */
-    public ArrayList<Results> GetAllCities() {
+    public ArrayList<Results> getAllCities() {
         System.out.println("Cities in the world");
-        return GetCities(allCities);
+        return getCities(allCities);
     }
 
     /**
-     * All the cities in a continent organised by largest population to smallest.
-     * @return
+     *  All the cities in a continent organised by largest population to smallest.
+     * @param continent is used in SQL query of world db.
+     * @return getCities(query)
      */
-    public ArrayList<Results> getCitiesFromContinent(String continentForCities) {
-        /**
-         *  All the cities in a continent organised by largest population to smallest.
-         */
-         //= "Europe";
+    public ArrayList<Results> getCitiesFromContinent(String continent) {
         String citiesFromContinent = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
                 "    FROM city" +
                 "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "    WHERE country.Continent LIKE '" + continentForCities + "' ORDER BY city.Population DESC";
+                "    WHERE country.Continent LIKE '" +
+                continent + "' ORDER BY city.Population DESC";
 
-        System.out.println("Cities in " + continentForCities);
-        return GetCities(citiesFromContinent);
+        System.out.println("Cities in " + continent);
+        return getCities(citiesFromContinent);
     }
 
     /**
@@ -235,7 +233,7 @@ public class App {
      * @param query
      * @return ArrayList<Results>
      */
-    public ArrayList<Results> GetCities(String query) {
+    public ArrayList<Results> getCities(String query) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
