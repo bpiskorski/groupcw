@@ -241,7 +241,16 @@ public class App {
         return getCities(citiesFromRegion);
     }
 
+    public ArrayList getCitiesFromCountry(String country) {
+        String citiesFromCountry = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "WHERE country.Name LIKE '" +
+                country + "' ORDER BY city.Population DESC";
+        System.out.println("Cities in " + country);
+        return getCities(citiesFromCountry);
 
+    }
 
 
     /**
