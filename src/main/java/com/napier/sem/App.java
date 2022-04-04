@@ -257,6 +257,24 @@ public class App {
 
     }
 
+    /**
+     *  All the cities in a district organised by largest population to smallest.
+     * @param district is used in SQL query of world db.
+    * @return getCities(query)
+     */
+    public ArrayList getCitiesFromDistrict(String district) {
+        String citiesFromDistrict = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "WHERE district LIKE '" +
+                district + "' ORDER BY city.Population DESC";
+        System.out.println("Cities in " + district);
+        return getCities(citiesFromDistrict);
+
+
+    }
+
+
 
     /**
      *  Return and print list of cities from a query in world db.

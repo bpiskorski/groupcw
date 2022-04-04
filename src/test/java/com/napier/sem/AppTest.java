@@ -83,4 +83,9 @@ public class AppTest {
         app.getCitiesFromCountry("United Kingdom");
     }
 
+    @Test
+    void getCitiesFromDistrict() {
+        app.getCitiesFromDistrict("Scotland");
+    }
+
 }
