@@ -623,6 +623,12 @@ public class App {
 
 
     // Printing methods
+
+    /**
+     * Print city data: name, country code, district, population (000s)
+     *  or "No results"
+     * @param results - world db query
+     */
     public void PrintCityResults(ArrayList<Results> results) {
         // Check results is not null
         if (results == null) {

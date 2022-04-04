@@ -101,5 +101,12 @@ public class AppTest {
     void getNCitiesFromDistrict() {
         app.getNCitiesFromDistrict(5, "England");
     }
+    @Test
+    void getCities() {
+        String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
+                " FROM city" +
+                " ORDER BY city.Population DESC";
+        app.getCities(query);
+    }
 
 }
