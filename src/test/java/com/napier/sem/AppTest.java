@@ -73,4 +73,9 @@ public class AppTest {
         app.getCitiesFromContinent("Europe");
     }
 
+    @Test
+    void getCitiesFromRegion() {
+        app.getCitiesFromRegion("Eastern Europe");
+    }
+
 }

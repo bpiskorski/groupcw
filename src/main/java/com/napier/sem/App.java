@@ -227,6 +227,24 @@ public class App {
     }
 
     /**
+     * All the cities in a region organised by largest population to smallest.
+     * @param region is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList getCitiesFromRegion(String region) {
+        String citiesFromRegion = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                " INNER JOIN country ON city.ID = country.Capital " +
+                "WHERE country.Region LIKE '" +
+                region + "' ORDER BY city.Population DESC";
+        System.out.println("Cities in " + region);
+        return getCities(citiesFromRegion);
+    }
+
+
+
+
+    /**
      *  Return and print list of cities from a query in world db.
      *  It calls getCityList(rset) formating query results
      * @param query
