@@ -80,22 +80,22 @@ public class AppTest {
     void getCitiesFromCountry() {
         app.getCitiesFromCountry("United Kingdom");
     }
-
     @Test
     void getCitiesFromDistrict() {
         app.getCitiesFromDistrict("Scotland");
     }
-
     @Test
     void getNCitiesFromWorld() {
         app.getNCitiesFromWorld(5);
     }
-
     @Test
     void getNCitiesFromContinent() {
         app.getNCitiesFromContinent(5, "Europe");
     }
-
+    @Test
+    void getNCitiesFromRegion() {
+        app.getNCitiesFromRegion(5, "Eastern Europe");
+    }
 
 
 }

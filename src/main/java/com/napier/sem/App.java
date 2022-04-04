@@ -298,8 +298,24 @@ public class App {
                 continent + "' ORDER BY city.Population DESC LIMIT " + N;
         System.out.println("The biggest " + N + " cities in " + continent);
         return getCities(citiesFromContinent);
-
     }
+
+    /**
+     *  The top N populated cities in a region where N is provided by the user.
+     * @param N  is used in SQL query of world db.
+     * @param region
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getNCitiesFromRegion(int N, String region) {
+        String citiesFromRegion = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                " INNER JOIN country ON city.ID = country.Capital " +
+                "WHERE country.Region LIKE '" +
+                region + "' ORDER BY city.Population  DESC LIMIT " + N;
+        System.out.println("The biggest " + N + " cities in " + region);
+        return getCities(citiesFromRegion);
+    }
+
 
 
     /**
@@ -635,7 +651,6 @@ public class App {
             System.out.println(emp_string);
         }
     }
-
 
 
 }
