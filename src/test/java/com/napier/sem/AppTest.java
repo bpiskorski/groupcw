@@ -97,6 +97,9 @@ public class AppTest {
     void getNCitiesFromCountry() {
         app.getNCitiesFromCountry(5, "United Kingdom");
     }
-
+    @Test
+    void getNCitiesFromDistrict() {
+        app.getNCitiesFromDistrict(5, "England");
+    }
 
 }

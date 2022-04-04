@@ -332,6 +332,23 @@ public class App {
         return getCities(citiesFromCountry);
     }
 
+    /**
+     * The top N populated cities in a district where N is provided by the user.
+     * @param N is used in SQL query of world db.
+    *  @param district is used in SQL query of world db.
+    * @return getCities(query)
+     */
+    public ArrayList<Results> getNCitiesFromDistrict(int N, String district) {
+        String citiesFromDistrict = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "WHERE district LIKE '" +
+                district + "' ORDER BY city.Population DESC LIMIT " + N;
+        System.out.println("The biggest " + N + " cities in " + district);
+        return getCities(citiesFromDistrict);
+
+    }
+
 
 
     /**
