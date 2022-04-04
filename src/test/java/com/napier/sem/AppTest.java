@@ -60,11 +60,9 @@ public class AppTest {
     }
 
 
-
     // Cities tests
     @Test
-    void getAllCities()
-    {
+    void getAllCities() {
         app.getAllCities();
     }
 
@@ -90,8 +88,14 @@ public class AppTest {
 
     @Test
     void getNCitiesFromWorld() {
-        app.getNCitiesFromWorld(20);
+        app.getNCitiesFromWorld(5);
     }
+
+    @Test
+    void getNCitiesFromContinent() {
+        app.getNCitiesFromContinent(5, "Europe");
+    }
+
 
 
 }
