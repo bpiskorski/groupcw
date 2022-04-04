@@ -88,4 +88,10 @@ public class AppTest {
         app.getCitiesFromDistrict("Scotland");
     }
 
+    @Test
+    void getNCitiesFromWorld() {
+        app.getNCitiesFromWorld(20);
+    }
+
+
 }

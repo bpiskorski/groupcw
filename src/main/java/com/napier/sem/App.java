@@ -270,9 +270,22 @@ public class App {
                 district + "' ORDER BY city.Population DESC";
         System.out.println("Cities in " + district);
         return getCities(citiesFromDistrict);
+    }
 
+    /**
+     * The top N populated cities in the world where N is provided by the user.
+     * @param number N is used in SQL query of world db.
+    * @return getCities(query)
+     */
+    public ArrayList getNCitiesFromWorld(int number) {
+        String cities = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
+                " FROM city" +
+                " ORDER BY city.Population DESC LIMIT " + number;
+        System.out.println(number + " the biggest cities in the world");
+        return getCities(cities);
 
     }
+
 
 
 
