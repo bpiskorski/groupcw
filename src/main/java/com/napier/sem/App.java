@@ -287,7 +287,7 @@ public class App {
     /**
      *  The top N populated cities in a continent where N is provided by the user.
      * @param N  is used in SQL query of world db.
-     * @param continent
+     * @param continent is used in SQL query of world db.
      * @return getCities(query)
      */
     public ArrayList<Results> getNCitiesFromContinent(int N, String continent) {
@@ -303,7 +303,7 @@ public class App {
     /**
      *  The top N populated cities in a region where N is provided by the user.
      * @param N  is used in SQL query of world db.
-     * @param region
+     * @param region is used in SQL query of world db.
      * @return getCities(query)
      */
     public ArrayList<Results> getNCitiesFromRegion(int N, String region) {
@@ -314,6 +314,22 @@ public class App {
                 region + "' ORDER BY city.Population  DESC LIMIT " + N;
         System.out.println("The biggest " + N + " cities in " + region);
         return getCities(citiesFromRegion);
+    }
+
+    /**
+     * The top N populated cities in a country where N is provided by the user.
+     * @param N is used in SQL query of world db.
+     * @param country is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getNCitiesFromCountry(int N, String country) {
+        String citiesFromCountry = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "WHERE country.Name LIKE '" +
+                country + "' ORDER BY city.Population DESC LIMIT " + N;
+        System.out.println("The biggest " + N + " cities in " + country);
+        return getCities(citiesFromCountry);
     }
 
 
@@ -651,6 +667,7 @@ public class App {
             System.out.println(emp_string);
         }
     }
+
 
 
 }

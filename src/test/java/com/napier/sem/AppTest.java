@@ -65,17 +65,14 @@ public class AppTest {
     void getAllCities() {
         app.getAllCities();
     }
-
     @Test
     void getCitiesFromContinent() {
         app.getCitiesFromContinent("Europe");
     }
-
     @Test
     void getCitiesFromRegion() {
         app.getCitiesFromRegion("Eastern Europe");
     }
-
     @Test
     void getCitiesFromCountry() {
         app.getCitiesFromCountry("United Kingdom");
@@ -95,6 +92,10 @@ public class AppTest {
     @Test
     void getNCitiesFromRegion() {
         app.getNCitiesFromRegion(5, "Eastern Europe");
+    }
+    @Test
+    void getNCitiesFromCountry() {
+        app.getNCitiesFromCountry(5, "United Kingdom");
     }
 
 
