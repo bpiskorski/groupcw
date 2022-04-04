@@ -241,6 +241,11 @@ public class App {
         return getCities(citiesFromRegion);
     }
 
+    /**
+     * All the cities in a country organised by largest population to smallest.
+     * @param country is used in SQL query of world db.
+     * @return getCities(query)
+     */
     public ArrayList getCitiesFromCountry(String country) {
         String citiesFromCountry = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
                 "FROM city" +
