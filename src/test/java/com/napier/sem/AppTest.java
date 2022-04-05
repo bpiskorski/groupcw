@@ -10,7 +10,7 @@ public class AppTest {
     @BeforeAll
     static void init() {
         app = new App(); // creating an instance of App to work with
-        app.connect("localhost:33060", 5000);
+        app.connect("localhost:33060", 1000);
     }
 
     @Test
@@ -54,10 +54,6 @@ public class AppTest {
         app.Get_N_RegionCities("Southern Europe", 5);
     }
 
-    @AfterAll
-    static void close() {
-        app.disconnect();
-    }
 
 
     // Cities tests
@@ -107,6 +103,17 @@ public class AppTest {
                 " FROM city" +
                 " ORDER BY city.Population DESC";
         app.getCities(query);
+    }
+    @Test
+    void getCity() {
+        app.getCity("Warszawa");
+    }
+
+
+
+    @AfterAll
+    static void close() {
+        app.disconnect();
     }
 
 }

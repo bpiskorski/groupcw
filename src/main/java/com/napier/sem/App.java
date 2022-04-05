@@ -23,7 +23,7 @@ public class App {
 
         // Connect to database
         if (args.length < 1) {
-            a.connect("localhost:33060", 5000);
+            a.connect("localhost:33060", 1000);
         }
         else {
             a.connect("db:3306", 30000);
@@ -348,6 +348,14 @@ public class App {
         return getCities(citiesFromDistrict);
 
     }
+
+    public ArrayList<Results> getCity(String name) {
+        String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city " +
+                "WHERE city.Name = '" + name + "'";
+        return getCities(query);
+    }
+
 
 
 
