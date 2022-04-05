@@ -10,7 +10,7 @@ public class AppTest {
     @BeforeAll
     static void init() {
         app = new App(); // creating an instance of App to work with
-        // app.connect("localhost:33060", 0);
+        app.connect("localhost:33060", 0);
     }
 
     @Test
