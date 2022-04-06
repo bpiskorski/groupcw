@@ -349,13 +349,48 @@ public class App {
 
     }
 
-    public ArrayList<Results> getCity(String name) {
+    /**
+     *  Make query in world db with
+     * @param name
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getCityArray(String name) {
         String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
                 "FROM city " +
                 "WHERE city.Name = '" + name + "'";
         return getCities(query);
     }
 
+    /**
+     *  Created for integration test.It make query in world db with @param name,
+     *  the same quary as in ArrayList<Results> getCityArray(String name), but I couldn't make it to work with the test
+     * @param name of the city
+     * @return result
+     * @throws Exception Failed to get city details
+     */
+     public Results getCity(String name) {
+         String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                 "FROM city " +
+                 "WHERE city.Name = '" + name + "'";
+         try {
+             // Create an SQL statement
+             Statement stmt = con.createStatement();
+             // Execute SQL statement
+             ResultSet resultSet = stmt.executeQuery(query);
+             // Extract city information
+             if (resultSet.next())  {
+                 Results result = new Results();
+                 result.population = resultSet.getInt("city.Population");
+                 result.countryCode = resultSet.getString("city.CountryCode");
+                 result.district = resultSet.getString("city.District");
+                 return result;
+             } else return null;
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+             System.out.println("Failed to get city details");
+             return null;
+         }
+     }
 
 
 

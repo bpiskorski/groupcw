@@ -106,7 +106,7 @@ public class AppTest {
     }
     @Test
     void getCity() {
-        app.getCity("Warszawa");
+        app.getCityArray("Warszawa");
     }
 
 

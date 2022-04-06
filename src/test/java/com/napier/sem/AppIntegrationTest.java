@@ -16,17 +16,18 @@ public class AppIntegrationTest
     static void init()
     {
         app = new App();
-        app.connect("localhost:33060", 30000);
+        app.connect("localhost:33060", 1000);
 
     }
 
     @Test
     void testGetCity()
     {
+
 //        Employee emp = app.getEmployee(255530);
-//        City city = city.getCity();
-//        assertEquals(emp.emp_no, 255530);
-//        assertEquals(emp.first_name, "Ronghao");
-//        assertEquals(emp.last_name, "Garigliano");
+       Results result = app.getCity("Warszawa");
+//       Results city = app. getCityArray("Warszawa");
+        assertEquals(result.countryCode, "POL");
+        assertEquals(result.district, "Mazowieckie");
     }
 }
