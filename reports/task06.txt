@@ -1,3 +1,0 @@
-Country{code='CHN', name='China', continent='Asia', region='Eastern Asia', population=1277558000, capital=1891}
-Country{code='IND', name='India', continent='Asia', region='Southern and Central Asia', population=1013662000, capital=1109}
-Country{code='USA', name='United States', continent='North America', region='North America', population=278357000, capital=3813}
