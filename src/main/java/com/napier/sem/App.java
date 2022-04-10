@@ -1,7 +1,5 @@
 package com.napier.sem;
 
-import com.napier.sem.country.Country;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
