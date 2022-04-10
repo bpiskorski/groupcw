@@ -20,6 +20,7 @@ public class Results {
     float gnp;
     float gnpOld;
     String localName;
+    String governmentForm;
     String headOfState;
     int capital;
     String countryCode2;
