@@ -27,7 +27,9 @@ public class App {
             a.connect("db:3306", 30000);
         }
 
-
+        /**
+         * Capital City Reports
+         */
         // Get all capital cities
         System.out.println("Calling GetCapitals_World (Ordered By Population)...");
         // Extract city information
