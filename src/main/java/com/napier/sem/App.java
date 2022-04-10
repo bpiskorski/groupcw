@@ -11,49 +11,37 @@ public class App {
         App a = new App();
 
         // Connect to database
-        a.connect();
+        a.connect("db:3306", 3000);
 
-        /* // Get all capital cities
-        System.out.println("Calling GetCapitalCities (Ordered By Population)...");
+        // Get all capital cities
+        System.out.println("Calling GetCapitals_World (Ordered By Population)...");
         // Extract city information
-        ArrayList<Results> results = GetCapitalCities(con1);
-        PrintCityResults(results);
-        System.out.println("Number of results: " + results.size());*/
+        a.GetCapitals_World();
 
-        /* // Get capital cities by continent
-        System.out.println("Calling GetContinentCities (Ordered By population)...");
+        // Get capital cities by continent
+        System.out.println("Calling GetCapitals_Continent (Ordered By population)...");
         // Extract city information
-        ArrayList<Results> results = GetContinentCities(con1, "Europe");
-        PrintCityResults(results);
-        System.out.println("Number of results: " + results.size());*/
+        a.GetCapitals_Continent("Europe");
 
-        /* // Get capital cities by region
-        System.out.println("Calling GetRegionCities (Ordered By population)...");
+        // Get capital cities by region
+        System.out.println("Calling GetCapitals_Region (Ordered By population)...");
         // Extract city information
-        ArrayList<Results> results = GetRegionCities(con1, "Northern Europe");
-        PrintCityResults(results);
-        System.out.println("Number of results: " + results.size());*/
+        a.GetCapitals_Region("Northern Europe");
 
-        /* // Get n capital cities in the world
-        System.out.println("Calling Get_N_CapitalCities (Ordered By population)...");
+        // Get n capital cities in the world
+        System.out.println("Calling GetCapitals_World_N (Ordered By population)...");
         // Extract city information
-        ArrayList<Results> results = Get_N_CapitalCities(con1, 5);
-        PrintCityResults(results);
-        System.out.println("Number of results: " + results.size());*/
+        a.GetCapitals_World_N(5);
 
-        /*// Get n capital cities by continent
-        System.out.println("Calling Get_N_ContinentCities (Ordered By population)...");
+        // Get n capital cities by continent
+        System.out.println("Calling GetCapitals_Continent_N (Ordered By population)...");
         // Extract city information
-        ArrayList<Results> results = Get_N_ContinentCities(con1, "Europe", 5);
-        PrintCityResults(results);
-        System.out.println("Number of results: " + results.size());*/
+        a.GetCapitals_Continent_N("Europe", 5);
 
         // Get n capital cities by region
-        System.out.println("Calling Get_N_RegionCities (Ordered By population)...");
+        System.out.println("Calling GetCapitals_Region_N (Ordered By population)...");
         // Extract city information
-        ArrayList<Results> results = a.Get_N_RegionCities("Southern Europe", 5);
-        a.PrintCityResults(results);
-        System.out.println("Number of results: " + results.size());
+        a.GetCapitals_Region_N("Southern Europe", 5);
 
         // Disconnect from database
         a.disconnect();
@@ -67,7 +55,7 @@ public class App {
     static final String PASS = "root";
 
     // Connect to the MySQL database.
-    public void connect() {
+    public void connect(String conString, int delay) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -81,9 +69,9 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                Thread.sleep(2000);
+                Thread.sleep(delay);
                 // Connect to database
-                con = DriverManager.getConnection(DB_URL,USER,PASS);
+                con = DriverManager.getConnection("jdbc:mysql://" + conString + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
@@ -133,7 +121,7 @@ public class App {
     }
 
     // Get list of all capital cities by population
-    public ArrayList<Results> GetCapitalCities(){
+    public ArrayList<Results> GetCapitals_World(){
         System.out.println("Getting cities (All)...");
         try
         {
@@ -149,13 +137,13 @@ public class App {
             while (rset.next())
             {
                 Results res = new Results();
-                res.id = rset.getInt("city.ID");
                 res.cityName = rset.getString("city.Name");
                 res.population = rset.getInt("city.Population");
                 res.countryCode = rset.getString("city.CountryCode");
-                res.district = rset.getString("city.District");
                 ress.add(res);
             }
+            // Print results
+            PrintCityResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -167,7 +155,7 @@ public class App {
     }
 
     // Get list of capital cities by continent
-    public ArrayList<Results> GetContinentCities(String continent){
+    public ArrayList<Results> GetCapitals_Continent(String continent){
         System.out.println("Getting cities (Continent)...");
         try
         {
@@ -183,13 +171,13 @@ public class App {
             while (rset.next())
             {
                 Results res = new Results();
-                res.id = rset.getInt("city.ID");
                 res.cityName = rset.getString("city.Name");
                 res.population = rset.getInt("city.Population");
                 res.countryCode = rset.getString("city.CountryCode");
-                res.district = rset.getString("city.District");
                 ress.add(res);
             }
+            // Print results
+            PrintCityResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -201,7 +189,7 @@ public class App {
     }
 
     // Get list of capital cities by region
-    public ArrayList<Results> GetRegionCities(String region){
+    public ArrayList<Results> GetCapitals_Region(String region){
         System.out.println("Getting cities (Region)...");
         try
         {
@@ -217,13 +205,13 @@ public class App {
             while (rset.next())
             {
                 Results res = new Results();
-                res.id = rset.getInt("city.ID");
                 res.cityName = rset.getString("city.Name");
                 res.population = rset.getInt("city.Population");
                 res.countryCode = rset.getString("city.CountryCode");
-                res.district = rset.getString("city.District");
                 ress.add(res);
             }
+            // Print results
+            PrintCityResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -235,7 +223,7 @@ public class App {
     }
 
     // Get list of N capital cities in the world
-    public ArrayList<Results> Get_N_CapitalCities(int n){
+    public ArrayList<Results> GetCapitals_World_N(int n){
         System.out.println("Getting " + n + " cities (All)...");
         try
         {
@@ -258,6 +246,8 @@ public class App {
                 res.district = rset.getString("city.District");
                 ress.add(res);
             }
+            // Print results
+            PrintCityResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -269,7 +259,7 @@ public class App {
     }
 
     // Get list of N capital cities by continent
-    public ArrayList<Results> Get_N_ContinentCities(String continent, int n){
+    public ArrayList<Results> GetCapitals_Continent_N(String continent, int n){
         System.out.println("Getting " + n + " cities (Continent)...");
         try
         {
@@ -292,6 +282,8 @@ public class App {
                 res.district = rset.getString("city.District");
                 ress.add(res);
             }
+            // Print results
+            PrintCityResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -303,7 +295,7 @@ public class App {
     }
 
     // Get list of N capital cities by continent
-    public ArrayList<Results> Get_N_RegionCities(String region, int n){
+    public ArrayList<Results> GetCapitals_Region_N(String region, int n){
         System.out.println("Getting " + n + " cities (Region)...");
         try
         {
@@ -319,13 +311,13 @@ public class App {
             while (rset.next())
             {
                 Results res = new Results();
-                res.id = rset.getInt("city.ID");
                 res.cityName = rset.getString("city.Name");
                 res.population = rset.getInt("city.Population");
                 res.countryCode = rset.getString("city.CountryCode");
-                res.district = rset.getString("city.District");
                 ress.add(res);
             }
+            // Print results
+            PrintCityResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -344,15 +336,13 @@ public class App {
             return;
         }
         // Print header
-        System.out.println(String.format("%-10s %-40s %-10s %-8s %-8s", "City ID", "City Name", "City Population", "City Country Code", "City District"));
+        System.out.println(String.format("%-40s %-10s %-8s", "City Name", "City Population", "City Country Code"));
         // Loop over all results in the list
         for (Results res : results)
         {
             if (results == null)
                 continue;
-            String emp_string =
-                    String.format("%-10s %-40s %-15s %-18s %-15s",
-                            res.id, res.cityName, res.population, res.countryCode, res.district);
+            String emp_string = String.format("%-40s %-15s %-18s",res.cityName, res.population, res.countryCode);
             System.out.println(emp_string);
         }
     }

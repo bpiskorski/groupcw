@@ -14,41 +14,42 @@ public class AppTest {
     @BeforeAll      // creating an instance of App to work with
     static void init() {
         app = new App();
+        app.connect("localhost:33060", 0);
     }
 
     @Test
-    void CapitalCities() // Get all capital cities
+    void WorldCapitals() // Get all capital cities
     {
-        app.GetCapitalCities();
+        app.GetCapitals_World();
     }
 
     @Test
-    void ContinentCities() // Get all capital cities on defined continent
+    void ContinentCapitals() // Get all capital cities on defined continent
     {
-        app.GetContinentCities("Europe");
+        app.GetCapitals_Continent("Europe");
     }
 
     @Test
-    void RegionCities() // Get all capital cities in defined region
+    void RegionCapitals() // Get all capital cities in defined region
     {
-        app.GetRegionCities("Southern Europe");
+        app.GetCapitals_Region("Southern Europe");
     }
 
     @Test
-    void N_CapitalCities() // Get N capital cities
+    void N_WorldCapitals() // Get N capital cities
     {
-        app.Get_N_CapitalCities(5);
+        app.GetCapitals_World_N(5);
     }
 
     @Test
-    void N_ContinentCities() // Get N capital cities on defined continent
+    void N_ContinentCapitals() // Get N capital cities on defined continent
     {
-        app.Get_N_ContinentCities("Europe", 5);
+        app.GetCapitals_Continent_N("Europe", 5);
     }
 
     @Test
-    void N_RegionCities() // Get N capital cities in defined region
+    void N_RegionCapitals() // Get N capital cities in defined region
     {
-        app.Get_N_RegionCities("Southern Europe", 5);
+        app.GetCapitals_Region_N("Southern Europe", 5);
     }
 }
