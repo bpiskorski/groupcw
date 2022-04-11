@@ -87,6 +87,29 @@ public class App {
         //"select * from world.country where Region ='Eastern Asia' order by Population desc limit 3;";
         a.country_region_N("Eastern Asia", 5);
 
+        /**
+         * City reports
+         */
+        // 1) All the cities in the world organised by largest population to smallest.
+        a.getAllCities();
+        // 2) All the cities in a continent organised by largest population to smallest.
+        a.getCitiesFromContinent("Europe");
+        // 3) All the cities in a region organised by largest population to smallest.
+        a.getCitiesFromRegion("Southern Europe");
+        // 4) All the cities in a country organised by largest population to smallest.
+        a.getCitiesFromCountry("United Kingdom");
+        // 5) All the cities in a district organised by largest population to smallest.
+        a.getCitiesFromDistrict("Scotland");
+        // 6) The top N populated cities in the world where N is provided by the user.
+        a.getNCitiesFromWorld(5);
+        // 7) The top N populated cities in a continent where N is provided by the user.
+        a.getNCitiesFromContinent("Europe",5);
+        // 8) The top N populated cities in a region where N is provided by the user.
+        a.getNCitiesFromRegion("Southern Europe", 5);
+        // 9) The top N populated cities in a country where N is provided by the user.
+        a.getNCitiesFromCountry("United Kingdom", 5);
+        // 10) The top N populated cities in a district where N is provided by the user.
+        a.getNCitiesFromDistrict("Scotland", 5);
 
         // Disconnect from database
         a.disconnect();
@@ -98,7 +121,6 @@ public class App {
      * @param conString db:3306 for docker and localhost:33060 for local or Integration Tests
      * @param //i
      */
-
     // Database Username, Password
     static final String USER = "root";
     static final String PASS = "example";
@@ -147,7 +169,10 @@ public class App {
         }
     }
 
-    // 1) Provide all countries in a world from largest population to smallest.
+    // Country reports
+    /**
+     * 1) Provide all countries in a world from largest population to smallest.
+     */
     public ArrayList<Results> country_world() {
         System.out.println("Creating the report (Countries in world by population)...");
         StringBuilder sb  = new StringBuilder();
@@ -188,7 +213,9 @@ public class App {
         }
     }
 
-    // 2) Provide countries in a continent from largest population to smallest
+    /**
+     * 2) Provide countries in a continent from largest population to smallest
+     */
     public ArrayList<Results> country_continent(String continent) {
         System.out.println("Creating the report (Countries in continent by population)...");
         StringBuilder sb  = new StringBuilder();
@@ -229,7 +256,9 @@ public class App {
         }
     }
 
-    // 3) Provide countries in a region from largest population to smallest
+    /**
+     * 3) Provide countries in a region from largest population to smallest
+     */
     public ArrayList<Results> country_region(String region) {
         System.out.println("Creating the report (Countries in region by population)...");
         StringBuilder sb  = new StringBuilder();
@@ -270,7 +299,9 @@ public class App {
         }
     }
 
-    // 4)The top N populated countries in the world where N is provided by the user.
+    /**
+     * 4)The top N populated countries in the world where N is provided by the user.
+     */
     public ArrayList<Results> country_world_N(int n) {
         System.out.println("Creating the report (N Countries in world by population)...");
         StringBuilder sb  = new StringBuilder();
@@ -311,7 +342,9 @@ public class App {
         }
     }
 
-    // 5)The top N populated countries in a continent where N is provided by the user.
+    /**
+     * 5)The top N populated countries in a continent where N is provided by the user.
+     */
     public ArrayList<Results> country_continent_N(String continent, int n) {
         System.out.println("Creating the report (N Countries in continent by population)...");
         StringBuilder sb  = new StringBuilder();
@@ -352,7 +385,9 @@ public class App {
         }
     }
 
-    // 6) The top N populated countries in a region where N is provided by the user.
+    /**
+     * 6) The top N populated countries in a region where N is provided by the user.
+     */
     public ArrayList<Results> country_region_N(String region, int n) {
         System.out.println("Creating the report (N Countries in region by population)...");
         StringBuilder sb  = new StringBuilder();
@@ -394,10 +429,10 @@ public class App {
     }
 
 
-
-
     // Capital reports
-    // Get list of all capital cities by population
+    /**
+     * 1) Get list of all capital cities by population
+     */
     public ArrayList<Results> GetCapitals_World(){
         System.out.println("Getting cities (All)...");
         try
@@ -431,7 +466,9 @@ public class App {
         }
     }
 
-    // Get list of capital cities by continent
+    /**
+     * 2) Get list of capital cities by continent
+     */
     public ArrayList<Results> GetCapitals_Continent(String continent){
         System.out.println("Getting cities (Continent)...");
         try
@@ -465,7 +502,9 @@ public class App {
         }
     }
 
-    // Get list of capital cities by region
+    /**
+     * 3) Get list of capital cities by region
+     */
     public ArrayList<Results> GetCapitals_Region(String region){
         System.out.println("Getting cities (Region)...");
         try
@@ -499,7 +538,9 @@ public class App {
         }
     }
 
-    // Get list of N capital cities in the world
+    /**
+     * 4) Get list of N capital cities in the world
+     */
     public ArrayList<Results> GetCapitals_World_N(int n){
         System.out.println("Getting " + n + " cities (All)...");
         try
@@ -535,7 +576,9 @@ public class App {
         }
     }
 
-    // Get list of N capital cities by continent
+    /**
+     * 5) Get list of N capital cities by continent
+     */
     public ArrayList<Results> GetCapitals_Continent_N(String continent, int n){
         System.out.println("Getting " + n + " cities (Continent)...");
         try
@@ -571,7 +614,9 @@ public class App {
         }
     }
 
-    // Get list of N capital cities by continent
+    /**
+     * 6) Get list of N capital cities by continent
+     */
     public ArrayList<Results> GetCapitals_Region_N(String region, int n){
         System.out.println("Getting " + n + " cities (Region)...");
         try
@@ -606,14 +651,238 @@ public class App {
     }
 
 
+    // City reports
+    /**
+     *  1) All the cities in the world organised by largest population to smallest from query string allCities
+     * @return getCities(allCities)
+     */
+    public ArrayList<Results> getAllCities() {
+        String allCities = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city ORDER BY city.Population DESC";
+        System.out.println("Cities in the world:");
+        return getCities(allCities);
+    }
 
+    /**
+     *  2) All the cities in a continent organised by largest population to smallest.
+     * @param continent is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getCitiesFromContinent(String continent) {
+        String citiesFromContinent = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
+                "    FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "    WHERE country.Continent LIKE '" +
+                continent + "' ORDER BY city.Population DESC";
+        System.out.println("Cities in " + continent + ":");
+        return getCities(citiesFromContinent);
+    }
 
+    /**
+     * 3) All the cities in a region organised by largest population to smallest.
+     * @param region is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getCitiesFromRegion(String region) {
+        String citiesFromRegion = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                " INNER JOIN country ON city.ID = country.Capital " +
+                "WHERE country.Region LIKE '" +
+                region + "' ORDER BY city.Population DESC";
+        System.out.println("Cities in " + region + ":");
+        return getCities(citiesFromRegion);
+    }
+
+    /**
+     * 4) All the cities in a country organised by largest population to smallest.
+     * @param country is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getCitiesFromCountry(String country) {
+        String citiesFromCountry = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "WHERE country.Name LIKE '" +
+                country + "' ORDER BY city.Population DESC";
+        System.out.println("Cities in " + country + ":");
+        return getCities(citiesFromCountry);
+
+    }
+
+    /**
+     *  5) All the cities in a district organised by largest population to smallest.
+     * @param district is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getCitiesFromDistrict(String district) {
+        String citiesFromDistrict = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "WHERE district LIKE '" +
+                district + "' ORDER BY city.Population DESC";
+        System.out.println("Cities in " + district + ":");
+        return getCities(citiesFromDistrict);
+    }
+
+    /**
+     * 6) The top N populated cities in the world where N is provided by the user.
+     * @param N is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getNCitiesFromWorld(int N) {
+        String cities = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
+                " FROM city" +
+                " ORDER BY city.Population DESC LIMIT " + N;
+        System.out.println("Top " + N + " cities in the world (by population):");
+        return getCities(cities);
+    }
+
+    /**
+     *  7) The top N populated cities in a continent where N is provided by the user.
+     * @param N  is used in SQL query of world db.
+     * @param continent is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getNCitiesFromContinent(String continent, int N) {
+        String citiesFromContinent = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
+                "    FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "    WHERE country.Continent LIKE '" +
+                continent + "' ORDER BY city.Population DESC LIMIT " + N;
+        System.out.println("Top " + N + " cities in " + continent + " (by population):");
+        return getCities(citiesFromContinent);
+    }
+
+    /**
+     *  8) The top N populated cities in a region where N is provided by the user.
+     * @param N  is used in SQL query of world db.
+     * @param region is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getNCitiesFromRegion(String region, int N) {
+        String citiesFromRegion = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                " INNER JOIN country ON city.ID = country.Capital " +
+                "WHERE country.Region LIKE '" +
+                region + "' ORDER BY city.Population  DESC LIMIT " + N;
+        System.out.println("Top " + N + " cities in " + region + " (by population):");
+        return getCities(citiesFromRegion);
+    }
+
+    /**
+     * 9) The top N populated cities in a country where N is provided by the user.
+     * @param N is used in SQL query of world db.
+     * @param country is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getNCitiesFromCountry(String country, int N) {
+        String citiesFromCountry = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "WHERE country.Name LIKE '" +
+                country + "' ORDER BY city.Population DESC LIMIT " + N;
+        System.out.println("Top " + N + " cities in " + country + " (by population):");
+        return getCities(citiesFromCountry);
+    }
+
+    /**
+     * 10) The top N populated cities in a district where N is provided by the user.
+     * @param N is used in SQL query of world db.
+     * @param district is used in SQL query of world db.
+     * @return getCities(query)
+     */
+    public ArrayList<Results> getNCitiesFromDistrict(String district, int N) {
+        String citiesFromDistrict = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+                "FROM city" +
+                "    INNER JOIN country ON city.CountryCode = country.Code " +
+                "WHERE district LIKE '" +
+                district + "' ORDER BY city.Population DESC LIMIT " + N;
+        System.out.println("Top " + N + " cities in " + district + " (by population):");
+        return getCities(citiesFromDistrict);
+
+    }
+
+    /**
+     *  Return and print list of cities from a query in world db.
+     *  It calls getCityList(rset) formating query results
+     * @param query
+     * @return ArrayList<Results> of cities data or null
+     * @throws Exception Failed to get city details"
+     */
+    public ArrayList<Results> getCities(String query) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = query;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<Results> ress = getCityList(rset);
+            if (ress != null) {
+                PrintCityResults(ress);
+                System.out.println("Number of results: " + ress.size());
+                System.out.println(""); // Leave one line empty for clear view
+            }
+            return ress;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     *  Get ArrayList of city names, population, country code and location district
+     * @param resultSet from World DB SQL query
+     * @return ArrayList<Results> cityLists
+     * @throws SQLException
+     */
+    public ArrayList<Results> getCityList(ResultSet resultSet) throws SQLException {
+        ArrayList<Results> cityList = new ArrayList<Results>();
+        while (resultSet.next()) {
+            Results result = new Results();
+            result.cityName = resultSet.getString("city.Name");
+            result.population = resultSet.getInt("city.Population");
+            result.countryCode = resultSet.getString("city.CountryCode");
+            result.district = resultSet.getString("city.District");
+            cityList.add(result);
+        }
+        return cityList;
+    }
 
 
     // Printing methods
 
     /**
-     * Print city data: name, country code, district, population (000s)
+     * Print country data: country code, name, continent, region, population, capital
+     *  or "No results"
+     * @param results - world db query
+     */
+    public void PrintCountryResults(ArrayList<Results> results){
+        // Check results is not null
+        if (results == null)
+        {
+            System.out.println("No results");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-10s %-40s %-10s %-8s %-40s %-8s",
+                "Country Code", "Country Name", "Continent", "Region", "Population", "Capital"));
+        // Loop over all results in the list
+        for (Results res : results)
+        {
+            if (results == null)
+                continue;
+            String emp_string =
+                    String.format("%-10s %-40s %-10s %-8s %-40s %-8s",
+                            res.countryCode, res.countryName, res.continent, res.region, res.pop, res.capital);
+            System.out.println(emp_string);
+        }
+    }
+
+    /**
+     * Print capital city data: name, population, country code)
      *  or "No results"
      * @param results - world db query
      */
@@ -636,26 +905,27 @@ public class App {
         }
     }
 
-    public void PrintCountryResults(ArrayList<Results> results){
+    /**
+     * Print city data: name, country code, district, population (000s)
+     *  or "No results"
+     * @param results - world db query
+     */
+    public void PrintCityResults(ArrayList<Results> results) {
         // Check results is not null
-        if (results == null)
-        {
+        if (results == null) {
             System.out.println("No results");
             return;
         }
         // Print header
-        System.out.println(String.format("%-10s %-40s %-10s %-8s %-8s %-10s %-40s %-10s %-8s %-8s %-10s %-10s %-8s %-8s",
-                "Country Code", "Country Name", "Continent", "Region", "Surface Area", "Independent Year", "Population",
-                "Life Expectancy", "gnp", "gnp (OLD)", "Local Name", "Head of State", "Capital", "Country Code 2"));
+        System.out.println(String.format("%-30s %-15s %-30s %-5s",
+                "Name", "Country Code", "District", "Population (000s)"));
         // Loop over all results in the list
-        for (Results res : results)
-        {
+        for (Results res : results) {
             if (results == null)
                 continue;
             String emp_string =
-                    String.format("%-10s %-40s %-10s %-8s %-8s %-10s %-40s %-10s %-8s %-8s %-10s %-10s %-8s %-8s",
-                            res.countryCode, res.countryName, res.continent, res.region, res.surfaceArea, res.indepYear, res.pop,
-                            res.lifeExpectancy, res.gnp, res.gnpOld, res.localName, res.headOfState, res.capital, res.countryCode2);
+                    String.format("%-30s %-15s %-30s %-15s",
+                            res.cityName, res.countryCode, res.district, res.population/1000);
             System.out.println(emp_string);
         }
     }
