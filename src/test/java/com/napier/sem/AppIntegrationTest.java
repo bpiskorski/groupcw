@@ -19,15 +19,4 @@ public class AppIntegrationTest
         app.connect("localhost:33060", 1000);
 
     }
-
-    @Test
-    void testGetCity()
-    {
-
-//        Employee emp = app.getEmployee(255530);
-       Results result = app.getCity("Warszawa");
-//       Results city = app. getCityArray("Warszawa");
-        assertEquals(result.countryCode, "POL");
-        assertEquals(result.district, "Mazowieckie");
-    }
 }
