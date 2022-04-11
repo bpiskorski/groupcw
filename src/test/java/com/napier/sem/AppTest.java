@@ -13,53 +13,6 @@ public class AppTest {
         app.connect("localhost:33060", 0);
     }
 
-    @Test
-    void countryrep() {
-        app.countryrep("select * from world.country order by Population desc limit 3;");
-    }
-
-    @Test
-    void CapitalCities() // Get all capital cities
-    {
-        app.GetCapitalCities();
-    }
-
-    @Test
-    void ContinentCities() // Get all capital cities on defined continent
-    {
-        app.GetContinentCities("Europe");
-    }
-
-    @Test
-    void RegionCities() // Get all capital cities in defined region
-    {
-        app.GetRegionCities("Southern Europe");
-    }
-
-    @Test
-    void N_CapitalCities() // Get N capital cities
-    {
-        app.Get_N_CapitalCities(5);
-    }
-
-    @Test
-    void N_ContinentCities() // Get N capital cities on defined continent
-    {
-        app.Get_N_ContinentCities("Europe", 5);
-    }
-
-    @Test
-    void N_RegionCities() // Get N capital cities in defined region
-    {
-        app.Get_N_RegionCities("Southern Europe", 5);
-    }
-
-    @AfterAll
-    static void close() {
-        app.disconnect();
-    }
-
-
     // Cities tests
     @Test
     void getAllCities() {
@@ -87,19 +40,19 @@ public class AppTest {
     }
     @Test
     void getNCitiesFromContinent() {
-        app.getNCitiesFromContinent(5, "Europe");
+        app.getNCitiesFromContinent("Europe", 5);
     }
     @Test
     void getNCitiesFromRegion() {
-        app.getNCitiesFromRegion(5, "Eastern Europe");
+        app.getNCitiesFromRegion("Eastern Europe", 5);
     }
     @Test
     void getNCitiesFromCountry() {
-        app.getNCitiesFromCountry(5, "United Kingdom");
+        app.getNCitiesFromCountry("United Kingdom", 5);
     }
     @Test
     void getNCitiesFromDistrict() {
-        app.getNCitiesFromDistrict(5, "England");
+        app.getNCitiesFromDistrict("England", 5);
     }
     @Test
     void getCities() {
@@ -107,6 +60,11 @@ public class AppTest {
                 " FROM city" +
                 " ORDER BY city.Population DESC";
         app.getCities(query);
+    }
+
+    @AfterAll
+    static void close() {
+        app.disconnect();
     }
 
 }
