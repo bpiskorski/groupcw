@@ -88,11 +88,6 @@ public class App {
         a.country_region_N("Eastern Asia", 5);
 
 
-
-        // Extract city information
-        //ArrayList<Results> results = a.Get_N_RegionCities("Southern Europe", 5);
-
-
         // Disconnect from database
         a.disconnect();
     }
@@ -400,262 +395,6 @@ public class App {
 
 
 
-    // City reports
-
-    /**
-     *  All the cities in the world organised by largest population to smallest.
-     */
-    String allCities = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
-            " FROM city" +
-            " ORDER BY city.Population DESC";
-
-    /**
-     *  All the cities in the world organised by largest population to smallest from query string allCities
-     * @return getCities(allCities)
-     */
-    public ArrayList<Results> getAllCities() {
-        System.out.println("Cities in the world");
-        return getCities(allCities);
-    }
-
-    /**
-     *  All the cities in a continent organised by largest population to smallest.
-     * @param continent is used in SQL query of world db.
-     * @return getCities(query)
-     */
-    public ArrayList<Results> getCitiesFromContinent(String continent) {
-        String citiesFromContinent = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
-                "    FROM city" +
-                "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "    WHERE country.Continent LIKE '" +
-                continent + "' ORDER BY city.Population DESC";
-        System.out.println("Cities in " + continent);
-        return getCities(citiesFromContinent);
-    }
-
-    /**
-     * All the cities in a region organised by largest population to smallest.
-     * @param region is used in SQL query of world db.
-     * @return getCities(query)
-     */
-    public ArrayList<Results> getCitiesFromRegion(String region) {
-        String citiesFromRegion = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
-                "FROM city" +
-                "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "WHERE country.Region LIKE '" +
-                region + "' ORDER BY city.Population DESC";
-        System.out.println("Cities in " + region);
-        return getCities(citiesFromRegion);
-    }
-
-    /**
-     * All the cities in a country organised by largest population to smallest.
-     * @param country is used in SQL query of world db.
-     * @return getCities(query)
-     */
-    public ArrayList<Results> getCitiesFromCountry(String country) {
-        String citiesFromCountry = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
-                "FROM city" +
-                "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "WHERE country.Name LIKE '" +
-                country + "' ORDER BY city.Population DESC";
-        System.out.println("Cities in " + country);
-        return getCities(citiesFromCountry);
-
-    }
-
-    /**
-     *  All the cities in a district organised by largest population to smallest.
-     * @param district is used in SQL query of world db.
-    * @return getCities(query)
-     */
-    public ArrayList<Results> getCitiesFromDistrict(String district) {
-        String citiesFromDistrict = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
-                "FROM city" +
-                "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "WHERE district LIKE '" +
-                district + "' ORDER BY city.Population DESC";
-        System.out.println("Cities in " + district);
-        return getCities(citiesFromDistrict);
-    }
-
-    /**
-     * The top N populated cities in the world where N is provided by the user.
-     * @param N is used in SQL query of world db.
-    * @return getCities(query)
-     */
-    public ArrayList<Results> getNCitiesFromWorld(int N) {
-        String cities = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
-                " FROM city" +
-                " ORDER BY city.Population DESC LIMIT " + N;
-        System.out.println("The biggest " + N + " the biggest cities in the world");
-        return getCities(cities);
-    }
-
-    /**
-     *  The top N populated cities in a continent where N is provided by the user.
-     * @param N  is used in SQL query of world db.
-     * @param continent is used in SQL query of world db.
-     * @return getCities(query)
-     */
-    public ArrayList<Results> getNCitiesFromContinent(int N, String continent) {
-        String citiesFromContinent = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
-                "    FROM city" +
-                "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "    WHERE country.Continent LIKE '" +
-                continent + "' ORDER BY city.Population DESC LIMIT " + N;
-        System.out.println("The biggest " + N + " cities in " + continent);
-        return getCities(citiesFromContinent);
-    }
-
-    /**
-     *  The top N populated cities in a region where N is provided by the user.
-     * @param N  is used in SQL query of world db.
-     * @param region is used in SQL query of world db.
-     * @return getCities(query)
-     */
-    public ArrayList<Results> getNCitiesFromRegion(int N, String region) {
-        String citiesFromRegion = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
-                "FROM city" +
-                "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "WHERE country.Region LIKE '" +
-                region + "' ORDER BY city.Population  DESC LIMIT " + N;
-        System.out.println("The biggest " + N + " cities in " + region);
-        return getCities(citiesFromRegion);
-    }
-
-    /**
-     * The top N populated cities in a country where N is provided by the user.
-     * @param N is used in SQL query of world db.
-     * @param country is used in SQL query of world db.
-     * @return getCities(query)
-     */
-    public ArrayList<Results> getNCitiesFromCountry(int N, String country) {
-        String citiesFromCountry = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
-                "FROM city" +
-                "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "WHERE country.Name LIKE '" +
-                country + "' ORDER BY city.Population DESC LIMIT " + N;
-        System.out.println("The biggest " + N + " cities in " + country);
-        return getCities(citiesFromCountry);
-    }
-
-    /**
-     * The top N populated cities in a district where N is provided by the user.
-     * @param N is used in SQL query of world db.
-    *  @param district is used in SQL query of world db.
-    * @return getCities(query)
-     */
-    public ArrayList<Results> getNCitiesFromDistrict(int N, String district) {
-        String citiesFromDistrict = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
-                "FROM city" +
-                "    INNER JOIN country ON city.CountryCode = country.Code " +
-                "WHERE district LIKE '" +
-                district + "' ORDER BY city.Population DESC LIMIT " + N;
-        System.out.println("The biggest " + N + " cities in " + district);
-        return getCities(citiesFromDistrict);
-
-    }
-
-    /**
-     *  Make query in world db with
-     * @param name
-     * @return getCities(query)
-     */
-    public ArrayList<Results> getCityArray(String name) {
-        String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
-                "FROM city " +
-                "WHERE city.Name = '" + name + "'";
-        return getCities(query);
-    }
-
-    /**
-     *  Created for integration test.It make query in world db with @param name,
-     *  the same quary as in ArrayList<Results> getCityArray(String name), but I couldn't make it to work with the test
-     * @param name of the city
-     * @return result
-     * @throws Exception Failed to get city details
-     */
-     public Results getCity(String name) {
-         String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
-                 "FROM city " +
-                 "WHERE city.Name = '" + name + "'";
-         try {
-             // Create an SQL statement
-             Statement stmt = con.createStatement();
-             // Execute SQL statement
-             ResultSet resultSet = stmt.executeQuery(query);
-             // Extract city information
-             if (resultSet.next())  {
-                 Results result = new Results();
-                 result.population = resultSet.getInt("city.Population");
-                 result.countryCode = resultSet.getString("city.CountryCode");
-                 result.district = resultSet.getString("city.District");
-                 return result;
-             } else return null;
-         } catch (Exception e) {
-             System.out.println(e.getMessage());
-             System.out.println("Failed to get city details");
-             return null;
-         }
-     }
-
-
-
-    /**
-     *  Return and print list of cities from a query in world db.
-     *  It calls getCityList(rset) formating query results
-     * @param query
-     * @return ArrayList<Results> of cities data or null
-     * @throws Exception Failed to get city details"
-     */
-    public ArrayList<Results> getCities(String query) {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect = query;
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
-            ArrayList<Results> ress = getCityList(rset);
-            if (ress != null) {
-                PrintCityResults(ress);
-                System.out.println("Number of results: " + ress.size());
-                System.out.println(""); // Leave one line empty for clear view
-            }
-            return ress;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
-            return null;
-        }
-    }
-
-    /**
-     *  Get ArrayList of city names, population, country code and location district
-     * @param resultSet from World DB SQL query
-     * @return ArrayList<Results> cityLists
-     * @throws SQLException
-     */
-    public ArrayList<Results> getCityList(ResultSet resultSet) throws SQLException {
-        ArrayList<Results> cityList = new ArrayList<Results>();
-        while (resultSet.next()) {
-            Results result = new Results();
-            result.cityName = resultSet.getString("city.Name");
-            result.population = resultSet.getInt("city.Population");
-            result.countryCode = resultSet.getString("city.CountryCode");
-            result.district = resultSet.getString("city.District");
-            cityList.add(result);
-        }
-        return cityList;
-    }
-
-
-
-
-
 
     // Capital reports
     // Get list of all capital cities by population
@@ -681,7 +420,7 @@ public class App {
                 ress.add(res);
             }
             // Print results
-            PrintCityResults(ress);
+            PrintCapitalResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -715,7 +454,7 @@ public class App {
                 ress.add(res);
             }
             // Print results
-            PrintCityResults(ress);
+            PrintCapitalResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -749,7 +488,7 @@ public class App {
                 ress.add(res);
             }
             // Print results
-            PrintCityResults(ress);
+            PrintCapitalResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -785,7 +524,7 @@ public class App {
                 ress.add(res);
             }
             // Print results
-            PrintCityResults(ress);
+            PrintCapitalResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -821,7 +560,7 @@ public class App {
                 ress.add(res);
             }
             // Print results
-            PrintCityResults(ress);
+            PrintCapitalResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -855,7 +594,7 @@ public class App {
                 ress.add(res);
             }
             // Print results
-            PrintCityResults(ress);
+            PrintCapitalResults(ress);
             return ress;
         }
         catch (Exception e)
@@ -878,7 +617,7 @@ public class App {
      *  or "No results"
      * @param results - world db query
      */
-    public void PrintCityResults(ArrayList<Results> results) {
+    public void PrintCapitalResults(ArrayList<Results> results) {
         // Check results is not null
         if (results == null)
         {

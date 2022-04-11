@@ -48,60 +48,6 @@ public class AppTest {
     }
 
 
-    // Cities Tests
-    @Test
-    void getAllCities() {
-        app.getAllCities();
-    }
-    @Test
-    void getCitiesFromContinent() {
-        app.getCitiesFromContinent("Europe");
-    }
-    @Test
-    void getCitiesFromRegion() {
-        app.getCitiesFromRegion("Eastern Europe");
-    }
-    @Test
-    void getCitiesFromCountry() {
-        app.getCitiesFromCountry("United Kingdom");
-    }
-    @Test
-    void getCitiesFromDistrict() {
-        app.getCitiesFromDistrict("Scotland");
-    }
-    @Test
-    void getNCitiesFromWorld() {
-        app.getNCitiesFromWorld(5);
-    }
-    @Test
-    void getNCitiesFromContinent() {
-        app.getNCitiesFromContinent(5, "Europe");
-    }
-    @Test
-    void getNCitiesFromRegion() {
-        app.getNCitiesFromRegion(5, "Eastern Europe");
-    }
-    @Test
-    void getNCitiesFromCountry() {
-        app.getNCitiesFromCountry(5, "United Kingdom");
-    }
-    @Test
-    void getNCitiesFromDistrict() {
-        app.getNCitiesFromDistrict(5, "England");
-    }
-    @Test
-    void getCities() {
-        String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
-                " FROM city" +
-                " ORDER BY city.Population DESC";
-        app.getCities(query);
-    }
-    @Test
-    void getCity() {
-        app.getCityArray("Warszawa");
-    }
-
-
     // Countries Tests
     @Test
     void country_world(){
