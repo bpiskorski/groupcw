@@ -17,34 +17,34 @@ public class AppTest {
 
     // Capital Cities Test
     @Test
-    void WorldCapitals() // Get all capital cities
+    void worldCapitals() // Get all capital cities
     {
-        app.GetCapitals_World();
+        app.getCapitals_World();
     }
     @Test
-    void ContinentCapitals() // Get all capital cities on defined continent
+    void continentCapitals() // Get all capital cities on defined continent
     {
-        app.GetCapitals_Continent("Europe");
+        app.getCapitals_Continent("Europe");
     }
     @Test
-    void RegionCapitals() // Get all capital cities in defined region
+    void regionCapitals() // Get all capital cities in defined region
     {
-        app.GetCapitals_Region("Southern Europe");
+        app.getCapitals_Region("Southern Europe");
     }
     @Test
-    void N_WorldCapitals() // Get N capital cities
+    void n_WorldCapitals() // Get N capital cities
     {
-        app.GetCapitals_World_N(5);
+        app.getCapitals_World_N(5);
     }
     @Test
-    void N_ContinentCapitals() // Get N capital cities on defined continent
+    void n_ContinentCapitals() // Get N capital cities on defined continent
     {
-        app.GetCapitals_Continent_N("Europe", 5);
+        app.getCapitals_Continent_N("Europe", 5);
     }
     @Test
-    void N_RegionCapitals() // Get N capital cities in defined region
+    void n_RegionCapitals() // Get N capital cities in defined region
     {
-        app.GetCapitals_Region_N("Southern Europe", 5);
+        app.getCapitals_Region_N("Southern Europe", 5);
     }
 
 
