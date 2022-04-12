@@ -175,42 +175,9 @@ public class App {
      */
     public ArrayList<Results> country_world() {
         System.out.println("Creating the report (Countries in world by population)...");
-        StringBuilder sb  = new StringBuilder();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement - REMOVED
-            String sql = "select * from world.country order by Population desc";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(sql);
-            // Extract country information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            // Return  if valid.
-            // Check one is returned
-            while (rset.next()) {
-                Results res = new Results();
-                res.countryCode = rset.getString("code");
-                res.countryName = rset.getString("name");
-                res.continent = rset.getString("continent");
-                res.region = rset.getString("region");
-                res.pop = rset.getInt("population");
-                res.capital = rset.getInt("Capital");
-                ress.add(res);
-            }
-            // Print to text file
-            new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/task06.txt")));
-            writer.write(sb.toString());
-            writer.close();
-            System.out.println("Report created look in a reports folder!");
-            // Print reports out
-            printCountryResults(ress);
-            return ress;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
+        // Create string for SQL statement
+        String sql = "select * from world.country order by Population desc;";
+        return getCountries(sql);
     }
 
     /**
@@ -218,42 +185,9 @@ public class App {
      */
     public ArrayList<Results> country_continent(String continent) {
         System.out.println("Creating the report (Countries in continent by population)...");
-        StringBuilder sb  = new StringBuilder();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement - REMOVED
-            String sql = "select * from world.country Where Continent = '" + continent + "' order by Population desc;";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(sql);
-            // Extract country information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            // Return  if valid.
-            // Check one is returned
-            while (rset.next()) {
-                Results res = new Results();
-                res.countryCode = rset.getString("code");
-                res.countryName = rset.getString("name");
-                res.continent = rset.getString("continent");
-                res.region = rset.getString("region");
-                res.pop = rset.getInt("population");
-                res.capital = rset.getInt("Capital");
-                ress.add(res);
-            }
-            // Print to text file
-            new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/task06.txt")));
-            writer.write(sb.toString());
-            writer.close();
-            System.out.println("Report created look in a reports folder!");
-            // Print reports out
-            printCountryResults(ress);
-            return ress;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
+        // Create string for SQL statement
+        String sql = "select * from world.country Where Continent = '" + continent + "' order by Population desc;";
+        return getCountries(sql);
     }
 
     /**
@@ -261,42 +195,9 @@ public class App {
      */
     public ArrayList<Results> country_region(String region) {
         System.out.println("Creating the report (Countries in region by population)...");
-        StringBuilder sb  = new StringBuilder();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement - REMOVED
-            String sql = "select * from world.country Where Region = '" + region + "' order by Population desc;";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(sql);
-            // Extract country information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            // Return  if valid.
-            // Check one is returned
-            while (rset.next()) {
-                Results res = new Results();
-                res.countryCode = rset.getString("code");
-                res.countryName = rset.getString("name");
-                res.continent = rset.getString("continent");
-                res.region = rset.getString("region");
-                res.pop = rset.getInt("population");
-                res.capital = rset.getInt("Capital");
-                ress.add(res);
-            }
-            // Print to text file
-            new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/task06.txt")));
-            writer.write(sb.toString());
-            writer.close();
-            System.out.println("Report created look in a reports folder!");
-            // Print reports out
-            printCountryResults(ress);
-            return ress;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
+        // Create string for SQL statement
+        String sql = "select * from world.country Where Region = '" + region + "' order by Population desc;";
+        return getCountries(sql);
     }
 
     /**
@@ -304,42 +205,9 @@ public class App {
      */
     public ArrayList<Results> country_world_N(int n) {
         System.out.println("Creating the report (N Countries in world by population)...");
-        StringBuilder sb  = new StringBuilder();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement - REMOVED
-            String sql = "select * from world.country order by Population desc limit " + n +";";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(sql);
-            // Extract country information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            // Return  if valid.
-            // Check one is returned
-            while (rset.next()) {
-                Results res = new Results();
-                res.countryCode = rset.getString("code");
-                res.countryName = rset.getString("name");
-                res.continent = rset.getString("continent");
-                res.region = rset.getString("region");
-                res.pop = rset.getInt("population");
-                res.capital = rset.getInt("Capital");
-                ress.add(res);
-            }
-            // Print to text file
-            new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/task06.txt")));
-            writer.write(sb.toString());
-            writer.close();
-            System.out.println("Report created look in a reports folder!");
-            // Print reports out
-            printCountryResults(ress);
-            return ress;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
+        // Create string for SQL statement
+        String sql = "select * from world.country order by Population desc limit " + n +";";
+        return getCountries(sql);
     }
 
     /**
@@ -347,42 +215,9 @@ public class App {
      */
     public ArrayList<Results> country_continent_N(String continent, int n) {
         System.out.println("Creating the report (N Countries in continent by population)...");
-        StringBuilder sb  = new StringBuilder();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement - REMOVED
-            String sql = "select  * from world.country where Continent = '" + continent + "' order by Population desc limit " + n +";";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(sql);
-            // Extract country information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            // Return  if valid.
-            // Check one is returned
-            while (rset.next()) {
-                Results res = new Results();
-                res.countryCode = rset.getString("code");
-                res.countryName = rset.getString("name");
-                res.continent = rset.getString("continent");
-                res.region = rset.getString("region");
-                res.pop = rset.getInt("population");
-                res.capital = rset.getInt("Capital");
-                ress.add(res);
-            }
-            // Print to text file
-            new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/task06.txt")));
-            writer.write(sb.toString());
-            writer.close();
-            System.out.println("Report created look in a reports folder!");
-            // Print reports out
-            printCountryResults(ress);
-            return ress;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
+        // Create string for SQL statement
+        String sql = "select  * from world.country where Continent = '" + continent + "' order by Population desc limit " + n +";";
+        return getCountries(sql);
     }
 
     /**
@@ -390,42 +225,10 @@ public class App {
      */
     public ArrayList<Results> country_region_N(String region, int n) {
         System.out.println("Creating the report (N Countries in region by population)...");
-        StringBuilder sb  = new StringBuilder();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement - REMOVED
-            String sql = "select * from world.country where Region = '" + region + "' order by Population desc limit " + n +";";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(sql);
-            // Extract country information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            // Return  if valid.
-            // Check one is returned
-            while (rset.next()) {
-                Results res = new Results();
-                res.countryCode = rset.getString("code");
-                res.countryName = rset.getString("name");
-                res.continent = rset.getString("continent");
-                res.region = rset.getString("region");
-                res.pop = rset.getInt("population");
-                res.capital = rset.getInt("Capital");
-                ress.add(res);
-            }
-            // Print to text file
-            new File("./reports/").mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/task06.txt")));
-            writer.write(sb.toString());
-            writer.close();
-            System.out.println("Report created look in a reports folder!");
-            // Print reports out
-            printCountryResults(ress);
-            return ress;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
+        // Create string for SQL statement
+        String sql = "select * from world.country where Region = '" + region + "' order by Population desc limit " + n +";";
+        return getCountries(sql);
+
     }
 
 
@@ -651,10 +454,76 @@ public class App {
     // Helper methods
 
     /**
+     *  Return list of results from a query in world db.
+     * @param query
+     * @return ResultSet of data or null
+     * @throws Exception Failed to get results"
+     */
+    public ResultSet getResults(String query){
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(query);
+
+            // Return results
+            return rset;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     *  Return and print list of countries from a query in world db.
+     * @param query
+     * @return ArrayList<Results> of countries data or null
+     * @throws Exception Failed to get country details"
+     */
+    public ArrayList<Results> getCountries(String query){
+        try {
+            // Get results
+            ResultSet rset = getResults(query);
+
+            // Extract country information
+            ArrayList<Results> ress = new ArrayList<Results>();
+            while (rset.next()) {
+                Results res = new Results();
+                res.countryCode = rset.getString("code");
+                res.countryName = rset.getString("name");
+                res.continent = rset.getString("continent");
+                res.region = rset.getString("region");
+                res.pop = rset.getInt("population");
+                res.capital = rset.getInt("Capital");
+                ress.add(res);
+            }
+
+            // Print out results if there are any and return list of results
+            if(!ress.isEmpty()){
+                // Print results out
+                printCountryResults(ress);
+                return ress;
+            }
+            // Return null if there are no results
+            else{
+                System.out.println("No results");
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    /**
      *  Return and print list of capital cities from a query in world db.
      * @param query
-     * @return ArrayList<Results> of cities data or null
-     * @throws Exception Failed to get city details"
+     * @return ArrayList<Results> of capital cities data or null
+     * @throws Exception Failed to get capital city details"
      */
     public ArrayList<Results> getCapitals(String query){
         try {

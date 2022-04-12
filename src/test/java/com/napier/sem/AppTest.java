@@ -60,6 +60,11 @@ public class AppTest {
         app.country_continent("Asia");
     }
     @Test
+    void country_atlantis_continent(){
+        // This will return no results
+        app.country_continent("Atlantis");
+    }
+    @Test
     void country_region(){
         // 3) Provide countries in a region from largest population to smallest
         app.country_region("Eastern Asia");
