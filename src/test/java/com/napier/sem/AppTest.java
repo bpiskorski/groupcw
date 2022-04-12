@@ -46,6 +46,11 @@ public class AppTest {
     {
         app.getCapitals_Region_N("Southern Europe", 5);
     }
+    @Test
+    void getNoCapitals(){
+        // This will return no results (However there is Solitude - the capital city of Skyrim)
+        app.getCapitals_Region("Haafingar");
+    }
 
 
     // Countries Tests

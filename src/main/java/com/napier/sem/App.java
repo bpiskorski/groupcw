@@ -527,33 +527,31 @@ public class App {
      */
     public ArrayList<Results> getCapitals(String query){
         try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect = query;
+            // Get results
+            ResultSet rset = getResults(query);
 
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<Results> ress = new ArrayList<Results>();
-            while (rset.next())
-            {
-                Results res = new Results();
-                res.cityName = rset.getString("city.Name");
-                res.population = rset.getInt("city.Population");
-                res.countryCode = rset.getString("city.CountryCode");
-                ress.add(res);
+            while (rset.next()) {
+                Results result = new Results();
+                result.cityName = rset.getString("city.Name");
+                result.population = rset.getInt("city.Population");
+                result.countryCode = rset.getString("city.CountryCode");
+                ress.add(result);
             }
-            // Print out the list if it is not empty
-            if (ress != null) {
-                printCityResults(ress);
-                System.out.println("Number of results: " + ress.size());
-                System.out.println(""); // Leave one line empty for clear view
-            }else{
+
+            // Print out results if there are any and return list of results
+            if(!ress.isEmpty()){
+                // Print results out
+                printCapitalResults(ress);
+                return ress;
+            }
+            // Return null if there are no results
+            else{
                 System.out.println("No results");
                 return null;
             }
-            return ress;
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
