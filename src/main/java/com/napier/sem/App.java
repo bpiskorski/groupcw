@@ -611,7 +611,7 @@ public class App {
      * @throws Exception Failed to get city details
      */
     public Results getCity(String name) {
-        String query = "SELECT city.Name, city.CountryCode, city.District, city.Population" +
+        String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
                 "FROM city " +
                 "WHERE city.Name = '" + name + "'";
         try {
@@ -622,10 +622,9 @@ public class App {
             // Extract city information
             if (resultSet.next())  {
                 Results result = new Results();
-                result.cityName = resultSet.getString("city.Name");
+                result.population = resultSet.getInt("city.Population");
                 result.countryCode = resultSet.getString("city.CountryCode");
                 result.district = resultSet.getString("city.District");
-                result.population = resultSet.getInt("city.Population");
                 return result;
             } else return null;
         } catch (Exception e) {
