@@ -133,6 +133,11 @@ public class AppTest {
                 " ORDER BY city.Population DESC";
         app.getCities(query);
     }
+    @Test
+    void getNoCities(){
+        // This will return no results (even though there are multiple cities in that region of Middle-Earth)
+        app.getCitiesFromRegion("Gondor");
+    }
 
     // Disconnect from db on end
     @AfterAll

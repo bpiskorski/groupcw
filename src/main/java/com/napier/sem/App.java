@@ -570,45 +570,37 @@ public class App {
      */
     public ArrayList<Results> getCities(String query) {
         try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect = query;
+            // Get results
+            ResultSet rset = getResults(query);
 
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
-            ArrayList<Results> ress = getCityList(rset);
-            if (ress != null) {
-                printCityResults(ress);
-                System.out.println("Number of results: " + ress.size());
-                System.out.println(""); // Leave one line empty for clear view
+            // Extract city information
+            ArrayList<Results> ress = new ArrayList<Results>();
+            while (rset.next()) {
+                Results result = new Results();
+                result.cityName = rset.getString("city.Name");
+                result.population = rset.getInt("city.Population");
+                result.countryCode = rset.getString("city.CountryCode");
+                result.district = rset.getString("city.District");
+                ress.add(result);
             }
-            return ress;
+
+            // Print out results if there are any and return list of results
+            if(!ress.isEmpty()){
+                // Print results out
+                printCityResults(ress);
+                return ress;
+            }
+            // Return null if there are no results
+            else{
+                System.out.println("No results");
+                return null;
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
             return null;
         }
-    }
-
-    /**
-     *  Get ArrayList of city names, population, country code and location district
-     * @param resultSet from World DB SQL query
-     * @return ArrayList<Results> cityLists
-     * @throws SQLException
-     */
-    public ArrayList<Results> getCityList(ResultSet resultSet) throws SQLException {
-        ArrayList<Results> cityList = new ArrayList<Results>();
-        while (resultSet.next()) {
-            Results result = new Results();
-            result.cityName = resultSet.getString("city.Name");
-            result.population = resultSet.getInt("city.Population");
-            result.countryCode = resultSet.getString("city.CountryCode");
-            result.district = resultSet.getString("city.District");
-            cityList.add(result);
-        }
-        return cityList;
     }
 
     /**
@@ -619,7 +611,7 @@ public class App {
      * @throws Exception Failed to get city details
      */
     public Results getCity(String name) {
-        String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
+        String query = "SELECT city.Name, city.CountryCode, city.District, city.Population" +
                 "FROM city " +
                 "WHERE city.Name = '" + name + "'";
         try {
@@ -630,9 +622,10 @@ public class App {
             // Extract city information
             if (resultSet.next())  {
                 Results result = new Results();
-                result.population = resultSet.getInt("city.Population");
+                result.cityName = resultSet.getString("city.Name");
                 result.countryCode = resultSet.getString("city.CountryCode");
                 result.district = resultSet.getString("city.District");
+                result.population = resultSet.getInt("city.Population");
                 return result;
             } else return null;
         } catch (Exception e) {
