@@ -564,23 +564,15 @@ public class App {
                 ress.add(result);
             }
 
-            // Print out results if there are any and return list of results
-            if(!ress.isEmpty()){
-                // Print results out
-                printCapitalResults(ress);
-                System.out.println(""); // Leave one line empty for clear view
-                return ress;
-            }
-            // Return null if there are no results
-            else{
-                System.out.println("No results");
-                System.out.println(""); // Leave one line empty for clear view
-                return null;
-            }
+            // Print results
+            printCapitalResults(ress);
+            System.out.println(""); // Leave one line empty for clear view
+            return ress;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
+            System.out.println(""); // Leave one line empty for clear view
             return null;
         }
     }
@@ -732,20 +724,21 @@ public class App {
      */
     public void printCapitalResults(ArrayList<Results> results) {
         // Check results is not null
-        if (results == null)
+        if (!results.isEmpty())
         {
+            // Print header
+            System.out.println(String.format("%-40s %-10s %-8s", "City Name", "City Population", "City Country Code"));
+            // Loop over all results in the list
+            for (Results res : results)
+            {
+                if (results == null)
+                    continue;
+                String emp_string = String.format("%-40s %-15s %-18s",res.cityName, res.population, res.countryCode);
+                System.out.println(emp_string);
+            }
+        }else{
             System.out.println("No results");
             return;
-        }
-        // Print header
-        System.out.println(String.format("%-40s %-10s %-8s", "City Name", "City Population", "City Country Code"));
-        // Loop over all results in the list
-        for (Results res : results)
-        {
-            if (results == null)
-                continue;
-            String emp_string = String.format("%-40s %-15s %-18s",res.cityName, res.population, res.countryCode);
-            System.out.println(emp_string);
         }
     }
 
