@@ -144,6 +144,12 @@ public class AppTest {
         app.getCitiesFromRegion("Gondor");
     }
 
+    // Language tests
+    @Test
+    void getLanguages(){
+        app.getLanguagesBySpeakers();
+    }
+
     // Disconnect from db on end
     @AfterAll
     static void close() {

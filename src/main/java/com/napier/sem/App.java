@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -110,6 +111,11 @@ public class App {
         a.getNCitiesFromCountry("United Kingdom", 5);
         // 10) The top N populated cities in a district where N is provided by the user.
         a.getNCitiesFromDistrict("Scotland", 5);
+
+        /**
+         Language reports
+         */
+        a.getLanguagesBySpeakers();
 
         // Disconnect from database
         a.disconnect();
@@ -451,6 +457,22 @@ public class App {
     }
 
 
+    // Language reports
+    /**
+     * Provide the number of people who speak the following languages from greatest number to smallest, including the percentage
+     * of the world population: Chinese, English, Hindi, Spanish, Arabic
+     * @return getLanguages(query)
+     */
+    public ArrayList<Results> getLanguagesBySpeakers(){
+        String languages = "SELECT Language, SUM(country.Population*(Percentage/100)) AS Speakers, " +
+                "SUM(country.Population*(Percentage/100))/(SELECT SUM(Population) FROM country)*100 AS 'World_%'" +
+                "FROM countrylanguage JOIN country ON (country.Code = countrylanguage.CountryCode) " +
+                "WHERE Language LIKE 'Chinese' OR Language LIKE 'English' OR Language LIKE 'Hindi' OR Language LIKE 'Spanish' OR Language LIKE 'Arabic' GROUP BY Language ORDER BY Speakers DESC;";
+        System.out.println("Getting language results:");
+        return getLanguages(languages);
+    }
+
+
     // Helper methods
 
     /**
@@ -504,11 +526,13 @@ public class App {
             if(!ress.isEmpty()){
                 // Print results out
                 printCountryResults(ress);
+                System.out.println(""); // Leave one line empty for clear view
                 return ress;
             }
             // Return null if there are no results
             else{
                 System.out.println("No results");
+                System.out.println(""); // Leave one line empty for clear view
                 return null;
             }
 
@@ -544,11 +568,13 @@ public class App {
             if(!ress.isEmpty()){
                 // Print results out
                 printCapitalResults(ress);
+                System.out.println(""); // Leave one line empty for clear view
                 return ress;
             }
             // Return null if there are no results
             else{
                 System.out.println("No results");
+                System.out.println(""); // Leave one line empty for clear view
                 return null;
             }
 
@@ -586,17 +612,53 @@ public class App {
             if(!ress.isEmpty()){
                 // Print results out
                 printCityResults(ress);
+                System.out.println(""); // Leave one line empty for clear view
                 return ress;
             }
             // Return null if there are no results
             else{
                 System.out.println("No results");
+                System.out.println(""); // Leave one line empty for clear view
                 return null;
             }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     *  Return and print list of languages from a query in world db.
+     * @param query
+     * @return ArrayList<Results> of cities data or null
+     * @throws Exception Failed to get language details"
+     */
+    public ArrayList<Results> getLanguages(String query) {
+        try {
+            // Get results
+            ResultSet rset = getResults(query);
+
+            // Extract language information
+            ArrayList<Results> ress = new ArrayList<Results>();
+            while (rset.next()) {
+                Results result = new Results();
+                result.language = rset.getString("Language");
+                result.speakers = rset.getInt("Speakers");
+                result.world_percentage = Double.parseDouble(rset.getString("World_%"));
+                ress.add(result);
+            }
+
+            // Print out results if there are any and return list of results
+            printLanguageResults(ress);
+            System.out.println(""); // Leave one line empty for clear view
+            return ress;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get language details");
+            System.out.println(""); // Leave one line empty for clear view
             return null;
         }
     }
@@ -628,6 +690,7 @@ public class App {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
+            System.out.println(""); // Leave one line empty for clear view
             return null;
         }
     }
@@ -711,25 +774,31 @@ public class App {
         }
     }
 
+    /**
+     * Print language data: name, language name, number of speakers in the world, percentage of speakers in the world
+     *  or "No results"
+     * @param results - world db query
+     */
     public void printLanguageResults(ArrayList<Results> results) {
-        // Check results is not null
-        if (results == null)
+        // Check if there are results
+        if (!results.isEmpty())
         {
+            // Print header
+            System.out.println(String.format("%-15s %-13s %-10s",
+                    "Language", "Speakers", "World %"));
+            // Loop over all results in the list
+            for (Results res : results)
+            {
+                if (results == null)
+                    continue;
+                String emp_string =
+                        String.format("%-15s %-13s %-10s",
+                                res.language,  res.speakers, res.world_percentage);
+                System.out.println(emp_string);
+            }
+        }else{
             System.out.println("No results");
             return;
-        }
-        // Print header
-        System.out.println(String.format("%-10s %-40s %-10s %-8s",
-                "Country Code", "Language", "Is Official", "Percentage"));
-        // Loop over all results in the list
-        for (Results res : results)
-        {
-            if (results == null)
-                continue;
-            String emp_string =
-                    String.format("%-10s %-40s %-10s %-8s",
-                            res.country_code, res.language, res.isOfficial, res.percentage);
-            System.out.println(emp_string);
         }
     }
 }

@@ -26,8 +26,7 @@ public class Results {
     String countryCode2;
 
     // Country Language table ('countrylanguage')
-    String country_code;
     String language;
-    String isOfficial;
-    float percentage;
+    int speakers;
+    double world_percentage;
 }
