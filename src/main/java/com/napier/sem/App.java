@@ -600,19 +600,10 @@ public class App {
                 ress.add(result);
             }
 
-            // Print out results if there are any and return list of results
-            if(!ress.isEmpty()){
-                // Print results out
-                printCityResults(ress);
-                System.out.println(""); // Leave one line empty for clear view
-                return ress;
-            }
-            // Return null if there are no results
-            else{
-                System.out.println("No results");
-                System.out.println(""); // Leave one line empty for clear view
-                return null;
-            }
+            // Print results out
+            printCityResults(ress);
+            System.out.println(""); // Leave one line empty for clear view
+            return ress;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -749,21 +740,22 @@ public class App {
      */
     public void printCityResults(ArrayList<Results> results) {
         // Check results is not null
-        if (results == null) {
+        if (!results.isEmpty()) {
+            // Print header
+            System.out.println(String.format("%-30s %-15s %-30s %-5s",
+                    "Name", "Country Code", "District", "Population (000s)"));
+            // Loop over all results in the list
+            for (Results res : results) {
+                if (results == null)
+                    continue;
+                String emp_string =
+                        String.format("%-30s %-15s %-30s %-15s",
+                                res.cityName, res.countryCode, res.district, res.population/1000);
+                System.out.println(emp_string);
+            }
+        }else{
             System.out.println("No results");
             return;
-        }
-        // Print header
-        System.out.println(String.format("%-30s %-15s %-30s %-5s",
-                "Name", "Country Code", "District", "Population (000s)"));
-        // Loop over all results in the list
-        for (Results res : results) {
-            if (results == null)
-                continue;
-            String emp_string =
-                    String.format("%-30s %-15s %-30s %-15s",
-                            res.cityName, res.countryCode, res.district, res.population/1000);
-            System.out.println(emp_string);
         }
     }
 
