@@ -499,6 +499,40 @@ public class App {
     }
 
     /**
+     *  Return list of country results extracted from ResultSet
+     * @param rset
+     * @return ArrayList of Results
+     * @throws SQLException
+     */
+
+    /**
+     *  Return list of capital city results extracted from ResultSet
+     * @param rset
+     * @return ArrayList of Results
+     * @throws SQLException
+     */
+
+    /**
+     *  Return list of city results extracted from ResultSet
+     * @param rset
+     * @return ArrayList of Results
+     * @throws SQLException
+     */
+    public ArrayList<Results> getCityList(ResultSet rset) throws SQLException{
+        // Extract city information
+        ArrayList<Results> ress = new ArrayList<Results>();
+        while (rset.next()) {
+            Results result = new Results();
+            result.cityName = rset.getString("city.Name");
+            result.population = rset.getInt("city.Population");
+            result.countryCode = rset.getString("city.CountryCode");
+            result.district = rset.getString("city.District");
+            ress.add(result);
+        }
+        return ress;
+    }
+
+    /**
      *  Return and print list of countries from a query in world db.
      * @param query
      * @return ArrayList<Results> of countries data or null
@@ -590,15 +624,7 @@ public class App {
             ResultSet rset = getResults(query);
 
             // Extract city information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            while (rset.next()) {
-                Results result = new Results();
-                result.cityName = rset.getString("city.Name");
-                result.population = rset.getInt("city.Population");
-                result.countryCode = rset.getString("city.CountryCode");
-                result.district = rset.getString("city.District");
-                ress.add(result);
-            }
+            ArrayList<Results> ress = getCityList(rset);
 
             // Print results out
             printCityResults(ress);
