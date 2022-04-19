@@ -504,6 +504,21 @@ public class App {
      * @return ArrayList of Results
      * @throws SQLException
      */
+    public ArrayList<Results> getCountryList(ResultSet rset) throws SQLException{
+        // Extract country information
+        ArrayList<Results> ress = new ArrayList<Results>();
+        while (rset.next()) {
+            Results res = new Results();
+            res.countryCode = rset.getString("code");
+            res.countryName = rset.getString("name");
+            res.continent = rset.getString("continent");
+            res.region = rset.getString("region");
+            res.pop = rset.getInt("population");
+            res.capital = rset.getInt("Capital");
+            ress.add(res);
+        }
+        return ress;
+    }
 
     /**
      *  Return list of capital city results extracted from ResultSet
@@ -556,17 +571,7 @@ public class App {
             ResultSet rset = getResults(query);
 
             // Extract country information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            while (rset.next()) {
-                Results res = new Results();
-                res.countryCode = rset.getString("code");
-                res.countryName = rset.getString("name");
-                res.continent = rset.getString("continent");
-                res.region = rset.getString("region");
-                res.pop = rset.getInt("population");
-                res.capital = rset.getInt("Capital");
-                ress.add(res);
-            }
+            ArrayList<Results> ress = getCountryList(rset);
 
             // Print results
             printCountryResults(ress);
