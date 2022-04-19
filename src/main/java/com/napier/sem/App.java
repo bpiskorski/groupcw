@@ -115,7 +115,18 @@ public class App {
         /**
          Language reports
          */
+        // Combined report for required languages organised by the number of speakers
         a.getLanguagesBySpeakers();
+        // Individual report for Chinese
+        a.getLanguageByName("Chinese");
+        // Individual report for English
+        a.getLanguageByName("English");
+        // Individual report for Hindi
+        a.getLanguageByName("Hindi");
+        // Individual report for Spanish
+        a.getLanguageByName("Spanish");
+        // Individual report for Arabic
+        a.getLanguageByName("Arabic");
 
         // Disconnect from database
         a.disconnect();
@@ -469,6 +480,19 @@ public class App {
                 "FROM countrylanguage JOIN country ON (country.Code = countrylanguage.CountryCode) " +
                 "WHERE Language LIKE 'Chinese' OR Language LIKE 'English' OR Language LIKE 'Hindi' OR Language LIKE 'Spanish' OR Language LIKE 'Arabic' GROUP BY Language ORDER BY Speakers DESC;";
         System.out.println("Getting language results:");
+        return getLanguages(languages);
+    }
+
+    /**
+     * Provide the number of people who speak the defined language, including the percentage of the world population
+     * @return getLanguages(query)
+     */
+    public ArrayList<Results> getLanguageByName(String languageName){
+        String languages = "SELECT Language, SUM(country.Population*(Percentage/100)) AS Speakers, " +
+                "SUM(country.Population*(Percentage/100))/(SELECT SUM(Population) FROM country)*100 AS 'World_%'" +
+                "FROM countrylanguage JOIN country ON (country.Code = countrylanguage.CountryCode) " +
+                "WHERE Language LIKE '" + languageName + "' GROUP BY Language;";
+        System.out.println("Getting language results (by language name):");
         return getLanguages(languages);
     }
 

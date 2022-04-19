@@ -149,6 +149,16 @@ public class AppTest {
     void getLanguages(){
         app.getLanguagesBySpeakers();
     }
+    @Test
+    void getChinese(){app.getLanguageByName("Chinese");}
+    @Test
+    void getEnglish(){app.getLanguageByName("English");}
+    @Test
+    void getHindi(){app.getLanguageByName("Hindi");}
+    @Test
+    void getSpanish(){app.getLanguageByName("Spanish");}
+    @Test
+    void getArabic(){app.getLanguageByName("Arabic");}
 
     // Disconnect from db on end
     @AfterAll
