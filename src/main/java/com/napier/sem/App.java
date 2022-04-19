@@ -511,6 +511,18 @@ public class App {
      * @return ArrayList of Results
      * @throws SQLException
      */
+    public ArrayList<Results> getCapitalList(ResultSet rset) throws SQLException{
+        // Extract city information
+        ArrayList<Results> ress = new ArrayList<Results>();
+        while (rset.next()) {
+            Results result = new Results();
+            result.cityName = rset.getString("city.Name");
+            result.population = rset.getInt("city.Population");
+            result.countryCode = rset.getString("city.CountryCode");
+            ress.add(result);
+        }
+        return ress;
+    }
 
     /**
      *  Return list of city results extracted from ResultSet
@@ -580,14 +592,7 @@ public class App {
             ResultSet rset = getResults(query);
 
             // Extract city information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            while (rset.next()) {
-                Results result = new Results();
-                result.cityName = rset.getString("city.Name");
-                result.population = rset.getInt("city.Population");
-                result.countryCode = rset.getString("city.CountryCode");
-                ress.add(result);
-            }
+            ArrayList<Results> ress = getCapitalList(rset);
 
             // Print results
             printCapitalResults(ress);
