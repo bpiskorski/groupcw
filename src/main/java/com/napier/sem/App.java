@@ -131,7 +131,16 @@ public class App {
         /**
          * Population Reports
          */
-        // Populaiton reports here
+        // The population of people, people living in cities, and people not living in cities in each continent.
+        a.getPopulationInContinent("Europe");
+        // The population of people, people living in cities, and people not living in cities in each region.
+        a.getPopulationInRegion();
+        // The population of people, people living in cities, and people not living in cities in each country.
+        a.getPopulationInCountry();
+        // The population of districts.
+        a.getPopulationInDistrict();
+        // The population of the world.
+        a.getPopulationInWorld();
 
         // Disconnect from database
         a.disconnect();
@@ -541,6 +550,20 @@ public class App {
                 "(country.Population - SUM(city.Population)) AS nonCity_pop " +
                 "FROM country JOIN city ON (city.CountryCode = country.Code)" +
                 "GROUP BY country.Name, country.Population ORDER BY country.Population DESC;";
+        System.out.println("Getting population results (in countries):");
+        return getPopulation(query);
+    }
+
+    /**
+     * The population of people in each district.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInDistrict(){
+        String query = "SELECT city.District AS 'name', SUM(city.Population) AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "null AS nonCity_pop " +
+                "FROM city " +
+                "GROUP BY city.District ORDER BY SUM(city.Population) DESC;";
         System.out.println("Getting population results (in countries):");
         return getPopulation(query);
     }

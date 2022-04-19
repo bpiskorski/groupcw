@@ -168,6 +168,8 @@ public class AppTest {
     @Test
     void populationInCountry(){app.getPopulationInCountry();}
     @Test
+    void populationInDistrict(){app.getPopulationInDistrict();}
+    @Test
     void populationInWorld(){app.getPopulationInWorld();}
 
     // Disconnect from db on end
