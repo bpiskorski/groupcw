@@ -521,13 +521,13 @@ public class App {
      * The population of people, people living in cities, and people not living in cities in each region.
      * @return getPopulation(query)
      */
-    public ArrayList<Results> getPopulationInRegion(String region){
-        String query = "SELECT country.Region AS 'name', SUM(country.Population) AS 'total_pop', " +
-                "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Region LIKE '" + region +"') AS 'city_pop', " +
-                "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Region LIKE '" + region +"')) AS nonCity_pop " +
-                "FROM country " +
-                "WHERE country.Region LIKE '" + region + "' GROUP BY country.Region;";
-        System.out.println("Getting population results (in " + region + "):");
+    public ArrayList<Results> getPopulationInRegion(){
+        String query = "SELECT country.Region AS 'name', country.Population AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "(country.Population - SUM(city.Population)) AS nonCity_pop " +
+                "FROM country JOIN city ON (city.CountryCode = country.Code)" +
+                "GROUP BY country.Region, country.Population ORDER BY country.Population DESC;";
+        System.out.println("Getting population results (in regions):");
         return getPopulation(query);
     }
 
@@ -535,13 +535,13 @@ public class App {
      * The population of people, people living in cities, and people not living in cities in each country.
      * @return getPopulation(query)
      */
-    public ArrayList<Results> getPopulationInCountry(String name){
-        String query = "SELECT country.Name AS 'name', SUM(country.Population) AS 'total_pop', " +
-                "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Name LIKE '" + name +"') AS 'city_pop', " +
-                "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Name LIKE '" + name +"')) AS nonCity_pop " +
-                "FROM country " +
-                "WHERE country.Name LIKE '" + name + "' GROUP BY country.Name;";
-        System.out.println("Getting population results (in " + name + "):");
+    public ArrayList<Results> getPopulationInCountry(){
+        String query = "SELECT country.Name AS 'name', country.Population AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "(country.Population - SUM(city.Population)) AS nonCity_pop " +
+                "FROM country JOIN city ON (city.CountryCode = country.Code)" +
+                "GROUP BY country.Name, country.Population ORDER BY country.Population DESC;";
+        System.out.println("Getting population results (in countries):");
         return getPopulation(query);
     }
 

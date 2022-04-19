@@ -164,9 +164,9 @@ public class AppTest {
     @Test
     void populationInContinent(){app.getPopulationInContinent("Europe");}
     @Test
-    void populationInRegion(){app.getPopulationInRegion("Southern Europe");}
+    void populationInRegion(){app.getPopulationInRegion();}
     @Test
-    void populationInCountry(){app.getPopulationInCountry("United Kingdom");}
+    void populationInCountry(){app.getPopulationInCountry();}
     @Test
     void populationInWorld(){app.getPopulationInWorld();}
 
