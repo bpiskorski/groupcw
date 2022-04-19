@@ -29,4 +29,10 @@ public class Results {
     String language;
     int speakers;
     double world_percentage;
+
+    // Population table ('population')
+    String name;
+    long totalPop;
+    long cityPop;
+    long nonCityPop;
 }

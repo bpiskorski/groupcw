@@ -128,6 +128,11 @@ public class App {
         // Individual report for Arabic
         a.getLanguageByName("Arabic");
 
+        /**
+         * Population Reports
+         */
+        // Populaiton reports here
+
         // Disconnect from database
         a.disconnect();
     }
@@ -497,6 +502,63 @@ public class App {
     }
 
 
+    // Population reports
+    /**
+     * The population of people, people living in cities, and people not living in cities in each continent.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInContinent(String continent){
+        String query = "SELECT country.Continent AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Continent LIKE '" + continent +"') AS 'city_pop', " +
+                "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Continent LIKE '" + continent +"')) AS nonCity_pop " +
+                "FROM country " +
+                "WHERE country.Continent LIKE '" + continent + "' GROUP BY country.Continent;";
+        System.out.println("Getting population results (in " + continent + "):");
+        return getPopulation(query);
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in each region.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInRegion(String region){
+        String query = "SELECT country.Region AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Region LIKE '" + region +"') AS 'city_pop', " +
+                "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Region LIKE '" + region +"')) AS nonCity_pop " +
+                "FROM country " +
+                "WHERE country.Region LIKE '" + region + "' GROUP BY country.Region;";
+        System.out.println("Getting population results (in " + region + "):");
+        return getPopulation(query);
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in each country.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInCountry(String name){
+        String query = "SELECT country.Name AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Name LIKE '" + name +"') AS 'city_pop', " +
+                "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode) WHERE country.Name LIKE '" + name +"')) AS nonCity_pop " +
+                "FROM country " +
+                "WHERE country.Name LIKE '" + name + "' GROUP BY country.Name;";
+        System.out.println("Getting population results (in " + name + "):");
+        return getPopulation(query);
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in the world.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInWorld(){
+        String query = "SELECT 'Earth' AS 'name', SUM(country.Population) AS 'total_pop', " +
+                        "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode)) AS 'city_pop', " +
+                        "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode))) AS nonCity_pop " +
+                        "FROM country;";
+        System.out.println("Getting population results (in the world):");
+        return getPopulation(query);
+    }
+
+
     // Helper methods
 
     /**
@@ -597,6 +659,26 @@ public class App {
             result.language = rset.getString("Language");
             result.speakers = rset.getInt("Speakers");
             result.world_percentage = Double.parseDouble(rset.getString("World_%"));
+            ress.add(result);
+        }
+        return ress;
+    }
+
+    /**
+     *  Return list of population results extracted from ResultSet
+     * @param rset
+     * @return ArrayList of Results
+     * @throws SQLException
+     */
+    public ArrayList<Results> getPopulationList(ResultSet rset) throws SQLException{
+        // Extract language information
+        ArrayList<Results> ress = new ArrayList<Results>();
+        while (rset.next()) {
+            Results result = new Results();
+            result.name = rset.getString("name");
+            result.totalPop = rset.getLong("total_pop");
+            result.cityPop = rset.getLong("city_pop");
+            result.nonCityPop = rset.getLong("nonCity_pop");
             ress.add(result);
         }
         return ress;
@@ -704,6 +786,33 @@ public class App {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get language details");
+            System.out.println(""); // Leave one line empty for clear view
+            return null;
+        }
+    }
+
+    /**
+     *  Return and print population information from a query in world db.
+     * @param query
+     * @return ArrayList<Results> of population data or null
+     * @throws Exception Failed to get language details"
+     */
+    public ArrayList<Results> getPopulation(String query){
+        try {
+            // Get results
+            ResultSet rset = getResults(query);
+
+            // Extract population information
+            ArrayList<Results> ress = getPopulationList(rset);
+
+            // Print out results if there are any and return list of results
+            printPopulationResults(ress);
+            System.out.println(""); // Leave one line empty for clear view
+            return ress;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
             System.out.println(""); // Leave one line empty for clear view
             return null;
         }
@@ -843,6 +952,34 @@ public class App {
                 String emp_string =
                         String.format("%-15s %-13s %-10s",
                                 res.language,  res.speakers, res.world_percentage);
+                System.out.println(emp_string);
+            }
+        }else{
+            System.out.println("No results");
+            return;
+        }
+    }
+
+    /**
+     * Print population data: name, total population, total population in cities, total population outside cities
+     *  or "No results"
+     * @param results - world db query
+     */
+    public void printPopulationResults(ArrayList<Results> results) {
+        // Check if there are results
+        if (!results.isEmpty())
+        {
+            // Print header
+            System.out.println(String.format("%-25s %-20s %-20s %-20s",
+                    "Name", "Total Population", "City Population", "Non City Population"));
+            // Loop over all results in the list
+            for (Results res : results)
+            {
+                if (results == null)
+                    continue;
+                String emp_string =
+                        String.format("%-25s %-20s %-20s %-20s",
+                                res.name,  res.totalPop, res.cityPop, res.nonCityPop);
                 System.out.println(emp_string);
             }
         }else{

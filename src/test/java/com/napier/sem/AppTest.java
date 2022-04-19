@@ -160,6 +160,16 @@ public class AppTest {
     @Test
     void getArabic(){app.getLanguageByName("Arabic");}
 
+    // Population tests
+    @Test
+    void populationInContinent(){app.getPopulationInContinent("Europe");}
+    @Test
+    void populationInRegion(){app.getPopulationInRegion("Southern Europe");}
+    @Test
+    void populationInCountry(){app.getPopulationInCountry("United Kingdom");}
+    @Test
+    void populationInWorld(){app.getPopulationInWorld();}
+
     // Disconnect from db on end
     @AfterAll
     static void close() {
