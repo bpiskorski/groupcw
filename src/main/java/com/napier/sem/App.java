@@ -340,7 +340,7 @@ public class App {
     public ArrayList<Results> getCitiesFromRegion(String region) {
         String citiesFromRegion = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
                 "FROM city" +
-                " INNER JOIN country ON city.ID = country.Capital " +
+                " INNER JOIN country ON city.CountryCode = country.Code " +
                 "WHERE country.Region LIKE '" +
                 region + "' ORDER BY city.Population DESC";
         System.out.println("Cities in " + region + ":");
@@ -416,10 +416,10 @@ public class App {
     public ArrayList<Results> getNCitiesFromRegion(String region, int N) {
         String citiesFromRegion = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District " +
                 "FROM city" +
-                " INNER JOIN country ON city.ID = country.Capital " +
+                " INNER JOIN country ON city.CountryCode = country.Code " +
                 "WHERE country.Region LIKE '" +
                 region + "' ORDER BY city.Population  DESC LIMIT " + N;
-        System.out.println("Top " + N + " cities in " + region + " (by population):");
+        System.out.println("The biggest " + N + " cities in " + region);
         return getCities(citiesFromRegion);
     }
 
