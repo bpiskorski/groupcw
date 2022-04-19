@@ -560,6 +560,25 @@ public class App {
     }
 
     /**
+     *  Return list of language results extracted from ResultSet
+     * @param rset
+     * @return ArrayList of Results
+     * @throws SQLException
+     */
+    public ArrayList<Results> getLanguageList(ResultSet rset) throws SQLException{
+        // Extract language information
+        ArrayList<Results> ress = new ArrayList<Results>();
+        while (rset.next()) {
+            Results result = new Results();
+            result.language = rset.getString("Language");
+            result.speakers = rset.getInt("Speakers");
+            result.world_percentage = Double.parseDouble(rset.getString("World_%"));
+            ress.add(result);
+        }
+        return ress;
+    }
+
+    /**
      *  Return and print list of countries from a query in world db.
      * @param query
      * @return ArrayList<Results> of countries data or null
@@ -651,14 +670,7 @@ public class App {
             ResultSet rset = getResults(query);
 
             // Extract language information
-            ArrayList<Results> ress = new ArrayList<Results>();
-            while (rset.next()) {
-                Results result = new Results();
-                result.language = rset.getString("Language");
-                result.speakers = rset.getInt("Speakers");
-                result.world_percentage = Double.parseDouble(rset.getString("World_%"));
-                ress.add(result);
-            }
+            ArrayList<Results> ress = getLanguageList(rset);
 
             // Print out results if there are any and return list of results
             printLanguageResults(ress);
