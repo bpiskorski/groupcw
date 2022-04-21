@@ -564,7 +564,7 @@ public class App {
                 "null AS nonCity_pop " +
                 "FROM city " +
                 "GROUP BY city.District ORDER BY SUM(city.Population) DESC;";
-        System.out.println("Getting population results (in countries):");
+        System.out.println("Getting population results (in district):");
         return getPopulation(query);
     }
 
