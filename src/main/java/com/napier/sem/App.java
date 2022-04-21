@@ -561,7 +561,7 @@ public class App {
     public ArrayList<Results> getPopulationInDistrict(){
         String query = "SELECT city.District AS 'name', SUM(city.Population) AS 'total_pop', " +
                 "SUM(city.Population) AS 'city_pop', " +
-                "null AS nonCity_pop " +
+                "'none' AS nonCity_pop " +
                 "FROM city " +
                 "GROUP BY city.District ORDER BY SUM(city.Population) DESC;";
         System.out.println("Getting population results (in district):");
@@ -701,7 +701,7 @@ public class App {
             result.name = rset.getString("name");
             result.totalPop = rset.getLong("total_pop");
             result.cityPop = rset.getLong("city_pop");
-            result.nonCityPop = rset.getLong("nonCity_pop");
+            result.nonCityPop = rset.getString("nonCity_pop");
             ress.add(result);
         }
         return ress;

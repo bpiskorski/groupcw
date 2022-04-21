@@ -34,5 +34,5 @@ public class Results {
     String name;
     long totalPop;
     long cityPop;
-    long nonCityPop;
+    String nonCityPop;
 }
