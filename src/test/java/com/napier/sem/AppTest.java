@@ -136,7 +136,7 @@ public class AppTest {
         String query = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District" +
                 " FROM city" +
                 " ORDER BY city.Population DESC";
-        app.getCities(query);
+        app.getCities(query, "getCities.md");
     }
     @Test
     void getNoCities(){
