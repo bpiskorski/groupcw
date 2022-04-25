@@ -162,15 +162,23 @@ public class AppTest {
 
     // Population tests
     @Test
+    void populationInWorld(){app.getPopulationInWorld();}
+    @Test
     void populationInContinent(){app.getPopulationInContinent("Europe");}
     @Test
-    void populationInRegion(){app.getPopulationInRegion();}
+    void populationInRegion(){app.getPopulationInRegion("Western Europe");}
     @Test
-    void populationInCountry(){app.getPopulationInCountry();}
+    void populationInDistrict(){app.getPopulationInDistrict("Scotland");}
     @Test
-    void populationInDistrict(){app.getPopulationInDistrict();}
+    void populationInCountry(){app.getPopulationInCountry("United Kingdom");}
     @Test
-    void populationInWorld(){app.getPopulationInWorld();}
+    void populationInCity(){app.getPopulationInCity("Edinburgh");}
+    @Test
+    void populationInContinents(){app.getPopulationInContinents();}
+    @Test
+    void populationInRegions(){app.getPopulationInRegions();}
+    @Test
+    void populationInCountries(){app.getPopulationInCountries();}
 
     // Disconnect from db on end
     @AfterAll

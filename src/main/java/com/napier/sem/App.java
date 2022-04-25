@@ -128,16 +128,25 @@ public class App {
         /**
          * Population Reports
          */
-        // The population of people, people living in cities, and people not living in cities in each continent.
-        a.getPopulationInContinent("Europe");
-        // The population of people, people living in cities, and people not living in cities in each region.
-        a.getPopulationInRegion();
-        // The population of people, people living in cities, and people not living in cities in each country.
-        a.getPopulationInCountry();
-        // The population of districts.
-        a.getPopulationInDistrict();
         // The population of the world.
         a.getPopulationInWorld();
+        // The population of people, people living in cities, and people not living in cities in defined continent.
+        a.getPopulationInContinent("Europe");
+        // The population of people, people living in cities, and people not living in cities in defined region.
+        a.getPopulationInRegion("Western Europe");
+        // The population of defined district
+        a.getPopulationInDistrict("Scotland");
+        // The population of people, people living in cities, and people not living in cities in defined country.
+        a.getPopulationInCountry("United Kingdom");
+        // The population of defined city
+        a.getPopulationInCity("Edinburgh");
+        // The population of people, people living in cities, and people not living in cities in each continent.
+        a.getPopulationInContinents();
+        // The population of people, people living in cities, and people not living in cities in each region.
+        a.getPopulationInRegions();
+        // The population of people, people living in cities, and people not living in cities in each country.
+        a.getPopulationInCountries();
+
 
         // Disconnect from database
         a.disconnect();
@@ -510,7 +519,20 @@ public class App {
 
     // Population reports
     /**
-     * The population of people, people living in cities, and people not living in cities in each continent.
+     * The population of people, people living in cities, and people not living in cities in the world.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInWorld(){
+        String query = "SELECT 'Earth' AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode)) AS 'city_pop', " +
+                "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode))) AS nonCity_pop " +
+                "FROM country;";
+        System.out.println("Getting population results (in the world):");
+        return getPopulation(query, "1_Population_World.md");
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in defined continent.
      * @return getPopulation(query)
      */
     public ArrayList<Results> getPopulationInContinent(String continent){
@@ -520,62 +542,104 @@ public class App {
                 "FROM country " +
                 "WHERE country.Continent LIKE '" + continent + "' GROUP BY country.Continent;";
         System.out.println("Getting population results (in " + continent + "):");
-        return getPopulation(query, "1_Population_Continent_" + continent +".md");
+        return getPopulation(query, "2_Population_Continent_" + continent +".md");
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in defined region.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInRegion(String region){
+        String query = "SELECT country.Region AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "(SUM(country.Population) - SUM(city.Population)) AS nonCity_pop " +
+                "FROM country JOIN city ON (city.CountryCode = country.Code)" +
+                "WHERE country.Region LIKE '" + region + "' GROUP BY country.Region;";
+        System.out.println("Getting population results (in " + region + "):");
+        return getPopulation(query, "3_Population_Region_" + region +".md");
+    }
+
+    /**
+     * The population of people in defined district.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInDistrict(String district){
+        String query = "SELECT city.District AS 'name', SUM(city.Population) AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "'none' AS nonCity_pop " +
+                "FROM city " +
+                "WHERE city.District LIKE '" + district + "'GROUP BY city.District ORDER BY SUM(city.Population) DESC;";
+        System.out.println("Getting population results (in district):");
+        return getPopulation(query, "4_Population_District_" + district + ".md");
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in defined country.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInCountry(String country){
+        String query = "SELECT country.Name AS 'name', country.Population AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "(country.Population - SUM(city.Population)) AS nonCity_pop " +
+                "FROM country JOIN city ON (city.CountryCode = country.Code)" +
+                "WHERE country.Name LIKE '" + country + "' GROUP BY country.Name, country.Population ORDER BY country.Population DESC;";
+        System.out.println("Getting population results (in countries):");
+        return getPopulation(query, "5_Population_Country_" + country + ".md");
+    }
+
+    /**
+     * The population of people in defined city.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInCity(String city){
+        String query = "SELECT city.Name AS 'name', city.Population AS 'total_pop', " +
+                "city.Population AS 'city_pop', " +
+                "'none' AS nonCity_pop " +
+                "FROM city " +
+                "WHERE city.Name LIKE '" + city + "';";
+        System.out.println("Getting population results (in city):");
+        return getPopulation(query, "6_Population_City" + city + ".md");
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in each continent.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInContinents(){
+        String query = "SELECT country.Continent AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "(SUM(city.Population)) AS 'city_pop', " +
+                "(SUM(country.Population) - SUM(city.Population)) AS nonCity_pop " +
+                "FROM country JOIN city ON (country.Code = city.CountryCode) " +
+                "GROUP BY country.Continent;";
+        return getPopulation(query, "7_Population_Continents.md");
     }
 
     /**
      * The population of people, people living in cities, and people not living in cities in each region.
      * @return getPopulation(query)
      */
-    public ArrayList<Results> getPopulationInRegion(){
+    public ArrayList<Results> getPopulationInRegions(){
         String query = "SELECT country.Region AS 'name', country.Population AS 'total_pop', " +
                 "SUM(city.Population) AS 'city_pop', " +
                 "(country.Population - SUM(city.Population)) AS nonCity_pop " +
                 "FROM country JOIN city ON (city.CountryCode = country.Code)" +
                 "GROUP BY country.Region, country.Population ORDER BY country.Population DESC;";
         System.out.println("Getting population results (in regions):");
-        return getPopulation(query, "2_Population_Region.md");
+        return getPopulation(query, "8_Population_Regions.md");
     }
 
     /**
      * The population of people, people living in cities, and people not living in cities in each country.
      * @return getPopulation(query)
      */
-    public ArrayList<Results> getPopulationInCountry(){
+    public ArrayList<Results> getPopulationInCountries(){
         String query = "SELECT country.Name AS 'name', country.Population AS 'total_pop', " +
                 "SUM(city.Population) AS 'city_pop', " +
                 "(country.Population - SUM(city.Population)) AS nonCity_pop " +
                 "FROM country JOIN city ON (city.CountryCode = country.Code)" +
                 "GROUP BY country.Name, country.Population ORDER BY country.Population DESC;";
         System.out.println("Getting population results (in countries):");
-        return getPopulation(query, "3_Population_Country.md");
-    }
-
-    /**
-     * The population of people in each district.
-     * @return getPopulation(query)
-     */
-    public ArrayList<Results> getPopulationInDistrict(){
-        String query = "SELECT city.District AS 'name', SUM(city.Population) AS 'total_pop', " +
-                "SUM(city.Population) AS 'city_pop', " +
-                "'none' AS nonCity_pop " +
-                "FROM city " +
-                "GROUP BY city.District ORDER BY SUM(city.Population) DESC;";
-        System.out.println("Getting population results (in district):");
-        return getPopulation(query, "4_Population_District.md");
-    }
-
-    /**
-     * The population of people, people living in cities, and people not living in cities in the world.
-     * @return getPopulation(query)
-     */
-    public ArrayList<Results> getPopulationInWorld(){
-        String query = "SELECT 'Earth' AS 'name', SUM(country.Population) AS 'total_pop', " +
-                        "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode)) AS 'city_pop', " +
-                        "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode))) AS nonCity_pop " +
-                        "FROM country;";
-        System.out.println("Getting population results (in the world):");
-        return getPopulation(query, "5_Population_World.md");
+        return getPopulation(query, "9_Population_Countries.md");
     }
 
 
@@ -1028,8 +1092,8 @@ public class App {
 
     /**
      * Print country results to the markdown file
-     * @param results
-     * @param filename
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
      */
     public void printCountryToMarkdown(ArrayList<Results> results, String filename){
         if (!results.isEmpty()){
@@ -1051,8 +1115,8 @@ public class App {
 
     /**
      * Print capital results to the markdown file
-     * @param results
-     * @param filename
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
      */
     public void printCapitalToMarkdown(ArrayList<Results> results, String filename){
         if (!results.isEmpty()){
@@ -1074,8 +1138,8 @@ public class App {
 
     /**
      * Print city results to the markdown file
-     * @param results
-     * @param filename
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
      */
     public void printCityToMarkdown(ArrayList<Results> results, String filename){
         if (!results.isEmpty()){
@@ -1097,8 +1161,8 @@ public class App {
 
     /**
      * Print language results to the markdown file
-     * @param results
-     * @param filename
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
      */
     public void printLanguageToMarkdown(ArrayList<Results> results, String filename){
         if (!results.isEmpty()){
@@ -1120,8 +1184,8 @@ public class App {
 
     /**
      * Print population results to the markdown file
-     * @param results
-     * @param filename
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
      */
     public void printPopulationToMarkdown(ArrayList<Results> results, String filename){
         if (!results.isEmpty()){
@@ -1143,8 +1207,8 @@ public class App {
 
     /**
      * Write given string to the file
-     * @param sb
-     * @param filename
+     * @param sb used to provide the string that is printed to file
+     * @param filename used to create the file and write to it
      * @returns boolean
      * @throws IOException e
      */
