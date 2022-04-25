@@ -19,7 +19,7 @@ jobs:
         run: mvn -Dtest=com.napier.sem.AppTest test
 
   IntegrationTests:
-    name: Integration Tests
+    name: Integration Tests and CodeCov
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -38,7 +38,14 @@ jobs:
           mvn -Dtest=com.napier.sem.AppIntegrationTest test
           docker stop world
           docker rm world
-          docker image rm database                    
+          docker image rm database
+      - name: CodeCov
+          uses: codecov/codecov-action@v2
+          with:
+            # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+            directory: ./target/site/jacoco
+            flags: Integration Tests # optional
+            verbose: true # optional (default = false)
 
   build:
     name: Build Run in Docker and Deploy Release
@@ -64,10 +71,3 @@ jobs:
           automatic_release_tag: "latest"
           files: |
             ./target/*.jar
-      - name: CodeCov
-          uses: codecov/codecov-action@v2
-          with:
-            # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-            directory: ./target/site/jacoco
-            flags: Integration Tests # optional
-            verbose: true # optional (default = false)
