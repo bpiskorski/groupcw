@@ -1,10 +1,7 @@
 package com.napier.sem;
 
-import java.io.Console;
+import java.io.*;
 import java.util.ArrayList;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -131,16 +128,25 @@ public class App {
         /**
          * Population Reports
          */
-        // The population of people, people living in cities, and people not living in cities in each continent.
-        a.getPopulationInContinent("Europe");
-        // The population of people, people living in cities, and people not living in cities in each region.
-        a.getPopulationInRegion();
-        // The population of people, people living in cities, and people not living in cities in each country.
-        a.getPopulationInCountry();
-        // The population of districts.
-        a.getPopulationInDistrict();
         // The population of the world.
         a.getPopulationInWorld();
+        // The population of people, people living in cities, and people not living in cities in defined continent.
+        a.getPopulationInContinent("Europe");
+        // The population of people, people living in cities, and people not living in cities in defined region.
+        a.getPopulationInRegion("Western Europe");
+        // The population of defined district
+        a.getPopulationInDistrict("Scotland");
+        // The population of people, people living in cities, and people not living in cities in defined country.
+        a.getPopulationInCountry("United Kingdom");
+        // The population of defined city
+        a.getPopulationInCity("Edinburgh");
+        // The population of people, people living in cities, and people not living in cities in each continent.
+        a.getPopulationInContinents();
+        // The population of people, people living in cities, and people not living in cities in each region.
+        a.getPopulationInRegions();
+        // The population of people, people living in cities, and people not living in cities in each country.
+        a.getPopulationInCountries();
+
 
         // Disconnect from database
         a.disconnect();
@@ -208,7 +214,7 @@ public class App {
         System.out.println("Creating the report (Countries in world by population)...");
         // Create string for SQL statement
         String sql = "select * from world.country order by Population desc;";
-        return getCountries(sql);
+        return getCountries(sql, "1_Country_World.md");
     }
 
     /**
@@ -218,7 +224,7 @@ public class App {
         System.out.println("Creating the report (Countries in continent by population)...");
         // Create string for SQL statement
         String sql = "select * from world.country Where Continent = '" + continent + "' order by Population desc;";
-        return getCountries(sql);
+        return getCountries(sql, "2_Country_Continent_" + continent + ".md");
     }
 
     /**
@@ -228,7 +234,7 @@ public class App {
         System.out.println("Creating the report (Countries in region by population)...");
         // Create string for SQL statement
         String sql = "select * from world.country Where Region = '" + region + "' order by Population desc;";
-        return getCountries(sql);
+        return getCountries(sql, "3_Country_Region_" + region + ".md");
     }
 
     /**
@@ -238,7 +244,7 @@ public class App {
         System.out.println("Creating the report (N Countries in world by population)...");
         // Create string for SQL statement
         String sql = "select * from world.country order by Population desc limit " + n +";";
-        return getCountries(sql);
+        return getCountries(sql, "4_Country_World_N.md");
     }
 
     /**
@@ -248,7 +254,7 @@ public class App {
         System.out.println("Creating the report (N Countries in continent by population)...");
         // Create string for SQL statement
         String sql = "select  * from world.country where Continent = '" + continent + "' order by Population desc limit " + n +";";
-        return getCountries(sql);
+        return getCountries(sql, "5_Country_Continent_" + continent + "_N.md");
     }
 
     /**
@@ -258,7 +264,7 @@ public class App {
         System.out.println("Creating the report (N Countries in region by population)...");
         // Create string for SQL statement
         String sql = "select * from world.country where Region = '" + region + "' order by Population desc limit " + n +";";
-        return getCountries(sql);
+        return getCountries(sql, "6_Country_Region_" + region + "_N.md");
 
     }
 
@@ -272,7 +278,7 @@ public class App {
         // Create string for SQL statement
         String strSelect =
                 "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital ORDER BY city.Population DESC";
-        return getCapitals(strSelect);
+        return getCapitals(strSelect, "1_Capitals_World.md");
     }
 
     /**
@@ -283,7 +289,7 @@ public class App {
         // Create string for SQL statement
         String strSelect =
                 "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital WHERE country.Continent LIKE '" + continent + "' ORDER BY city.Population DESC";
-        return getCapitals(strSelect);
+        return getCapitals(strSelect, "2_Capitals_Continent_" + continent + ".md");
     }
 
     /**
@@ -294,7 +300,7 @@ public class App {
         // Create string for SQL statement
         String strSelect =
                 "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital WHERE country.Region LIKE '" + region + "' ORDER BY city.Population DESC";
-        return getCapitals(strSelect);
+        return getCapitals(strSelect, "3_Capitals_Region_" + region + ".md");
     }
 
     /**
@@ -305,7 +311,7 @@ public class App {
         // Create string for SQL statement
         String strSelect =
                 "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital ORDER BY city.Population DESC LIMIT " + n;
-        return getCapitals(strSelect);
+        return getCapitals(strSelect, "4_Capitals_World_N.md");
     }
 
     /**
@@ -316,7 +322,7 @@ public class App {
         // Create string for SQL statement
         String strSelect =
                 "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital WHERE country.Continent LIKE '" + continent + "' ORDER BY city.Population DESC LIMIT " + n;
-        return getCapitals(strSelect);
+        return getCapitals(strSelect, "5_Capitals_Continent_" + continent + "_N.md");
     }
 
     /**
@@ -327,7 +333,7 @@ public class App {
         // Create string for SQL statement
         String strSelect =
                 "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city INNER JOIN country ON city.ID = country.Capital WHERE country.Region LIKE '" + region + "' ORDER BY city.Population DESC LIMIT " + n;
-        return getCapitals(strSelect);
+        return getCapitals(strSelect, "6_Capitals_Region_" + region + "_N.md");
     }
 
 
@@ -339,7 +345,7 @@ public class App {
     public ArrayList<Results> getAllCities() {
         String allCities = "SELECT city.ID , city.Name, city.Population, city.CountryCode, city.District FROM city ORDER BY city.Population DESC";
         System.out.println("Cities in the world:");
-        return getCities(allCities);
+        return getCities(allCities, "1_Cities_World.md");
     }
 
     /**
@@ -354,7 +360,7 @@ public class App {
                 "    WHERE country.Continent LIKE '" +
                 continent + "' ORDER BY city.Population DESC";
         System.out.println("Cities in " + continent + ":");
-        return getCities(citiesFromContinent);
+        return getCities(citiesFromContinent, "2_Cities_Continent_" + continent + ".md");
     }
 
     /**
@@ -369,7 +375,7 @@ public class App {
                 "WHERE country.Region LIKE '" +
                 region + "' ORDER BY city.Population DESC";
         System.out.println("Cities in " + region + ":");
-        return getCities(citiesFromRegion);
+        return getCities(citiesFromRegion, "3_Cities_Region_" + region + ".md");
     }
 
     /**
@@ -384,7 +390,7 @@ public class App {
                 "WHERE country.Name LIKE '" +
                 country + "' ORDER BY city.Population DESC";
         System.out.println("Cities in " + country + ":");
-        return getCities(citiesFromCountry);
+        return getCities(citiesFromCountry, "4_Cities_Country_" + country + ".md");
 
     }
 
@@ -400,7 +406,7 @@ public class App {
                 "WHERE district LIKE '" +
                 district + "' ORDER BY city.Population DESC";
         System.out.println("Cities in " + district + ":");
-        return getCities(citiesFromDistrict);
+        return getCities(citiesFromDistrict, "5_Cities_District_" + district + ".md");
     }
 
     /**
@@ -413,7 +419,7 @@ public class App {
                 " FROM city" +
                 " ORDER BY city.Population DESC LIMIT " + N;
         System.out.println("Top " + N + " cities in the world (by population):");
-        return getCities(cities);
+        return getCities(cities, "6_Cities_World_N.md");
     }
 
     /**
@@ -429,7 +435,7 @@ public class App {
                 "    WHERE country.Continent LIKE '" +
                 continent + "' ORDER BY city.Population DESC LIMIT " + N;
         System.out.println("Top " + N + " cities in " + continent + " (by population):");
-        return getCities(citiesFromContinent);
+        return getCities(citiesFromContinent, "7_Cities_Continent_" + continent + "_N.md");
     }
 
     /**
@@ -445,7 +451,7 @@ public class App {
                 "WHERE country.Region LIKE '" +
                 region + "' ORDER BY city.Population  DESC LIMIT " + N;
         System.out.println("The biggest " + N + " cities in " + region);
-        return getCities(citiesFromRegion);
+        return getCities(citiesFromRegion, "8_Cities_Region_" + region + "_N.md");
     }
 
     /**
@@ -461,7 +467,7 @@ public class App {
                 "WHERE country.Name LIKE '" +
                 country + "' ORDER BY city.Population DESC LIMIT " + N;
         System.out.println("Top " + N + " cities in " + country + " (by population):");
-        return getCities(citiesFromCountry);
+        return getCities(citiesFromCountry, "9_Cities_Country_" + country + "_N.md");
     }
 
     /**
@@ -477,7 +483,7 @@ public class App {
                 "WHERE district LIKE '" +
                 district + "' ORDER BY city.Population DESC LIMIT " + N;
         System.out.println("Top " + N + " cities in " + district + " (by population):");
-        return getCities(citiesFromDistrict);
+        return getCities(citiesFromDistrict, "10_Cities_District_" + district + "_N.md");
 
     }
 
@@ -494,7 +500,7 @@ public class App {
                 "FROM countrylanguage JOIN country ON (country.Code = countrylanguage.CountryCode) " +
                 "WHERE Language LIKE 'Chinese' OR Language LIKE 'English' OR Language LIKE 'Hindi' OR Language LIKE 'Spanish' OR Language LIKE 'Arabic' GROUP BY Language ORDER BY Speakers DESC;";
         System.out.println("Getting language results:");
-        return getLanguages(languages);
+        return getLanguages(languages, "Language_By_Speakers.md");
     }
 
     /**
@@ -507,13 +513,26 @@ public class App {
                 "FROM countrylanguage JOIN country ON (country.Code = countrylanguage.CountryCode) " +
                 "WHERE Language LIKE '" + languageName + "' GROUP BY Language;";
         System.out.println("Getting language results (by language name):");
-        return getLanguages(languages);
+        return getLanguages(languages, "Language_" + languageName + ".md");
     }
 
 
     // Population reports
     /**
-     * The population of people, people living in cities, and people not living in cities in each continent.
+     * The population of people, people living in cities, and people not living in cities in the world.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInWorld(){
+        String query = "SELECT 'Earth' AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode)) AS 'city_pop', " +
+                "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode))) AS nonCity_pop " +
+                "FROM country;";
+        System.out.println("Getting population results (in the world):");
+        return getPopulation(query, "1_Population_World.md");
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in defined continent.
      * @return getPopulation(query)
      */
     public ArrayList<Results> getPopulationInContinent(String continent){
@@ -523,62 +542,104 @@ public class App {
                 "FROM country " +
                 "WHERE country.Continent LIKE '" + continent + "' GROUP BY country.Continent;";
         System.out.println("Getting population results (in " + continent + "):");
-        return getPopulation(query);
+        return getPopulation(query, "2_Population_Continent_" + continent +".md");
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in defined region.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInRegion(String region){
+        String query = "SELECT country.Region AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "(SUM(country.Population) - SUM(city.Population)) AS nonCity_pop " +
+                "FROM country JOIN city ON (city.CountryCode = country.Code)" +
+                "WHERE country.Region LIKE '" + region + "' GROUP BY country.Region;";
+        System.out.println("Getting population results (in " + region + "):");
+        return getPopulation(query, "3_Population_Region_" + region +".md");
+    }
+
+    /**
+     * The population of people in defined district.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInDistrict(String district){
+        String query = "SELECT city.District AS 'name', SUM(city.Population) AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "'none' AS nonCity_pop " +
+                "FROM city " +
+                "WHERE city.District LIKE '" + district + "'GROUP BY city.District ORDER BY SUM(city.Population) DESC;";
+        System.out.println("Getting population results (in district):");
+        return getPopulation(query, "4_Population_District_" + district + ".md");
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in defined country.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInCountry(String country){
+        String query = "SELECT country.Name AS 'name', country.Population AS 'total_pop', " +
+                "SUM(city.Population) AS 'city_pop', " +
+                "(country.Population - SUM(city.Population)) AS nonCity_pop " +
+                "FROM country JOIN city ON (city.CountryCode = country.Code)" +
+                "WHERE country.Name LIKE '" + country + "' GROUP BY country.Name, country.Population ORDER BY country.Population DESC;";
+        System.out.println("Getting population results (in countries):");
+        return getPopulation(query, "5_Population_Country_" + country + ".md");
+    }
+
+    /**
+     * The population of people in defined city.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInCity(String city){
+        String query = "SELECT city.Name AS 'name', city.Population AS 'total_pop', " +
+                "city.Population AS 'city_pop', " +
+                "'none' AS nonCity_pop " +
+                "FROM city " +
+                "WHERE city.Name LIKE '" + city + "';";
+        System.out.println("Getting population results (in city):");
+        return getPopulation(query, "6_Population_City" + city + ".md");
+    }
+
+    /**
+     * The population of people, people living in cities, and people not living in cities in each continent.
+     * @return getPopulation(query)
+     */
+    public ArrayList<Results> getPopulationInContinents(){
+        String query = "SELECT country.Continent AS 'name', SUM(country.Population) AS 'total_pop', " +
+                "(SUM(city.Population)) AS 'city_pop', " +
+                "(SUM(country.Population) - SUM(city.Population)) AS nonCity_pop " +
+                "FROM country JOIN city ON (country.Code = city.CountryCode) " +
+                "GROUP BY country.Continent;";
+        return getPopulation(query, "7_Population_Continents.md");
     }
 
     /**
      * The population of people, people living in cities, and people not living in cities in each region.
      * @return getPopulation(query)
      */
-    public ArrayList<Results> getPopulationInRegion(){
+    public ArrayList<Results> getPopulationInRegions(){
         String query = "SELECT country.Region AS 'name', country.Population AS 'total_pop', " +
                 "SUM(city.Population) AS 'city_pop', " +
                 "(country.Population - SUM(city.Population)) AS nonCity_pop " +
                 "FROM country JOIN city ON (city.CountryCode = country.Code)" +
                 "GROUP BY country.Region, country.Population ORDER BY country.Population DESC;";
         System.out.println("Getting population results (in regions):");
-        return getPopulation(query);
+        return getPopulation(query, "8_Population_Regions.md");
     }
 
     /**
      * The population of people, people living in cities, and people not living in cities in each country.
      * @return getPopulation(query)
      */
-    public ArrayList<Results> getPopulationInCountry(){
+    public ArrayList<Results> getPopulationInCountries(){
         String query = "SELECT country.Name AS 'name', country.Population AS 'total_pop', " +
                 "SUM(city.Population) AS 'city_pop', " +
                 "(country.Population - SUM(city.Population)) AS nonCity_pop " +
                 "FROM country JOIN city ON (city.CountryCode = country.Code)" +
                 "GROUP BY country.Name, country.Population ORDER BY country.Population DESC;";
         System.out.println("Getting population results (in countries):");
-        return getPopulation(query);
-    }
-
-    /**
-     * The population of people in each district.
-     * @return getPopulation(query)
-     */
-    public ArrayList<Results> getPopulationInDistrict(){
-        String query = "SELECT city.District AS 'name', SUM(city.Population) AS 'total_pop', " +
-                "SUM(city.Population) AS 'city_pop', " +
-                "'none' AS nonCity_pop " +
-                "FROM city " +
-                "GROUP BY city.District ORDER BY SUM(city.Population) DESC;";
-        System.out.println("Getting population results (in district):");
-        return getPopulation(query);
-    }
-
-    /**
-     * The population of people, people living in cities, and people not living in cities in the world.
-     * @return getPopulation(query)
-     */
-    public ArrayList<Results> getPopulationInWorld(){
-        String query = "SELECT 'Earth' AS 'name', SUM(country.Population) AS 'total_pop', " +
-                        "(SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode)) AS 'city_pop', " +
-                        "(SUM(country.Population) - (SELECT SUM(city.Population) FROM city JOIN country ON (country.Code = city.CountryCode))) AS nonCity_pop " +
-                        "FROM country;";
-        System.out.println("Getting population results (in the world):");
-        return getPopulation(query);
+        return getPopulation(query, "9_Population_Countries.md");
     }
 
 
@@ -713,7 +774,7 @@ public class App {
      * @return ArrayList<Results> of countries data or null
      * @throws Exception Failed to get country details"
      */
-    public ArrayList<Results> getCountries(String query){
+    public ArrayList<Results> getCountries(String query, String filename){
         try {
             // Get results
             ResultSet rset = getResults(query);
@@ -724,6 +785,9 @@ public class App {
             // Print results
             printCountryResults(ress);
             System.out.println(""); // Leave one line empty for clear view
+            // Print to markdown
+            printCountryToMarkdown(ress, filename);
+            // Return list of results
             return ress;
 
         } catch (Exception e) {
@@ -739,7 +803,7 @@ public class App {
      * @return ArrayList<Results> of capital cities data or null
      * @throws Exception Failed to get capital city details"
      */
-    public ArrayList<Results> getCapitals(String query){
+    public ArrayList<Results> getCapitals(String query, String filename){
         try {
             // Get results
             ResultSet rset = getResults(query);
@@ -750,11 +814,14 @@ public class App {
             // Print results
             printCapitalResults(ress);
             System.out.println(""); // Leave one line empty for clear view
+            // Print to markdown
+            printCapitalToMarkdown(ress, filename);
+            // Return list of results
             return ress;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("Failed to get capital city details");
             System.out.println(""); // Leave one line empty for clear view
             return null;
         }
@@ -767,7 +834,7 @@ public class App {
      * @return ArrayList<Results> of cities data or null
      * @throws Exception Failed to get city details"
      */
-    public ArrayList<Results> getCities(String query) {
+    public ArrayList<Results> getCities(String query, String filename) {
         try {
             // Get results
             ResultSet rset = getResults(query);
@@ -778,6 +845,9 @@ public class App {
             // Print results out
             printCityResults(ress);
             System.out.println(""); // Leave one line empty for clear view
+            // Print to markdown
+            printCityToMarkdown(ress, filename);
+            // Return list of results
             return ress;
 
         } catch (Exception e) {
@@ -793,7 +863,7 @@ public class App {
      * @return ArrayList<Results> of cities data or null
      * @throws Exception Failed to get language details"
      */
-    public ArrayList<Results> getLanguages(String query) {
+    public ArrayList<Results> getLanguages(String query, String filename) {
         try {
             // Get results
             ResultSet rset = getResults(query);
@@ -801,9 +871,12 @@ public class App {
             // Extract language information
             ArrayList<Results> ress = getLanguageList(rset);
 
-            // Print out results if there are any and return list of results
+            // Print out results if there are any
             printLanguageResults(ress);
             System.out.println(""); // Leave one line empty for clear view
+            // Print to markdown
+            printLanguageToMarkdown(ress, filename);
+            // Return list of results
             return ress;
 
         } catch (Exception e) {
@@ -820,7 +893,7 @@ public class App {
      * @return ArrayList<Results> of population data or null
      * @throws Exception Failed to get language details"
      */
-    public ArrayList<Results> getPopulation(String query){
+    public ArrayList<Results> getPopulation(String query, String filename){
         try {
             // Get results
             ResultSet rset = getResults(query);
@@ -828,9 +901,12 @@ public class App {
             // Extract population information
             ArrayList<Results> ress = getPopulationList(rset);
 
-            // Print out results if there are any and return list of results
+            // Print out results if there are any
             printPopulationResults(ress);
             System.out.println(""); // Leave one line empty for clear view
+            // Print to markdown
+            printPopulationToMarkdown(ress, filename);
+            // Return list of results
             return ress;
 
         } catch (Exception e) {
@@ -1008,6 +1084,146 @@ public class App {
         }else{
             System.out.println("No results");
             return;
+        }
+    }
+
+
+    // Markdown Printing methods
+
+    /**
+     * Print country results to the markdown file
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
+     */
+    public void printCountryToMarkdown(ArrayList<Results> results, String filename){
+        if (!results.isEmpty()){
+            StringBuilder sb = new StringBuilder();
+            // Print header
+            sb.append("| Country Code | Country Name | Continent | Region | Population | Capital |\r\n");
+            sb.append("| --- | --- | --- | --- | --- | --- |\r\n");
+            // Loop over all results in the list
+            for (Results res : results) {
+                if (res == null) continue;
+                sb.append("| " + res.countryCode + " | " + res.countryName + " | " + res.continent + " | " + res.region + " | " + res.pop + " | " + res.capital + " |\r\n");
+            }
+            // Print to markdown file
+            if(printToFile(sb, filename)){
+                System.out.println("Country results printed to markdown: ./reports/" + filename);
+            }
+        }
+    }
+
+    /**
+     * Print capital results to the markdown file
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
+     */
+    public void printCapitalToMarkdown(ArrayList<Results> results, String filename){
+        if (!results.isEmpty()){
+            StringBuilder sb = new StringBuilder();
+            // Print header
+            sb.append("| City Name | City Population | City Country Code |\r\n");
+            sb.append("| --- | --- | --- |\r\n");
+            // Loop over all results in the list
+            for (Results res : results) {
+                if (res == null) continue;
+                sb.append("| " + res.cityName + " | " + res.population + " | " + res.countryCode + " |\r\n");
+            }
+            // Print to markdown file
+            if(printToFile(sb, filename)){
+                System.out.println("Capital results printed to markdown: ./reports/" + filename);
+            }
+        }
+    }
+
+    /**
+     * Print city results to the markdown file
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
+     */
+    public void printCityToMarkdown(ArrayList<Results> results, String filename){
+        if (!results.isEmpty()){
+            StringBuilder sb = new StringBuilder();
+            // Print header
+            sb.append("| Name | Country Code | District | Population (000s) |\r\n");
+            sb.append("| --- | --- | --- | --- |\r\n");
+            // Loop over all results in the list
+            for (Results res : results) {
+                if (res == null) continue;
+                sb.append("| " + res.cityName + " | " + res.countryCode + " | " + res.district + " | " + (res.population/1000) + " |\r\n");
+            }
+            // Print to markdown file
+            if(printToFile(sb, filename)){
+                System.out.println("City results printed to markdown: ./reports/" + filename);
+            }
+        }
+    }
+
+    /**
+     * Print language results to the markdown file
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
+     */
+    public void printLanguageToMarkdown(ArrayList<Results> results, String filename){
+        if (!results.isEmpty()){
+            StringBuilder sb = new StringBuilder();
+            // Print header
+            sb.append("| Language | Speakers | World |\r\n");
+            sb.append("| --- | --- | --- |\r\n");
+            // Loop over all results in the list
+            for (Results res : results) {
+                if (res == null) continue;
+                sb.append("| " + res.language + " | " + res.speakers + " | " + res.world_percentage + " |\r\n");
+            }
+            // Print to markdown file
+            if(printToFile(sb, filename)){
+                System.out.println("Language results printed to markdown: ./reports/" + filename);
+            }
+        }
+    }
+
+    /**
+     * Print population results to the markdown file
+     * @param results used to construct the string that will be provided to the printToFile method
+     * @param filename used to provide it to the printToFile method
+     */
+    public void printPopulationToMarkdown(ArrayList<Results> results, String filename){
+        if (!results.isEmpty()){
+            StringBuilder sb = new StringBuilder();
+            // Print header
+            sb.append("| Name | Total Population | City Population | Non City Population |\r\n");
+            sb.append("| --- | --- | --- | --- |\r\n");
+            // Loop over all results in the list
+            for (Results res : results) {
+                if (res == null) continue;
+                sb.append("| " + res.name + " | " + res.totalPop + " | " + res.cityPop + " | " + res.nonCityPop + " |\r\n");
+            }
+            // Print to markdown file
+            if(printToFile(sb, filename)){
+                System.out.println("Population results printed to markdown: ./reports/" + filename);
+            }
+        }
+    }
+
+    /**
+     * Write given string to the file
+     * @param sb used to provide the string that is printed to file
+     * @param filename used to create the file and write to it
+     * @returns boolean
+     * @throws IOException e
+     */
+    public boolean printToFile(StringBuilder sb, String filename){
+        try{
+            // Create and write to markdown file
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
+            writer.write(sb.toString());
+            writer.close();
+            return true;
+        } catch (IOException e){
+            System.out.println("Failed to print to file");
+            e.printStackTrace();
+            return false;
         }
     }
 }

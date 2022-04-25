@@ -1,3 +1,0 @@
-Country{code='CHN', name='China', continent='Asia', region='Eastern Asia', population=1277558000, capital=1891}
-Country{code='JPN', name='Japan', continent='Asia', region='Eastern Asia', population=126714000, capital=1532}
-Country{code='KOR', name='South Korea', continent='Asia', region='Eastern Asia', population=46844000, capital=2331}
