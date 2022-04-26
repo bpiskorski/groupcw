@@ -41,7 +41,7 @@ public class App {
         // Get capital cities by region
         System.out.println("Calling GetCapitals_Region (Ordered By population)...");
         // Extract city information
-        a.getCapitals_Region("Northern Europe");
+        a.getCapitals_Region("Southern Europe");
 
         // Get n capital cities in the world
         System.out.println("Calling GetCapitals_World_N (Ordered By population)...");
@@ -67,7 +67,7 @@ public class App {
 
         // 2) Provide counties from largest population to smallest in a continent
         //"select * from world.country Where Continent = 'Eastern Asia' order by Population desc;";
-        a.country_continent("Eastern Asia");
+        a.country_continent("Asia");
 
         // 3) Provide countries in a region from largest population to smallest
         //"select * from world.country Where Region = 'Eastern Asia' order by Population desc;";
