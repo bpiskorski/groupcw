@@ -39,7 +39,7 @@ Develop ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflo
 | 25 | The population of people, people living in cities, and people not living in cities in each region. | Yes | ![Web Table Output](screenshots/2_Population_Continent_Europe.PNG)                                                                     |
 | 26 | The population of people, people living in cities, and people not living in cities in each country. | Yes | ![Web Table Output](screenshots/3_Population_Region_Western Europe.PNG)                                                                     |
 | 27 | The population of the world. | Yes | ![Web Table Output](screenshots/4_Population_District_Scotland.PNG)                                                                     |
-| 28 | The population of a continent. | Yes | ![Web Table Output](5_Population_Country_United Kingdom.PNG)                                                                     |
+| 28 | The population of a continent. | Yes | ![Web Table Output](screenshots/5_Population_Country_United Kingdom.PNG)                                                                     |
 | 29 | The population of a region. | Yes | ![Web Table Output](screenshots/6_Population_CityEdinburgh.PNG)                                                                     |
 | 30 | The population of a district. | Yes | ![Web Table Output](screenshots/7_Population_Continents.PNG)                                                                     |
 | 31 | The population of a country. | Yes | ![Web Table Output](screenshots/8_Population_Regions.PNG)                                                                     |
