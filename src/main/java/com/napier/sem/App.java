@@ -213,7 +213,9 @@ public class App {
     public ArrayList<Results> country_world() {
         System.out.println("Creating the report (Countries in world by population)...");
         // Create string for SQL statement
-        String sql = "select * from world.country order by Population desc;";
+        String sql = "SELECT country.Code AS  Code, country.Name AS Name, country.Continent AS Continent, country.Region AS Region, country.Population AS Population, city.Name AS Capital FROM world.country " +
+                "JOIN city ON (city.ID = country.Capital) " +
+                "ORDER BY country.Population DESC;";
         return getCountries(sql, "1_Country_World.md");
     }
 
@@ -223,7 +225,9 @@ public class App {
     public ArrayList<Results> country_continent(String continent) {
         System.out.println("Creating the report (Countries in continent by population)...");
         // Create string for SQL statement
-        String sql = "select * from world.country Where Continent = '" + continent + "' order by Population desc;";
+        String sql = "SELECT country.Code AS  Code, country.Name AS Name, country.Continent AS Continent, country.Region AS Region, country.Population AS Population, city.Name AS Capital FROM world.country " +
+                "JOIN city ON (city.ID = country.Capital) " +
+                "WHERE country.Continent = '" + continent + "' ORDER BY country.Population DESC;";
         return getCountries(sql, "2_Country_Continent_" + continent + ".md");
     }
 
@@ -233,7 +237,9 @@ public class App {
     public ArrayList<Results> country_region(String region) {
         System.out.println("Creating the report (Countries in region by population)...");
         // Create string for SQL statement
-        String sql = "select * from world.country Where Region = '" + region + "' order by Population desc;";
+        String sql = "SELECT country.Code AS  Code, country.Name AS Name, country.Continent AS Continent, country.Region AS Region, country.Population AS Population, city.Name AS Capital FROM world.country " +
+                "JOIN city ON (city.ID = country.Capital) " +
+                "WHERE country.Region = '" + region + "' ORDER BY country.Population DESC;";
         return getCountries(sql, "3_Country_Region_" + region + ".md");
     }
 
@@ -243,7 +249,9 @@ public class App {
     public ArrayList<Results> country_world_N(int n) {
         System.out.println("Creating the report (N Countries in world by population)...");
         // Create string for SQL statement
-        String sql = "select * from world.country order by Population desc limit " + n +";";
+        String sql = "SELECT country.Code AS  Code, country.Name AS Name, country.Continent AS Continent, country.Region AS Region, country.Population AS Population, city.Name AS Capital FROM world.country " +
+                "JOIN city ON (city.ID = country.Capital) " +
+                "ORDER BY country.Population DESC LIMIT " + n +";";
         return getCountries(sql, "4_Country_World_N.md");
     }
 
@@ -253,7 +261,9 @@ public class App {
     public ArrayList<Results> country_continent_N(String continent, int n) {
         System.out.println("Creating the report (N Countries in continent by population)...");
         // Create string for SQL statement
-        String sql = "select  * from world.country where Continent = '" + continent + "' order by Population desc limit " + n +";";
+        String sql = "SELECT country.Code AS  Code, country.Name AS Name, country.Continent AS Continent, country.Region AS Region, country.Population AS Population, city.Name AS Capital FROM world.country " +
+                "JOIN city ON (city.ID = country.Capital) " +
+                "WHERE country.Continent = '" + continent + "' ORDER BY country.Population DESC LIMIT " + n +";";
         return getCountries(sql, "5_Country_Continent_" + continent + "_N.md");
     }
 
@@ -263,7 +273,9 @@ public class App {
     public ArrayList<Results> country_region_N(String region, int n) {
         System.out.println("Creating the report (N Countries in region by population)...");
         // Create string for SQL statement
-        String sql = "select * from world.country where Region = '" + region + "' order by Population desc limit " + n +";";
+        String sql = "SELECT country.Code AS  Code, country.Name AS Name, country.Continent AS Continent, country.Region AS Region, country.Population AS Population, city.Name AS Capital FROM world.country " +
+                "JOIN city ON (city.ID = country.Capital) " +
+                "WHERE Region = '" + region + "' ORDER BY country.Population DESC LIMIT " + n +";";
         return getCountries(sql, "6_Country_Region_" + region + "_N.md");
 
     }
@@ -684,7 +696,7 @@ public class App {
             res.continent = rset.getString("continent");
             res.region = rset.getString("region");
             res.pop = rset.getInt("population");
-            res.capital = rset.getInt("Capital");
+            res.capital = rset.getString("Capital");
             ress.add(res);
         }
         return ress;
@@ -962,7 +974,7 @@ public class App {
         if (!results.isEmpty())
         {
             // Print header
-            System.out.println(String.format("%-10s %-40s %-10s %-8s %-40s %-8s",
+            System.out.println(String.format("%-15s %-40s %-15s %-30s %-12s %-8s",
                     "Country Code", "Country Name", "Continent", "Region", "Population", "Capital"));
             // Loop over all results in the list
             for (Results res : results)
@@ -970,7 +982,7 @@ public class App {
                 if (results == null)
                     continue;
                 String emp_string =
-                        String.format("%-10s %-40s %-10s %-8s %-40s %-8s",
+                        String.format("%-15s %-40s %-15s %-30s %-12s %-8s",
                                 res.countryCode, res.countryName, res.continent, res.region, res.pop, res.capital);
                 System.out.println(emp_string);
             }

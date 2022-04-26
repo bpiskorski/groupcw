@@ -22,7 +22,7 @@ public class Results {
     String localName;
     String governmentForm;
     String headOfState;
-    int capital;
+    String capital;
     String countryCode2;
 
     // Country Language table ('countrylanguage')
