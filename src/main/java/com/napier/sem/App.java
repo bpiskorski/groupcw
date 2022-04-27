@@ -6,6 +6,9 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.Statement;
 
+/**
+ * This is the main application for world database reports
+ */
 public class App {
 
     /**

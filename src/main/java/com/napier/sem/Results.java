@@ -1,5 +1,8 @@
 package com.napier.sem;
 
+/**
+ * This is the results class containing all required variables for result retrieval
+ */
 public class Results {
     // City table ('city')
     int id;
